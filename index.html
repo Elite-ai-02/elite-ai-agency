@@ -1,0 +1,3442 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Elite AI & Smart Systems // Autonomous Intelligence</title>
+  <meta name="description" content="Elite AI & Smart Systems — The Next-Gen Autonomous Agency. Bridging Contactless NFC Smart Hardware with Autonomous AI Intelligence for Luxury Hospitality, Restaurants, and High-Growth Enterprises.">
+  <meta name="theme-color" content="#06080F">
+
+  <!-- Premium Typography: Inter (Google Fonts) + basis33 (OnlineWebFonts pixel font) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://db.onlinewebfonts.com/c/d08bafd725a4cfc309efb5a88e0b63a5?family=basis33" rel="stylesheet">
+
+  <style>
+    /* basis33 Font Face Declaration */
+    @font-face {
+      font-family: "basis33";
+      src: url("https://db.onlinewebfonts.com/t/d08bafd725a4cfc309efb5a88e0b63a5.eot");
+      src: url("https://db.onlinewebfonts.com/t/d08bafd725a4cfc309efb5a88e0b63a5.eot?#iefix") format("embedded-opentype"),
+           url("https://db.onlinewebfonts.com/t/d08bafd725a4cfc309efb5a88e0b63a5.woff2") format("woff2"),
+           url("https://db.onlinewebfonts.com/t/d08bafd725a4cfc309efb5a88e0b63a5.woff") format("woff"),
+           url("https://db.onlinewebfonts.com/t/d08bafd725a4cfc309efb5a88e0b63a5.ttf") format("truetype"),
+           url("https://db.onlinewebfonts.com/t/d08bafd725a4cfc309efb5a88e0b63a5.svg#basis33") format("svg");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* -------------------------------------------------------------
+       0. SYSTEM RESET & CORE DESIGN VARIABLES
+       ------------------------------------------------------------- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #04060A; /* Deeper Space Obsidian */
+      --bg-surface: #080C14;
+      --bg-card: rgba(10, 15, 25, 0.75);
+      --gold: #E5B83B; /* Liquid 24k Gold */
+      --gold-light: #FEE79A;
+      --gold-dark: #A57D18;
+      --gold-glow: rgba(229, 184, 59, 0.35);
+      --cyan: #00F0FF;
+      --cyan-glow: rgba(0, 240, 255, 0.35);
+      --cyan-dim: rgba(0, 240, 255, 0.12);
+      --cream: #FBDBAF;
+      --white: #FFFFFF;
+      --text-muted: #7E8C9F;
+      --text-sub: #A3B1C2;
+      --border-glass: rgba(255, 255, 255, 0.08);
+      --border-gold: rgba(229, 184, 59, 0.35);
+      --border-cyan: rgba(0, 240, 255, 0.35);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 24px;
+      --radius-xl: 36px;
+      --radius-full: 9999px;
+      --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'basis33', monospace;
+      --font-pixel: 'basis33', monospace;
+    }
+
+    .font-pixel {
+      font-family: 'basis33', monospace;
+      letter-spacing: 0.04em;
+    }
+
+    html {
+      background-color: var(--bg);
+      color: var(--white);
+      font-family: var(--font-body);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--white);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    /* Selection Color */
+    ::selection {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #030509;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1B2232;
+      border-radius: 4px;
+      border: 1px solid rgba(229, 184, 59, 0.25);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--gold);
+    }
+
+    /* -------------------------------------------------------------
+       1. GLOBAL UTILITIES & NOVEL GLOW BUTTON (PIXEL CONTRACT)
+       ------------------------------------------------------------- */
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 18px 6px 10px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(16px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--gold-light);
+    }
+
+    .badge-pill .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan);
+      animation: pulse-dot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* Signature Foot-Bloom Glow Button */
+    .btn-glow {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 14px 32px;
+      border-radius: 14px;
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      overflow: hidden;
+      cursor: pointer;
+      background: linear-gradient(to top,
+        #00f0ff 1px, #00d2e8 2px, #00b4d0 3px, #0094b2 4px,
+        #0a7490 6px, #065b74 8px, #04495e 10px, #07384a 13px,
+        #0a2a38 18px, #0c202d 24px, #0a1420 32px, #0a111d 100%);
+      box-shadow:
+        inset 0 2px 2px -1px rgba(255, 255, 255, 0.15),
+        inset 1px 0 0 rgba(255, 255, 255, 0.1),
+        inset -1px 0 0 rgba(255, 255, 255, 0.1),
+        0 0 8px rgba(0, 240, 255, 0.12),
+        0 2px 6px -3px rgba(0, 240, 255, 0.4);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+    }
+
+    .btn-glow::before {
+      content: "";
+      position: absolute;
+      left: 20%;
+      right: 35%;
+      top: 0.8px;
+      height: 1.8px;
+      z-index: 1;
+      filter: blur(0.5px);
+      background: linear-gradient(90deg, transparent 0%, rgba(229, 184, 59, 0.6) 50%, transparent 100%);
+    }
+
+    .btn-glow::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 1;
+      background:
+        linear-gradient(90deg, rgba(0, 240, 255, 0.5), transparent 12px),
+        linear-gradient(270deg, rgba(0, 240, 255, 0.5), transparent 12px);
+      -webkit-mask: linear-gradient(to top, #000 0, #000 6px, rgba(0,0,0,0.3) 14px, transparent 28px);
+      mask: linear-gradient(to top, #000 0, #000 6px, rgba(0,0,0,0.3) 14px, transparent 28px);
+    }
+
+    .btn-glow:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.15);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        0 8px 26px rgba(0, 240, 255, 0.45);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #E2E8F0;
+      font-weight: 500;
+      font-size: 0.95rem;
+      backdrop-filter: blur(12px);
+      transition: all 0.25s ease;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--gold);
+      color: #FFFFFF;
+      transform: translateY(-2px);
+    }
+
+    /* -------------------------------------------------------------
+       2. MASTER NAVIGATION
+       ------------------------------------------------------------- */
+    .master-nav {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 48px);
+      max-width: 1200px;
+      height: 72px;
+      border-radius: 36px;
+      background: rgba(8, 12, 20, 0.7);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px 0 24px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .nav-brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      box-shadow: 0 0 12px var(--gold-glow);
+      object-fit: cover;
+      display: block;
+    }
+
+    .nav-brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav-brand-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 0.08em;
+      line-height: 1;
+      background: linear-gradient(180deg, #FFFFFF 0%, #E5B83B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-brand-sub {
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--cyan);
+      line-height: 1.2;
+      margin-top: 3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.75);
+      letter-spacing: 0.02em;
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-light);
+      text-shadow: 0 0 8px var(--gold-glow);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .burger-btn {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .burger-btn span {
+      width: 20px;
+      height: 2px;
+      background: #FFFFFF;
+      border-radius: 2px;
+      transition: all 0.25s ease;
+    }
+
+    /* -------------------------------------------------------------
+       3. HERO COMMAND CENTER (CONVERGING FIBRE-OPTIC CINEMATIC)
+       ------------------------------------------------------------- */
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 130px 0 80px;
+    }
+
+    .hero-art-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 50%;
+      z-index: 0;
+      opacity: 0.78;
+      pointer-events: none;
+      background: #02060F;
+    }
+
+    .hero-veil {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(120% 70% at 50% 45%, rgba(6, 8, 15, 0.3) 0%, rgba(6, 8, 15, 0.85) 75%, rgba(6, 8, 15, 0.98) 100%),
+        linear-gradient(180deg, rgba(6, 8, 15, 0.6) 0%, transparent 20%, transparent 80%, #06080F 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 5;
+      text-align: center;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6.2vw, 5.2rem);
+      font-weight: 900;
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin: 24px 0 20px;
+      background: linear-gradient(180deg, #FFFFFF 20%, #FEE79A 60%, #E5B83B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 35px var(--gold-glow);
+    }
+
+    .hero-subline {
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      color: #B5C2D3;
+      max-width: 720px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    .hero-subline b {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+
+    .hero-kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      background: rgba(11, 15, 25, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .kpi-item {
+      text-align: center;
+      padding: 8px 12px;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .kpi-item:last-child {
+      border-right: none;
+    }
+
+    .kpi-value {
+      font-family: var(--font-display);
+      font-size: 1.85rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--gold-light);
+      text-shadow: 0 0 14px var(--gold-glow);
+    }
+
+    .kpi-label {
+      font-size: 0.9rem;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* -------------------------------------------------------------
+       4. 3D MOTION STREAM MARQUEE (FROM PROMPT 3 — DUAL ROW)
+       ------------------------------------------------------------- */
+    .marquee-section {
+      position: relative;
+      padding: 80px 0 100px;
+      background: #06080F;
+      overflow: hidden;
+    }
+
+    .section-eyebrow {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.8vw, 3rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      background: linear-gradient(180deg, #FFFFFF 0%, #B8C7D8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-sub {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 8px;
+      letter-spacing: 0.04em;
+    }
+
+    .marquee-track-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    }
+
+    .marquee-row {
+      display: flex;
+      gap: 16px;
+      width: max-content;
+      will-change: transform;
+      user-select: none;
+    }
+
+    .marquee-tile {
+      flex: 0 0 380px;
+      height: 240px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      background: #0E131F;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .marquee-tile:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: var(--gold);
+      box-shadow: 0 24px 48px var(--gold-glow);
+    }
+
+    .marquee-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .marquee-tile-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(6, 8, 15, 0.85) 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 18px;
+    }
+
+    .marquee-tile-label {
+      font-family: var(--font-mono);
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      font-weight: 600;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    /* -------------------------------------------------------------
+       5. ABOUT & THESIS (CHARACTER-BY-CHARACTER SCROLL REVEAL)
+       ------------------------------------------------------------- */
+    .about-section {
+      position: relative;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px;
+      background: radial-gradient(circle at 50% 50%, rgba(13, 20, 36, 0.7) 0%, #06080F 80%);
+      overflow: hidden;
+    }
+
+    /* Floating 3D Corner Decor */
+    .floating-3d {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.55;
+      filter: drop-shadow(0 15px 30px rgba(0,0,0,0.7));
+      transition: transform 0.4s ease-out;
+    }
+    .f3d-tl { top: 6%; left: 4%; width: 140px; }
+    .f3d-tr { top: 8%; right: 4%; width: 150px; }
+    .f3d-bl { bottom: 8%; left: 5%; width: 130px; }
+    .f3d-br { bottom: 6%; right: 5%; width: 150px; }
+
+    .about-inner {
+      max-width: 820px;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+    }
+
+    .char-reveal-paragraph {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.8vw, 2.5rem);
+      font-weight: 500;
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+      margin: 32px 0 40px;
+    }
+
+    .char-reveal-paragraph .char {
+      opacity: 0.18;
+      transition: opacity 0.15s ease, color 0.15s ease;
+    }
+    .char-reveal-paragraph .char.lit {
+      opacity: 1;
+      color: #FFFFFF;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+    }
+    .char-reveal-paragraph .char.lit-gold {
+      opacity: 1;
+      color: var(--gold-light);
+      text-shadow: 0 0 16px rgba(229, 184, 59, 0.6);
+    }
+
+    /* -------------------------------------------------------------
+       CONVERGENCE 3D STAGE (FULL-BLEED 3D BACKGROUND INTERFACE)
+       ------------------------------------------------------------- */
+    .convergence-section {
+      position: relative;
+      min-height: 100vh;
+      padding: 120px 0 140px;
+      background: #000000;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .convergence-bg-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+      pointer-events: auto;
+      cursor: grab;
+      touch-action: none;
+    }
+    .convergence-bg-canvas:active {
+      cursor: grabbing;
+    }
+
+    .convergence-vignette {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      background: 
+        radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(4, 6, 10, 0.45) 75%, #04060A 100%),
+        linear-gradient(to bottom, #04060A 0%, transparent 12%, transparent 88%, #04060A 100%);
+    }
+
+    .webgl-bg-hud {
+      position: absolute;
+      top: 28px;
+      left: 36px;
+      right: 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .webgl-hud-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(8, 12, 20, 0.85);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      padding: 7px 18px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--cyan);
+      letter-spacing: 0.08em;
+    }
+
+    .pulse-cyan {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan);
+      animation: pulse-dot 2s infinite ease-in-out;
+    }
+
+    .webgl-hud-coords {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--gold-light);
+      letter-spacing: 0.1em;
+      background: rgba(8, 12, 20, 0.85);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(229, 184, 59, 0.28);
+      padding: 7px 18px;
+      border-radius: var(--radius-full);
+    }
+
+    .convergence-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .convergence-container a,
+    .convergence-container button,
+    .convergence-container input,
+    .convergence-container select {
+      pointer-events: auto;
+    }
+
+    .convergence-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+      margin: 24px auto 16px;
+      max-width: 920px;
+      text-transform: capitalize;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.9);
+    }
+
+    .convergence-sub {
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 1.4vw, 1.1rem);
+      color: var(--text-sub);
+      max-width: 680px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+      letter-spacing: 0.02em;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.9);
+    }
+
+    .convergence-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .btn-pill-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: var(--radius-full);
+      background: #FFFFFF;
+      color: #000000;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 25px rgba(255, 255, 255, 0.25);
+    }
+    .btn-pill-action:hover {
+      transform: translateY(-2px);
+      background: #F0F0F0;
+      box-shadow: 0 6px 30px rgba(255, 255, 255, 0.4);
+    }
+
+    .btn-pill-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: var(--radius-full);
+      background: rgba(10, 15, 25, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #FFFFFF;
+      font-size: 0.88rem;
+      backdrop-filter: blur(14px);
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .btn-pill-ghost:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.45);
+    }
+
+    .convergence-3d-spacer {
+      position: relative;
+      width: 100%;
+      height: 440px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 24px;
+      pointer-events: none;
+    }
+
+    .convergence-flank-labels {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      pointer-events: none;
+    }
+
+    .hud-hand-label {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      padding: 7px 16px;
+      border-radius: var(--radius-full);
+      background: rgba(8, 12, 20, 0.8);
+      backdrop-filter: blur(12px);
+    }
+    .hud-hand-label.left {
+      color: #B5D2FF;
+      border: 1px solid rgba(0, 240, 255, 0.25);
+    }
+    .hud-hand-label.right {
+      color: var(--gold-light);
+      border: 1px solid rgba(229, 184, 59, 0.25);
+    }
+
+    .hud-hint {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.55);
+      letter-spacing: 0.12em;
+    }
+
+    @media (max-width: 768px) {
+      .convergence-section {
+        padding: 90px 0 110px;
+      }
+      .convergence-3d-spacer {
+        height: 340px;
+      }
+      .webgl-bg-hud {
+        top: 14px;
+        left: 16px;
+        right: 16px;
+      }
+      .convergence-flank-labels {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .hud-hint {
+        display: none;
+      }
+    }
+
+    /* -------------------------------------------------------------
+       6. THE X-RAY SPOTLIGHT REVEAL (PROMPTS 2 & 5 FUSION)
+       ------------------------------------------------------------- */
+    .spotlight-section {
+      padding: 100px 0;
+      position: relative;
+      background: #06080F;
+    }
+
+    .spotlight-wrapper {
+      position: relative;
+      width: 100%;
+      height: 520px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+      margin-top: 40px;
+      cursor: crosshair;
+    }
+
+    /* Base Layer: Traditional Manual Business */
+    .spotlight-base {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #12100E 0%, #1A1412 100%);
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #C2AA95;
+      z-index: 1;
+    }
+
+    .old-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .old-card {
+      background: rgba(30, 22, 18, 0.6);
+      border: 1px solid rgba(194, 170, 149, 0.18);
+      border-radius: var(--radius-md);
+      padding: 22px;
+    }
+
+    .old-card h4 {
+      color: #FF8F6B;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Reveal Layer: Elite AI Automated System */
+    .spotlight-reveal {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #071526 0%, #061120 100%);
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #E2F0FD;
+      z-index: 2;
+      pointer-events: none;
+      /* Initial state hidden off-screen */
+      mask-image: radial-gradient(circle 0px at -999px -999px, #fff, transparent);
+      -webkit-mask-image: radial-gradient(circle 0px at -999px -999px, #fff, transparent);
+    }
+
+    .new-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .new-card {
+      background: rgba(14, 28, 48, 0.7);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      box-shadow: 0 10px 24px rgba(0, 240, 255, 0.08);
+    }
+
+    .new-card h4 {
+      color: var(--cyan);
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .spotlight-hint {
+      position: absolute;
+      bottom: 24px;
+      right: 32px;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.75);
+      border: 1px solid var(--gold);
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      font-size: 0.92rem;
+      font-family: var(--font-mono);
+      color: var(--gold-light);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* -------------------------------------------------------------
+       7. HARDWARE SHOWCASE: 3D GYROSCOPIC NFC CARD
+       ------------------------------------------------------------- */
+    .hardware-section {
+      padding: 100px 0;
+      background: #06080F;
+      position: relative;
+    }
+
+    .hardware-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    .card-3d-stage {
+      perspective: 1200px;
+      width: 100%;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nfc-card-body {
+      width: 380px;
+      height: 240px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #151922 0%, #0A0D14 100%);
+      border: 2px solid var(--gold);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px var(--gold-glow);
+      position: relative;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform 0.15s ease-out;
+      overflow: hidden;
+      cursor: grab;
+    }
+
+    .nfc-card-glare {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: radial-gradient(circle 240px at 50% 50%, rgba(255, 255, 255, 0.18), transparent);
+      mix-blend-mode: overlay;
+    }
+
+    .card-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chip-gold {
+      width: 48px;
+      height: 36px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #ffd700, #b8860b);
+      border: 1px solid #ffe4b5;
+      box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+
+    .nfc-wave-icon {
+      font-size: 1.6rem;
+      color: var(--cyan);
+      filter: drop-shadow(0 0 8px var(--cyan));
+    }
+
+    .card-mid-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card-mid-logo img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+    }
+
+    .card-mid-text strong {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      color: #FFFFFF;
+      display: block;
+    }
+
+    .card-mid-text span {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      color: var(--cyan);
+      text-transform: uppercase;
+    }
+
+    .card-bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .hardware-info-panel h3 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .hardware-info-panel p {
+      color: var(--text-sub);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .feature-check-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: #E2E8F0;
+    }
+
+    .check-badge {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(0, 240, 255, 0.15);
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+      display: grid;
+      place-items: center;
+      font-size: 0.75rem;
+    }
+
+    /* -------------------------------------------------------------
+       8. STICKY-STACKING ECOSYSTEM (FROM PROMPT 3)
+       ------------------------------------------------------------- */
+    .stack-section {
+      padding: 100px 0;
+      background: #06080F;
+    }
+
+    .stack-cards-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin-top: 50px;
+    }
+
+    .stack-card {
+      position: sticky;
+      top: 110px;
+      background: #0A0D16;
+      border: 2px solid var(--border-gold);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.7);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .stack-card:nth-child(1) { border-color: rgba(229, 184, 59, 0.4); }
+    .stack-card:nth-child(2) { border-color: rgba(0, 240, 255, 0.4); }
+    .stack-card:nth-child(3) { border-color: rgba(251, 219, 175, 0.4); }
+
+    .stack-card-num {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.15);
+      line-height: 1;
+    }
+
+    .stack-card-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin: 8px 0 16px;
+    }
+
+    .stack-card-desc {
+      color: var(--text-sub);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .stack-card-preview {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      background: #020408;
+      height: 320px;
+      position: relative;
+    }
+
+    .stack-card-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* -------------------------------------------------------------
+       9. LIVE AI AGENT PLAYGROUND & ROI CALCULATOR
+       ------------------------------------------------------------- */
+    .lab-section {
+      padding: 100px 0;
+      background: radial-gradient(circle at 50% 30%, rgba(13, 23, 42, 0.6) 0%, #06080F 80%);
+    }
+
+    .lab-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      margin-top: 40px;
+    }
+
+    /* Terminal Window */
+    .terminal-box {
+      background: #090D16;
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 240, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      height: 480px;
+    }
+
+    .terminal-bar {
+      height: 42px;
+      background: #0D1322;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .terminal-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot-r { background: #EE5C62; }
+    .dot-y { background: #F6B719; }
+    .dot-g { background: #12C02F; }
+
+    .terminal-body {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      font-size: 0.9rem;
+    }
+
+    .bot-msg {
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 12px 12px 12px 2px;
+      padding: 12px 16px;
+      max-width: 85%;
+      align-self: flex-start;
+      color: #E2F0FD;
+      line-height: 1.5;
+    }
+
+    .user-msg {
+      background: rgba(229, 184, 59, 0.15);
+      border: 1px solid rgba(229, 184, 59, 0.3);
+      border-radius: 12px 12px 2px 12px;
+      padding: 12px 16px;
+      max-width: 85%;
+      align-self: flex-end;
+      color: #FFFFFF;
+      line-height: 1.5;
+    }
+
+    .prompt-pills {
+      display: flex;
+      gap: 8px;
+      padding: 10px 16px;
+      overflow-x: auto;
+      background: #080C14;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .prompt-pill {
+      font-size: 0.88rem;
+      font-family: var(--font-mono);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--gold-light);
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .prompt-pill:hover {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
+    .terminal-input-bar {
+      display: flex;
+      gap: 10px;
+      padding: 14px;
+      background: #0D1322;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .terminal-input-bar input {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      color: #FFFFFF;
+      padding: 8px 14px;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .terminal-input-bar input:focus {
+      border-color: var(--cyan);
+    }
+
+    /* ROI Box */
+    .roi-box {
+      background: #090D16;
+      border: 1px solid rgba(229, 184, 59, 0.25);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 25px rgba(229, 184, 59, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .roi-slider-group {
+      margin-bottom: 24px;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      margin-bottom: 10px;
+    }
+
+    .slider-header span:last-child {
+      font-family: var(--font-mono);
+      font-size: 1.05rem;
+      color: var(--gold-light);
+    }
+
+    .roi-slider {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: #1C2434;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    .roi-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 10px var(--gold);
+      cursor: pointer;
+    }
+
+    .roi-results-card {
+      background: rgba(14, 21, 35, 0.8);
+      border: 1px solid rgba(229, 184, 59, 0.3);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .res-metric strong {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--cyan);
+      display: block;
+    }
+    .res-metric span {
+      font-size: 0.88rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* -------------------------------------------------------------
+       10. CONSULTATION & AUDIT MODAL
+       ------------------------------------------------------------- */
+    .audit-section {
+      padding: 100px 0 140px;
+      background: #06080F;
+      position: relative;
+    }
+
+    .audit-card {
+      max-width: 760px;
+      margin: 0 auto;
+      background: #0A0E18;
+      border: 2px solid var(--border-gold);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+      text-align: center;
+    }
+
+    .audit-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 36px;
+      text-align: left;
+    }
+
+    .form-group-full {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.06em;
+      color: #CBD5E1;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      background: #04070D;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      color: #FFFFFF;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .form-input:focus, .form-select:focus {
+      border-color: var(--gold);
+    }
+
+    /* -------------------------------------------------------------
+       11. FOOTER & FLOATING WHATSAPP
+       ------------------------------------------------------------- */
+    .master-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 60px 0 40px;
+      background: #04060A;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .floating-wa {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #25D366;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+      z-index: 999;
+      transition: transform 0.25s ease;
+    }
+    .floating-wa:hover {
+      transform: scale(1.1);
+    }
+
+    .floating-wa svg {
+      width: 32px;
+      height: 32px;
+      fill: #FFFFFF;
+    }
+
+    /* -------------------------------------------------------------
+       12. COMPREHENSIVE RESPONSIVE ENGINE (MOBILE-FIRST OPTIMIZATION)
+       ------------------------------------------------------------- */
+    
+    /* Global safe viewport & overflow containment */
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Mobile Drawer */
+    .mobile-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 1005;
+      display: none;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-drawer.active {
+      display: block;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .mobile-drawer-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(4, 6, 10, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .mobile-drawer-sheet {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(360px, 86vw);
+      background: #080D18;
+      border-left: 1px solid rgba(229, 184, 59, 0.3);
+      box-shadow: -15px 0 40px rgba(0, 0, 0, 0.85);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px 18px;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mobile-drawer.active .mobile-drawer-sheet {
+      transform: translateX(0);
+    }
+    .mobile-drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .mobile-close-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      font-size: 1.1rem;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .mobile-close-btn:hover {
+      background: rgba(255, 255, 255, 0.14);
+      color: var(--cyan);
+    }
+    .mobile-drawer-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 20px 0;
+    }
+    .mobile-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #E2E8F0;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+    }
+    .mobile-link .m-num {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--cyan);
+    }
+    .mobile-link:hover, .mobile-link:active {
+      background: rgba(229, 184, 59, 0.12);
+      color: var(--gold-light);
+      transform: translateX(4px);
+    }
+    .mobile-drawer-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .mobile-action-btn {
+      width: 100%;
+      text-align: center;
+      padding: 14px;
+      font-size: 0.9rem;
+    }
+    .mobile-quick-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .mobile-contact-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      padding: 6px 10px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      word-break: break-all;
+    }
+
+    /* Burger Button Active Morph */
+    .burger-btn.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .burger-btn.active span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .burger-btn.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Tablet & Medium Screens */
+    @media (max-width: 1080px) {
+      .nav-links { display: none; }
+      .burger-btn { display: flex; }
+      .hero-kpis { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .kpi-item:nth-child(2) { border-right: none; }
+      .hardware-grid { grid-template-columns: 1fr; gap: 40px; }
+      .stack-card { grid-template-columns: 1fr; gap: 32px; }
+      .lab-grid { grid-template-columns: 1fr; gap: 32px; }
+      .old-grid, .new-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Standard Mobile & Small Tablets (<= 768px) */
+    @media (max-width: 768px) {
+      .container { padding: 0 16px; }
+
+      /* Master Nav Bar */
+      .master-nav {
+        top: 10px;
+        height: 58px;
+        width: calc(100% - 20px);
+        padding: 0 10px 0 14px;
+        border-radius: 29px;
+      }
+      .nav-brand-logo {
+        width: 36px;
+        height: 36px;
+      }
+      .nav-brand-title {
+        font-size: 1.05rem;
+      }
+      .nav-brand-sub {
+        font-size: 0.72rem;
+      }
+
+      /* Hero Command Center */
+      .hero-section {
+        padding: 95px 0 45px;
+        min-height: auto;
+      }
+      .hero-headline {
+        font-size: clamp(1.85rem, 7.8vw, 2.75rem);
+        line-height: 1.1;
+        margin: 18px 0 16px;
+        letter-spacing: -0.01em;
+      }
+      .hero-subline {
+        font-size: 0.95rem;
+        line-height: 1.55;
+        margin-bottom: 26px;
+        padding: 0 4px;
+      }
+      .hero-cta-group {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+        margin-bottom: 32px;
+      }
+      .hero-cta-group .btn-glow,
+      .hero-cta-group .btn-ghost {
+        width: 100%;
+        min-height: 48px;
+        padding: 13px 20px;
+        font-size: 0.9rem;
+      }
+      .hero-kpis {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 14px;
+        border-radius: var(--radius-md);
+      }
+      .kpi-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 8px 4px;
+      }
+      .kpi-item:nth-child(3), .kpi-item:nth-child(4) {
+        border-bottom: none;
+      }
+      .kpi-value {
+        font-size: 1.5rem;
+      }
+      .kpi-label {
+        font-size: 0.76rem;
+      }
+
+      /* 3D Motion Stream Marquee */
+      .marquee-section {
+        padding: 50px 0 60px;
+      }
+      .section-eyebrow {
+        margin-bottom: 24px;
+      }
+      .section-title {
+        font-size: clamp(1.6rem, 5.5vw, 2.2rem);
+      }
+      .marquee-tile {
+        flex: 0 0 240px;
+        height: 160px;
+        border-radius: var(--radius-md);
+      }
+      .marquee-tile-label {
+        font-size: 0.76rem;
+        padding: 3px 8px;
+      }
+
+      /* 3D Convergence Section (Background Interface) */
+      .convergence-section {
+        padding: 75px 0 85px;
+        min-height: 100vh;
+      }
+      .convergence-title {
+        font-size: clamp(1.6rem, 6.2vw, 2.25rem);
+        line-height: 1.15;
+        margin: 16px auto 12px;
+      }
+      .convergence-sub {
+        font-size: 0.88rem;
+        line-height: 1.48;
+        margin-bottom: 20px;
+        padding: 0 6px;
+      }
+      .convergence-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+      }
+      .btn-pill-action, .btn-pill-ghost {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 20px;
+        font-size: 0.88rem;
+      }
+      .convergence-3d-spacer {
+        height: 290px;
+        padding-bottom: 12px;
+      }
+      .convergence-flank-labels {
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+      }
+      .hud-hand-label {
+        font-size: 0.72rem;
+        padding: 5px 12px;
+      }
+      .webgl-bg-hud {
+        top: 10px;
+        left: 12px;
+        right: 12px;
+        gap: 8px;
+      }
+      .webgl-hud-pill {
+        padding: 4px 10px;
+        font-size: 0.68rem;
+      }
+      .webgl-hud-coords {
+        padding: 4px 10px;
+        font-size: 0.68rem;
+      }
+
+      /* About & Thesis Character Reveal */
+      .about-section {
+        min-height: auto;
+        padding: 60px 16px;
+      }
+      .char-reveal-paragraph {
+        font-size: clamp(1.15rem, 4.5vw, 1.55rem);
+        line-height: 1.45;
+        margin: 20px 0 28px;
+      }
+      .floating-3d {
+        display: none !important;
+      }
+
+      /* X-Ray Spotlight Box */
+      .spotlight-section {
+        padding: 60px 0;
+      }
+      .spotlight-wrapper {
+        min-height: 620px;
+        height: 620px;
+        border-radius: var(--radius-lg);
+        margin-top: 24px;
+      }
+      .spotlight-base, .spotlight-reveal {
+        padding: 18px 14px;
+        overflow-y: auto;
+      }
+      .old-grid, .new-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 16px;
+      }
+      .old-card, .new-card {
+        padding: 12px 14px;
+        border-radius: var(--radius-sm);
+      }
+      .old-card h4, .new-card h4 {
+        font-size: 0.92rem;
+        margin-bottom: 4px;
+      }
+      .old-card p, .new-card p {
+        font-size: 0.78rem;
+        line-height: 1.38;
+      }
+      .spotlight-hint {
+        bottom: 12px;
+        right: 12px;
+        font-size: 0.75rem;
+        padding: 5px 12px;
+      }
+
+      /* Hardware Showcase & 3D NFC Card */
+      .hardware-section {
+        padding: 60px 0;
+      }
+      .card-3d-stage {
+        height: 240px;
+      }
+      .nfc-card-body {
+        width: min(310px, calc(100vw - 44px));
+        height: 185px;
+        padding: 16px;
+        border-radius: 16px;
+      }
+      .chip-gold {
+        width: 38px;
+        height: 26px;
+      }
+      .card-mid-logo img {
+        width: 36px;
+        height: 36px;
+      }
+      .card-mid-text strong {
+        font-size: 1.15rem;
+      }
+      .card-bottom-row {
+        font-size: 0.76rem;
+      }
+      .hardware-info-panel h3 {
+        font-size: clamp(1.4rem, 5.5vw, 1.9rem);
+        line-height: 1.25;
+      }
+      .hardware-info-panel p {
+        font-size: 0.92rem;
+        line-height: 1.5;
+        margin-bottom: 18px;
+      }
+      .check-item {
+        font-size: 0.88rem;
+      }
+
+      /* Sticky-Stacking Ecosystem Cards */
+      .stack-section {
+        padding: 60px 0;
+      }
+      .stack-cards-wrapper {
+        gap: 20px;
+        margin-top: 28px;
+      }
+      .stack-card {
+        padding: 20px 16px;
+        border-radius: var(--radius-lg);
+        gap: 18px;
+      }
+      .stack-card:nth-child(1) { top: 68px; }
+      .stack-card:nth-child(2) { top: 80px; }
+      .stack-card:nth-child(3) { top: 92px; }
+      .stack-card-num {
+        font-size: 2.2rem;
+      }
+      .stack-card-title {
+        font-size: 1.35rem;
+        margin: 4px 0 10px;
+      }
+      .stack-card-desc {
+        font-size: 0.88rem;
+        line-height: 1.48;
+        margin-bottom: 14px;
+      }
+      .stack-card-preview {
+        height: 180px;
+        border-radius: var(--radius-md);
+      }
+
+      /* Live AI Chat Lab & ROI Calculator */
+      .lab-section {
+        padding: 60px 0;
+      }
+      .lab-grid {
+        gap: 24px;
+        margin-top: 24px;
+      }
+      .terminal-box {
+        height: 390px;
+        border-radius: var(--radius-lg);
+      }
+      .terminal-body {
+        padding: 14px;
+        font-size: 0.85rem;
+      }
+      .bot-msg, .user-msg {
+        max-width: 92%;
+        font-size: 0.84rem;
+        padding: 8px 12px;
+      }
+      .prompt-pills {
+        padding: 8px 10px;
+        gap: 6px;
+      }
+      .prompt-pill {
+        font-size: 0.78rem;
+        padding: 4px 10px;
+      }
+      .terminal-input-bar {
+        padding: 10px 12px;
+      }
+      .terminal-input-bar input {
+        font-size: 16px; /* Prevents auto-zoom in iOS Safari */
+        padding: 8px 12px;
+      }
+      .roi-box {
+        padding: 20px 16px;
+        border-radius: var(--radius-lg);
+      }
+      .slider-header {
+        font-size: 0.88rem;
+      }
+      .roi-slider {
+        height: 8px;
+      }
+      .roi-slider::-webkit-slider-thumb {
+        width: 24px;
+        height: 24px;
+      }
+      .roi-results-card {
+        padding: 16px 12px;
+        gap: 10px;
+      }
+      .res-metric strong {
+        font-size: 1.5rem;
+      }
+      .res-metric span {
+        font-size: 0.75rem;
+      }
+
+      /* Consultation & Audit Form */
+      .audit-section {
+        padding: 60px 0 100px;
+      }
+      .audit-card {
+        padding: 22px 14px;
+        border-radius: var(--radius-lg);
+      }
+      .audit-form {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-top: 20px;
+      }
+      .form-input, .form-select {
+        font-size: 16px; /* Prevents auto-zoom in iOS Safari */
+        padding: 12px 14px;
+      }
+
+      /* Footer & Floating Actions */
+      .master-footer {
+        padding: 45px 0 35px;
+      }
+      .footer-grid {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+        text-align: left;
+      }
+      .floating-wa {
+        bottom: 18px;
+        right: 16px;
+        width: 52px;
+        height: 52px;
+        box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+      }
+      .floating-wa svg {
+        width: 28px;
+        height: 28px;
+      }
+    }
+
+    /* Smallest Mobile Displays (<= 480px) */
+    @media (max-width: 480px) {
+      .nav-actions .btn-glow {
+        display: none; /* Give brand title breathing room on tiny screens */
+      }
+      .master-nav {
+        padding: 0 8px 0 12px;
+      }
+      .badge-pill {
+        font-size: 0.78rem;
+        padding: 5px 12px 5px 8px;
+      }
+      .hero-headline {
+        font-size: clamp(1.7rem, 7.5vw, 2.3rem);
+      }
+      .spotlight-wrapper {
+        min-height: 640px;
+        height: 640px;
+      }
+      .nfc-card-body {
+        width: calc(100vw - 36px);
+        height: 180px;
+        padding: 14px;
+      }
+      .card-mid-text strong {
+        font-size: 1.05rem;
+      }
+      .card-mid-text span {
+        font-size: 0.72rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MASTER GLASS NAVIGATION -->
+  <nav class="master-nav">
+    <a href="#" class="nav-brand">
+      <img src="assets/logo.jpg" alt="Elite AI Logo" class="nav-brand-logo">
+      <div class="nav-brand-text">
+        <span class="nav-brand-title">ELITE AI</span>
+        <span class="nav-brand-sub">AUTONOMOUS SYSTEMS</span>
+      </div>
+    </a>
+
+    <div class="nav-links">
+      <a href="#systems">Ecosystem</a>
+      <a href="#marquee">3D Stream</a>
+      <a href="#vision">Our Thesis</a>
+      <a href="#hardware">Smart NFC</a>
+      <a href="#playground">Live Lab</a>
+      <a href="#calculator">ROI Calculator</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="#audit" class="btn-glow nav-cta-btn">
+        <span>Book AI Audit</span>
+      </a>
+      <button class="burger-btn" id="burger-btn" aria-label="Toggle Navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE SLIDE-OUT GLASS DRAWER -->
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <div class="mobile-drawer-backdrop" id="mobile-drawer-backdrop"></div>
+    <div class="mobile-drawer-sheet">
+      <div class="mobile-drawer-header">
+        <div class="nav-brand">
+          <img src="assets/logo.jpg" alt="Elite AI" class="nav-brand-logo">
+          <div class="nav-brand-text">
+            <span class="nav-brand-title">ELITE AI</span>
+            <span class="nav-brand-sub">AUTONOMOUS SYSTEMS</span>
+          </div>
+        </div>
+        <button class="mobile-close-btn" id="mobile-close-btn" aria-label="Close Navigation">✕</button>
+      </div>
+
+      <nav class="mobile-drawer-menu">
+        <a href="#systems" class="mobile-link"><span class="m-num">01</span><span>Ecosystem &amp; Stacks</span></a>
+        <a href="#marquee" class="mobile-link"><span class="m-num">02</span><span>3D Motion Stream</span></a>
+        <a href="#vision" class="mobile-link"><span class="m-num">03</span><span>Autonomous 3D Thesis</span></a>
+        <a href="#spotlight" class="mobile-link"><span class="m-num">04</span><span>X-Ray Spotlight</span></a>
+        <a href="#hardware" class="mobile-link"><span class="m-num">05</span><span>Smart NFC Hardware</span></a>
+        <a href="#playground" class="mobile-link"><span class="m-num">06</span><span>Live AI Chat Lab</span></a>
+        <a href="#calculator" class="mobile-link"><span class="m-num">07</span><span>ROI Calculator</span></a>
+        <a href="#audit" class="mobile-link"><span class="m-num">08</span><span>Book Consultation</span></a>
+      </nav>
+
+      <div class="mobile-drawer-actions">
+        <a href="#audit" class="btn-glow mobile-action-btn">
+          <span>Schedule Private Audit ➔</span>
+        </a>
+        <div class="mobile-quick-contacts">
+          <a href="https://wa.me/919301814976" target="_blank" rel="noopener noreferrer" class="mobile-contact-pill">
+            <span class="pill-dot" style="background:#25D366;box-shadow:0 0 8px #25D366;"></span> WhatsApp: +91 9301814976
+          </a>
+          <a href="https://instagram.com/elite.ai_agency" target="_blank" rel="noopener noreferrer" class="mobile-contact-pill">
+            <span class="pill-dot" style="background:#E1306C;box-shadow:0 0 8px #E1306C;"></span> Instagram: @elite.ai_agency
+          </a>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=eliteai.agency.systems@gmail.com" target="_blank" rel="noopener noreferrer" class="mobile-contact-pill">
+            <span class="pill-dot" style="background:var(--gold);box-shadow:0 0 8px var(--gold);"></span> Gmail: eliteai.agency.systems@gmail.com
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. HERO COMMAND CENTER (CONVERGING FIBRE-OPTIC ARTWORK) -->
+  <header class="hero-section">
+    <video class="hero-art-video" autoplay muted loop playsinline preload="auto"
+      poster="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/130837c4-0244-4f37-9c61-8d801d93fd29.jpg"
+      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260912_104303_0c6d60b2-9353-408e-9449-585108a22fb5.mp4">
+    </video>
+    <div class="hero-veil"></div>
+
+    <div class="container hero-content">
+      <div class="badge-pill">
+        <span class="pill-dot"></span>
+        <span>Next-Gen Autonomous Intelligence & Hardware</span>
+      </div>
+
+      <h1 class="hero-headline">
+        Autonomous Systems For High-Growth Enterprises
+      </h1>
+
+      <p class="hero-subline">
+        We bridge <b>Contactless Smart Hardware (NFC & QR)</b> with <b>Autonomous Multi-Agent AI</b>. 
+        Empowering luxury hotels, fine dining, and ambitious businesses to scale revenue on complete autopilot.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#audit" class="btn-glow">
+          <span>Deploy Your System ➔</span>
+        </a>
+        <a href="#playground" class="btn-ghost">
+          <span>Test Live AI Bot</span>
+        </a>
+      </div>
+
+      <!-- Live Executive KPIs -->
+      <div class="hero-kpis">
+        <div class="kpi-item">
+          <div class="kpi-value">&lt;180ms</div>
+          <div class="kpi-label">Agent Latency</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">99.98%</div>
+          <div class="kpi-label">Uptime SLA</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">+340%</div>
+          <div class="kpi-label">Review Velocity</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">0%</div>
+          <div class="kpi-label">Order Errors</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. 3D MOTION STREAM MARQUEE (FROM PROMPT 3 — DUAL ROW DYNAMIC) -->
+  <section class="marquee-section" id="marquee">
+    <div class="container section-eyebrow">
+      <div class="badge-pill">
+        <span class="pill-dot" style="background:var(--gold);box-shadow:0 0 10px var(--gold);"></span>
+        <span>Interactive 3D Capabilities</span>
+      </div>
+      <h2 class="section-title">Engineered For Visual Dominance</h2>
+      <p class="section-sub">Real-time motion architectures built for brands that refuse to look ordinary.</p>
+    </div>
+
+    <div class="marquee-track-container">
+      <!-- Row 1: Glides Right on Scroll -->
+      <div class="marquee-row" id="marquee-row-1">
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif" alt="3D Space Voyage"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Spatial 3D Canvas</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif" alt="Prismatic 3D Core"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Prismatic 3D Core</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif" alt="CodeNest"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Autonomous Workflows</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-vex-ventures-preview-BczMFIiw.gif" alt="Vex Ventures"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Hospitality OS</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif" alt="Stellar AI"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Multi-Agent Core</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif" alt="ASME"><div class="marquee-tile-overlay"><span class="marquee-tile-label">KDS Architecture</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif" alt="Data Streams"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Real-time Sync</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif" alt="Vitara"><div class="marquee-tile-overlay"><span class="marquee-tile-label">In-Room Dining</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif" alt="Terra"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Smart Tap NFC</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif" alt="SkyElite"><div class="marquee-tile-overlay"><span class="marquee-tile-label">WhatsApp Engines</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif" alt="Aethera"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Quantum Dispatch</span></div></div>
+        <!-- Duplicated for seamless length -->
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif" alt="3D Space Voyage"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Spatial 3D Canvas</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif" alt="CodeNest"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Autonomous Workflows</span></div></div>
+      </div>
+
+      <!-- Row 2: Glides Left on Scroll -->
+      <div class="marquee-row" id="marquee-row-2">
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-stellar-ai-preview-D3HL6bw1.gif" alt="Stellar AI"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Conversational AI</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-xportfolio-preview-D4A8maiC.gif" alt="Portfolio"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Luxury UI Grid</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif" alt="Orbit"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Contactless Folio</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-nexora-preview-cx5HmUgo.gif" alt="Nexora"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Staff KDS Terminal</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-evr-ventures-preview-DZxeVFEX.gif" alt="EVR"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Dynamic Billing</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-planet-orbit-preview-DWAP8Z1P.gif" alt="Planet Orbit"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Reputation Pulse</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-new-era-preview-CocuDUm9.gif" alt="New Era"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Autonomous Sales</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-wealth-preview-B70idl_u.gif" alt="Wealth"><div class="marquee-tile-overlay"><span class="marquee-tile-label">ROI Optimization</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-luminex-preview-CxOP7ce6.gif" alt="Luminex"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Omnichannel Care</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif" alt="Celestia"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Zero-Latency Bots</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. THE 3D CONVERGENCE STAGE (THREE.JS REAL-TIME MOTION CORE AS BACKGROUND INTERFACE) -->
+  <section class="convergence-section" id="vision">
+    <!-- Real-time Three.js Full-Bleed Background Canvas -->
+    <canvas id="convergence-canvas" class="convergence-bg-canvas"></canvas>
+
+    <!-- Seamless obsidian vignette overlay -->
+    <div class="convergence-vignette"></div>
+
+    <!-- HUD Overlay at Top of Background Interface -->
+    <div class="webgl-bg-hud">
+      <div class="webgl-hud-pill">
+        <span class="pulse-cyan"></span>
+        <span>REAL-TIME 3D // SPATIAL CONVERGENCE</span>
+      </div>
+      <div class="webgl-hud-coords" id="hud-coords">
+        ROT: 0° // TILT: 0°
+      </div>
+    </div>
+
+    <!-- Foreground Floating Content -->
+    <div class="convergence-container">
+      
+      <!-- Top Pill Header -->
+      <div class="convergence-eyebrow">
+        <div class="badge-pill">
+          <span class="pill-dot" style="background:var(--cyan);box-shadow:0 0 10px var(--cyan);"></span>
+          <span>Autonomous 3D Convergence</span>
+        </div>
+      </div>
+
+      <!-- Headline & Subtitle from Motion Interface Prompt -->
+      <h2 class="convergence-title">
+        Where Precision Finds Its Edge<br>
+        And Vision Rewrites What Comes Next
+      </h2>
+      <p class="convergence-sub">
+        a seamless bridge — where raw human ambition and machine clarity converge as one
+      </p>
+
+      <div class="convergence-actions">
+        <a href="#audit" class="btn-pill-action">
+          <span>Watch It Unfold ➔</span>
+        </a>
+        <button type="button" class="btn-pill-ghost" id="toggle-3d-speed">
+          <span>Rotate 360° ↺</span>
+        </button>
+      </div>
+
+      <!-- Open 3D Spatial Window where the chromatic star and convergence hands shine through -->
+      <div class="convergence-3d-spacer" id="webgl-drag-zone">
+        <div class="convergence-flank-labels">
+          <div class="hud-hand-label left">
+            <span class="pill-dot" style="background:#00F0FF;box-shadow:0 0 8px #00F0FF;display:inline-block;margin-right:6px;"></span> [SYNTHETIC AI INTELLIGENCE]
+          </div>
+          <div class="hud-hint">
+            <span>✦ DRAG OR HOVER TO NAVIGATE 3D SPACE</span>
+          </div>
+          <div class="hud-hand-label right">
+            [HUMAN AMBITION &amp; VISION] <span class="pill-dot" style="background:var(--gold);box-shadow:0 0 8px var(--gold);display:inline-block;margin-left:6px;"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Character-by-character illuminated thesis -->
+      <div class="about-inner" style="margin: 64px auto 0; max-width: 840px;">
+        <div class="badge-pill" style="margin-bottom: 8px;">
+          <span class="pill-dot"></span>
+          <span>The Autonomous Shift</span>
+        </div>
+        <p class="char-reveal-paragraph" id="char-target">
+          We engineer bespoke technological infrastructure where physical contactless hardware converges with autonomous intelligence. From luxury hotel in-room dining to 1-tap NFC reputation systems and 24/7 AI conversational agents, we replace obsolete manual friction with effortless mathematical precision. Welcome to Elite AI.
+        </p>
+
+        <a href="#audit" class="btn-glow">
+          <span>Request Private Consultation ➔</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 4. THE X-RAY SPOTLIGHT REVEAL (PROMPTS 2 & 5 FUSION) -->
+  <section class="spotlight-section" id="spotlight">
+    <div class="container">
+      <div class="section-eyebrow">
+        <div class="badge-pill">
+          <span class="pill-dot"></span>
+          <span>Interactive X-Ray Reveal</span>
+        </div>
+        <h2 class="section-title">Drag to Reveal The Transformation</h2>
+        <p class="section-sub">Hover or drag across the panel to unmask the shift from manual chaos to autonomous efficiency.</p>
+      </div>
+
+      <div class="spotlight-wrapper" id="spotlight-box">
+        <!-- BASE: Traditional Manual Business -->
+        <div class="spotlight-base">
+          <div>
+            <div style="font-family:var(--font-mono);font-size:0.95rem;letter-spacing:0.1em;color:#FF8F6B;text-transform:uppercase;">
+              [Status: Traditional Legacy Operations]
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:2rem;color:#FFF;margin-top:6px;">Manual Friction & Lost Revenue</h3>
+          </div>
+
+          <div class="old-grid">
+            <div class="old-card">
+              <h4>⚠️ Paper Menus & Manual Entry</h4>
+              <p style="font-size:0.85rem;line-height:1.5;">Prone to kitchen miscommunication, printing reprint costs, and 25-minute wait times for diners.</p>
+            </div>
+            <div class="old-card">
+              <h4>⚠️ Lost Google Reviews</h4>
+              <p style="font-size:0.85rem;line-height:1.5;">Happy guests leave without writing reviews because the search-and-type process takes too long.</p>
+            </div>
+            <div class="old-card">
+              <h4>⚠️ Unanswered Night Enquiries</h4>
+              <p style="font-size:0.85rem;line-height:1.5;">Prospective high-ticket clients message on WhatsApp and Instagram after hours with zero response.</p>
+            </div>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:0.9rem;">LEGACY BOTTLENECK: HIGH OVERHEAD, HUMAN ERROR</div>
+        </div>
+
+        <!-- REVEAL: Elite AI Automated System -->
+        <div class="spotlight-reveal" id="spotlight-reveal-layer">
+          <div>
+            <div style="font-family:var(--font-mono);font-size:0.95rem;letter-spacing:0.1em;color:var(--cyan);text-transform:uppercase;">
+              [Status: Elite AI Autonomous Transformation]
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:2rem;color:#FFF;margin-top:6px;">Frictionless Growth on Autopilot</h3>
+          </div>
+
+          <div class="new-grid">
+            <div class="new-card">
+              <h4>⚡ Smart QR & Real-time KDS</h4>
+              <p style="font-size:0.85rem;line-height:1.5;">Guests scan, order, customize spice levels, and receive instant WhatsApp receipts with zero waiter lag.</p>
+            </div>
+            <div class="new-card">
+              <h4>🌟 1-Tap NFC Google Review Cards</h4>
+              <p style="font-size:0.85rem;line-height:1.5;">Customers tap their phone on your EliteTap card, directly opening your 5★ review page in 1 second.</p>
+            </div>
+            <div class="new-card">
+              <h4>🤖 24/7 Multi-Agent AI Dispatch</h4>
+              <p style="font-size:0.85rem;line-height:1.5;">Intelligent WhatsApp & Web agents qualify leads, answer FAQs, and book consultations while you sleep.</p>
+            </div>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:0.9rem;color:var(--cyan);">TRANSFORMATION COMPLETE: ZERO ERROR, +40% TABLE TURNOVER</div>
+        </div>
+
+        <div class="spotlight-hint">
+          <span>🔍 Move Cursor / Finger to Scan</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. HARDWARE SHOWCASE: 3D GYROSCOPIC NFC CARD -->
+  <section class="hardware-section" id="hardware">
+    <div class="container">
+      <div class="hardware-grid">
+        <div class="card-3d-stage" id="nfc-stage">
+          <div class="nfc-card-body" id="nfc-card">
+            <div class="nfc-card-glare" id="nfc-glare"></div>
+            
+            <div class="card-top-row">
+              <div class="chip-gold"></div>
+              <div class="nfc-wave-icon">)))</div>
+            </div>
+
+            <div class="card-mid-logo">
+              <img src="assets/logo.jpg" alt="Elite AI Emblem">
+              <div class="card-mid-text">
+                <strong>ELITE</strong>
+                <span>AI & SMART SYSTEMS</span>
+              </div>
+            </div>
+
+            <div class="card-bottom-row">
+              <div>CONTACTLESS REPUTATION & ACCESS</div>
+              <div style="color:var(--gold);">NFC + QR ENABLED</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hardware-info-panel">
+          <div class="badge-pill">
+            <span class="pill-dot"></span>
+            <span>Proprietary Smart Hardware</span>
+          </div>
+          <h3>EliteTap: The Physical Bridge to Your Digital Growth</h3>
+          <p>
+            While other agencies only build software, Elite AI delivers the tangible hardware touchpoints that bridge the physical world with autonomous systems.
+          </p>
+
+          <div class="feature-check-list">
+            <div class="check-item">
+              <div class="check-badge">✓</div>
+              <span><b>1-Second Tap:</b> Works natively on iOS & Android with zero app downloads.</span>
+            </div>
+            <div class="check-item">
+              <div class="check-badge">✓</div>
+              <span><b>5★ Review Acceleration:</b> Collect 10x more Google & TripAdvisor ratings at point of sale.</span>
+            </div>
+            <div class="check-item">
+              <div class="check-badge">✓</div>
+              <span><b>Precision Craftsmanship:</b> Available in Matte Obsidian PVC, Brushed 24k Gold Metal, & Acrylic Stand Tents.</span>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+            <a href="#audit" class="btn-glow">
+              <span>Order Custom Branded Cards</span>
+            </a>
+            <a href="https://instagram.com/elitetap.cards" target="_blank" rel="noopener noreferrer" class="btn-ghost">
+              <span>📸 Follow @elitetap.cards</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. STICKY-STACKING ECOSYSTEM CARDS (FROM PROMPT 3) -->
+  <section class="stack-section" id="systems">
+    <div class="container">
+      <div class="section-eyebrow">
+        <div class="badge-pill">
+          <span class="pill-dot"></span>
+          <span>Core Agency Systems</span>
+        </div>
+        <h2 class="section-title">Bespoke Enterprise Deployments</h2>
+        <p class="section-sub">Engineered to drive measurable revenue from day one.</p>
+      </div>
+
+      <div class="stack-cards-wrapper">
+        <!-- Card 1: Hotel & Hospitality OS -->
+        <article class="stack-card">
+          <div>
+            <div class="stack-card-num">01</div>
+            <h3 class="stack-card-title">Hotel & Restaurant QR Suite + KDS</h3>
+            <p class="stack-card-desc">
+              Transform guest dining and room service into a digital-first powerhouse. Live kitchen screens, automatic cooking timers, WhatsApp digital bills, and direct room folio charging.
+            </p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <span class="badge-pill">In-Room Dining</span>
+              <span class="badge-pill">Kitchen KDS</span>
+              <span class="badge-pill">WhatsApp Billing</span>
+            </div>
+          </div>
+          <div class="stack-card-preview">
+            <img src="https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif" alt="Hospitality Suite Preview">
+          </div>
+        </article>
+
+        <!-- Card 2: Reputation & Review Growth -->
+        <article class="stack-card">
+          <div>
+            <div class="stack-card-num">02</div>
+            <h3 class="stack-card-title">EliteTap NFC Reputation Engines</h3>
+            <p class="stack-card-desc">
+              Rank #1 in Google Maps local search. Handcrafted contactless review cards and bedside acrylic stands that route customers straight to your Google review submission box in 1 second.
+            </p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <span class="badge-pill">NFC Review Cards</span>
+              <span class="badge-pill">Google Maps SEO</span>
+              <span class="badge-pill">Instant 5-Star Tap</span>
+            </div>
+          </div>
+          <div class="stack-card-preview">
+            <img src="https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif" alt="NFC Reputation Engine">
+          </div>
+        </article>
+
+        <!-- Card 3: 24/7 AI WhatsApp Agents -->
+        <article class="stack-card">
+          <div>
+            <div class="stack-card-num">03</div>
+            <h3 class="stack-card-title">24/7 Autonomous WhatsApp & Voice Agents</h3>
+            <p class="stack-card-desc">
+              Never lose an after-hours lead again. Custom fine-tuned AI bots that answer complex inquiries, schedule appointments, send pricing quotes, and sync directly with your CRM.
+            </p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <span class="badge-pill">Omnichannel Bot</span>
+              <span class="badge-pill">BANT Lead Triage</span>
+              <span class="badge-pill">CRM Integration</span>
+            </div>
+          </div>
+          <div class="stack-card-preview">
+            <img src="https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif" alt="AI Agent Preview">
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. LIVE AI AGENT PLAYGROUND & ROI CALCULATOR -->
+  <section class="lab-section" id="playground">
+    <div class="container">
+      <div class="section-eyebrow">
+        <div class="badge-pill">
+          <span class="pill-dot"></span>
+          <span>Proof of Competence</span>
+        </div>
+        <h2 class="section-title">Interactive AI Terminal & ROI Calculator</h2>
+        <p class="section-sub">Test drive our agent core live, then calculate your exact monthly cost reduction.</p>
+      </div>
+
+      <div class="lab-grid">
+        <!-- Live AI Chat Terminal -->
+        <div class="terminal-box">
+          <div class="terminal-bar">
+            <div class="terminal-dots">
+              <span class="dot-r"></span>
+              <span class="dot-y"></span>
+              <span class="dot-g"></span>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--cyan);">
+              ELITE_AI_KERNEL // V2.4 [ACTIVE]
+            </div>
+            <div style="font-size:0.75rem;color:var(--text-muted);">LATENCY: 142ms</div>
+          </div>
+
+          <div class="terminal-body" id="chat-messages">
+            <div class="bot-msg">
+              👋 Welcome to Elite AI. I am your autonomous agency concierge. How can I assist you today? You can test my hospitality ordering, review acceleration, or appointment booking capabilities below.
+            </div>
+          </div>
+
+          <div class="prompt-pills">
+            <button type="button" class="prompt-pill" onclick="sendQuickPrompt('How does the Hotel QR System work?')">🍽️ Hotel QR Suite</button>
+            <button type="button" class="prompt-pill" onclick="sendQuickPrompt('Tell me about the EliteTap NFC Review Cards')">🌟 NFC Review Cards</button>
+            <button type="button" class="prompt-pill" onclick="sendQuickPrompt('How do your 24/7 WhatsApp AI Agents work?')">🤖 WhatsApp AI Bots</button>
+            <button type="button" class="prompt-pill" onclick="sendQuickPrompt('How long does setup and delivery take?')">⏱️ Delivery Timeline</button>
+            <button type="button" class="prompt-pill" onclick="sendQuickPrompt('Can you put my custom hotel logo on the cards?')">🎨 Custom Branding</button>
+            <button type="button" class="prompt-pill" onclick="sendQuickPrompt('How much money can Elite AI save my business?')">💰 Calculate Savings</button>
+            <button type="button" class="prompt-pill" onclick="sendQuickPrompt('Do you serve businesses in India and globally?')">🌍 Locations Served</button>
+            <button type="button" class="prompt-pill" onclick="sendQuickPrompt('How can I contact your executive team?')">📞 Direct Contact</button>
+          </div>
+
+          <form class="terminal-input-bar" onsubmit="handleChatSubmit(event)">
+            <input type="text" id="chat-input" placeholder="Type a message to test our AI..." autocomplete="off">
+            <button type="submit" class="btn-glow" style="padding:8px 18px;font-size:0.85rem;">Send</button>
+          </form>
+        </div>
+
+        <!-- Dynamic ROI Calculator -->
+        <div class="roi-box" id="calculator">
+          <div>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+              <span style="font-size:1.4rem;">📊</span>
+              <h3 style="font-family:var(--font-display);font-size:1.6rem;color:#FFF;">Savings & ROI Simulator</h3>
+            </div>
+
+            <div class="roi-slider-group">
+              <div class="slider-header">
+                <span>Monthly Customers / Inquiries</span>
+                <span id="customers-val">2,500</span>
+              </div>
+              <input type="range" class="roi-slider" id="customers-slider" min="300" max="15000" step="100" value="2500" oninput="calculateROI()">
+            </div>
+
+            <div class="roi-slider-group">
+              <div class="slider-header">
+                <span>Front-Desk / Operations Staff</span>
+                <span id="staff-val">4 Members</span>
+              </div>
+              <input type="range" class="roi-slider" id="staff-slider" min="1" max="25" step="1" value="4" oninput="calculateROI()">
+            </div>
+          </div>
+
+          <div class="roi-results-card">
+            <div class="res-metric">
+              <strong id="hours-saved">160 hrs</strong>
+              <span>Hours Saved / Month</span>
+            </div>
+            <div class="res-metric">
+              <strong id="cost-saved" style="color:var(--gold-light);">₹72,000</strong>
+              <span>Est. Monthly Value Added</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. CONSULTATION / AUDIT INTAKE FORM -->
+  <section class="audit-section" id="audit">
+    <div class="container">
+      <div class="audit-card">
+        <div class="badge-pill">
+          <span class="pill-dot"></span>
+          <span>Private Advisory</span>
+        </div>
+        <h2 style="font-family:var(--font-display);font-size:2.4rem;color:#FFF;margin:16px 0 10px;">
+          Book Your 30-Minute AI Architecture Audit
+        </h2>
+        <p style="color:var(--text-sub);max-width:560px;margin:0 auto;">
+          We inspect your current business bottlenecks and deliver a custom blueprint showing where automated systems and NFC hardware will produce the highest ROI.
+        </p>
+
+        <form class="audit-form" id="audit-form" onsubmit="return false;">
+          <div>
+            <label class="form-label">Your Name *</label>
+            <input type="text" id="audit-name" class="form-input" placeholder="e.g. Alexander Vance" required>
+          </div>
+          <div>
+            <label class="form-label">Business / Brand Name *</label>
+            <input type="text" id="audit-business" class="form-input" placeholder="e.g. The Grand Hotel & Suites" required>
+          </div>
+          <div>
+            <label class="form-label">Contact / WhatsApp Number *</label>
+            <input type="tel" id="audit-phone" class="form-input" placeholder="+91 9301814976" required>
+          </div>
+          <div>
+            <label class="form-label">Official Email Address *</label>
+            <input type="email" id="audit-email" class="form-input" placeholder="e.g. director@grandhotel.com" required>
+          </div>
+          <div class="form-group-full">
+            <label class="form-label">Primary Industry *</label>
+            <select class="form-select" id="audit-industry">
+              <option>Hotel & Luxury Hospitality</option>
+              <option>Restaurant / Bar / Cafe</option>
+              <option>Medical / Dental Clinic</option>
+              <option>High-Ticket B2B Services</option>
+              <option>Retail & E-Commerce</option>
+              <option>Other Enterprise</option>
+            </select>
+          </div>
+          <div class="form-group-full">
+            <label class="form-label">Primary Goal / Bottleneck</label>
+            <input type="text" id="audit-goal" class="form-input" placeholder="e.g. In-Room Dining digitization & accelerating 5-star Google reviews">
+          </div>
+          
+          <!-- Dual High-Ticket Dispatch Buttons -->
+          <div class="form-group-full" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:16px;">
+            <button type="button" onclick="dispatchAudit('whatsapp')" class="btn-glow" style="flex:1;min-width:240px;padding:16px 20px;background:linear-gradient(to top,#25d366 1px,#1da851 3px,#128c3e 6px,#0b6028 12px,#073818 18px,#081b10 28px,#08120b 100%);">
+              <span>📱 Send via WhatsApp ➔</span>
+            </button>
+            <button type="button" onclick="dispatchAudit('email')" class="btn-glow" style="flex:1;min-width:240px;padding:16px 20px;border-color:var(--gold);">
+              <span>✉️ Send via Email / Gmail ➔</span>
+            </button>
+          </div>
+          <div class="form-group-full" style="text-align:center;margin-top:10px;font-size:0.75rem;color:var(--text-muted);font-family:var(--font-mono);">
+            🔒 ENTERPRISE CONFIDENTIALITY GUARANTEED • 2-HOUR SLA RESPONSE BY LEAD ARCHITECT
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. MASTER FOOTER -->
+  <footer class="master-footer">
+    <div class="container footer-grid">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <img src="assets/logo.jpg" alt="Elite AI Logo" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--gold);">
+        <div>
+          <strong style="color:#FFF;letter-spacing:0.05em;display:block;">ELITE AI & SMART SYSTEMS</strong>
+          <span style="font-size:0.75rem;color:var(--text-muted);">Autonomous Intelligence meets Contactless Hardware.</span>
+        </div>
+      </div>
+
+      <!-- Official Instagram & Email Channels -->
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=eliteai.agency.systems@gmail.com" target="_blank" rel="noopener noreferrer" class="badge-pill" style="text-transform:none;padding:8px 16px;background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.2);transition:all 0.2s ease;">
+          <span style="font-size:0.9rem;">✉️</span>
+          <span style="color:#FFF;">Email: <b style="color:#FFF;">eliteai.agency.systems@gmail.com</b></span>
+        </a>
+        <a href="https://instagram.com/elite.ai_agency" target="_blank" rel="noopener noreferrer" class="badge-pill" style="text-transform:none;padding:8px 16px;background:rgba(255,255,255,0.06);border-color:rgba(212,175,55,0.3);transition:all 0.2s ease;">
+          <span style="font-size:0.9rem;">📸</span>
+          <span style="color:#FFF;">AI Agency: <b style="color:var(--gold-light);">@elite.ai_agency</b></span>
+        </a>
+        <a href="https://instagram.com/elitetap.cards" target="_blank" rel="noopener noreferrer" class="badge-pill" style="text-transform:none;padding:8px 16px;background:rgba(255,255,255,0.06);border-color:rgba(0,240,255,0.3);transition:all 0.2s ease;">
+          <span style="font-size:0.9rem;">💳</span>
+          <span style="color:#FFF;">Smart Cards: <b style="color:var(--cyan);">@elitetap.cards</b></span>
+        </a>
+      </div>
+
+      <div>
+        <span>Direct: <b>+91 9301814976</b> • © 2026 Elite AI Systems. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Quick Connect -->
+  <a href="https://wa.me/919301814976?text=Hello%20Elite%20AI,%20I%20would%20like%20to%20request%20an%20AI%20audit%20and%20smart%20hardware%20demo." target="_blank" rel="noopener noreferrer" class="floating-wa" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32">
+      <path d="M16 2a13.9 13.9 0 0 0-12 21l-1.9 6.9 7.1-1.9A13.9 13.9 0 1 0 16 2zm0 25.5a11.5 11.5 0 0 1-5.9-1.6l-.4-.2-4.4 1.2 1.2-4.3-.3-.5A11.6 11.6 0 1 1 16 27.5zm6.4-8.7c-.3-.2-2-.9-2.3-1s-.6-.2-.8.2-.9 1-1.1 1.3-.4.3-.7.1a9.2 9.2 0 0 1-2.7-1.7 10.2 10.2 0 0 1-1.9-2.4c-.2-.3 0-.5.2-.7s.3-.4.5-.6l.3-.5a1.8 1.8 0 0 0 .1-.8c0-.2-.8-2-1.1-2.7s-.6-.6-.8-.6h-.7a1.4 1.4 0 0 0-1 .5 4.3 4.3 0 0 0-1.3 3.2 7.5 7.5 0 0 0 1.6 4 17.2 17.2 0 0 0 6.6 5.8c.9.4 1.6.6 2.2.8a5.2 5.2 0 0 0 2.4.1 3.9 3.9 0 0 0 2.6-1.8 3.2 3.2 0 0 0 .2-1.8c-.1-.1-.4-.3-.7-.4z"/>
+    </svg>
+  </a>
+
+  <!-- =============================================================
+       THREE.JS 3D WEBGL LIBRARY (LOCAL WITH CDN FALLBACK)
+       ============================================================= -->
+  <script src="./assets/three.min.js"></script>
+  <script>
+    if (typeof THREE === 'undefined') {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
+    }
+  </script>
+
+  <!-- =============================================================
+       CORE JAVASCRIPT LOGIC
+       ============================================================= -->
+  <script>
+    // -------------------------------------------------------------
+    // 1. CHARACTER-BY-CHARACTER SCROLL REVEAL (PROMPT 3 ANATOMY)
+    // -------------------------------------------------------------
+    (function initCharReveal() {
+      const target = document.getElementById('char-target');
+      if (!target) return;
+      const text = target.innerText.trim();
+      target.innerHTML = '';
+
+      const chars = [];
+      for (let i = 0; i < text.length; i++) {
+        const span = document.createElement('span');
+        span.className = 'char';
+        span.textContent = text[i];
+        target.appendChild(span);
+        chars.push(span);
+      }
+
+      function updateChars() {
+        const rect = target.getBoundingClientRect();
+        const winH = window.innerHeight;
+        // Progress between top at 80% of viewport and bottom at 20%
+        const start = winH * 0.85;
+        const end = winH * 0.2;
+        const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
+
+        const litCount = Math.floor(progress * chars.length);
+        chars.forEach((c, idx) => {
+          if (idx <= litCount) {
+            c.classList.add('lit');
+            if (idx > chars.length - 16) {
+              c.classList.add('lit-gold');
+            }
+          } else {
+            c.classList.remove('lit', 'lit-gold');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', updateChars, { passive: true });
+      updateChars();
+    })();
+
+    // -------------------------------------------------------------
+    // 2. DUAL-ROW 3D SCROLL MARQUEE PHYSICS (PROMPT 3 ANATOMY)
+    // -------------------------------------------------------------
+    (function initMarquee() {
+      const row1 = document.getElementById('marquee-row-1');
+      const row2 = document.getElementById('marquee-row-2');
+      const section = document.getElementById('marquee');
+      if (!row1 || !row2 || !section) return;
+
+      function onScroll() {
+        const rect = section.getBoundingClientRect();
+        const offset = (window.scrollY - section.offsetTop + window.innerHeight) * 0.22;
+        row1.style.transform = `translateX(${offset - 250}px)`;
+        row2.style.transform = `translateX(${-(offset - 250)}px)`;
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    // -------------------------------------------------------------
+    // 3. MOBILE SLIDE-OUT DRAWER INTERACTION
+    // -------------------------------------------------------------
+    (function initMobileDrawer() {
+      const burger = document.getElementById('burger-btn');
+      const drawer = document.getElementById('mobile-drawer');
+      const closeBtn = document.getElementById('mobile-close-btn');
+      const backdrop = document.getElementById('mobile-drawer-backdrop');
+      if (!burger || !drawer) return;
+
+      const links = drawer.querySelectorAll('.mobile-link, .mobile-action-btn');
+
+      function openDrawer() {
+        drawer.classList.add('active');
+        burger.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeDrawer() {
+        drawer.classList.remove('active');
+        burger.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      burger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (drawer.classList.contains('active')) {
+          closeDrawer();
+        } else {
+          openDrawer();
+        }
+      });
+
+      if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+      if (backdrop) backdrop.addEventListener('click', closeDrawer);
+
+      links.forEach(link => {
+        link.addEventListener('click', () => {
+          closeDrawer();
+        });
+      });
+    })();
+
+    // -------------------------------------------------------------
+    // 4. X-RAY SPOTLIGHT REVEAL (PROMPTS 2 & 5 FUSION - TOUCH & MOUSE)
+    // -------------------------------------------------------------
+    (function initSpotlight() {
+      const box = document.getElementById('spotlight-box');
+      const reveal = document.getElementById('spotlight-reveal-layer');
+      if (!box || !reveal) return;
+
+      let radius = window.innerWidth < 640 ? 140 : 260;
+
+      function setMask(x, y) {
+        const grad = `radial-gradient(circle ${radius}px at ${x}px ${y}px, #fff 0%, #fff 40%, rgba(255,255,255,0.7) 65%, transparent 100%)`;
+        reveal.style.maskImage = grad;
+        reveal.style.webkitMaskImage = grad;
+      }
+
+      function onMove(clientX, clientY) {
+        const rect = box.getBoundingClientRect();
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
+        setMask(x, y);
+      }
+
+      box.addEventListener('pointermove', (e) => onMove(e.clientX, e.clientY));
+      box.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches.length > 0) {
+          onMove(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+
+      box.addEventListener('pointerleave', () => {
+        const rect = box.getBoundingClientRect();
+        setMask(rect.width * 0.5, rect.height * 0.4);
+      });
+
+      // Default spotlight placement for initial visual preview
+      const rect = box.getBoundingClientRect();
+      setMask(rect.width * 0.5, rect.height * 0.4);
+    })();
+
+    // -------------------------------------------------------------
+    // 5. 3D GYROSCOPIC NFC CARD TILT (HARDWARE PHYSICS - TOUCH & MOUSE)
+    // -------------------------------------------------------------
+    (function init3DCard() {
+      const stage = document.getElementById('nfc-stage');
+      const card = document.getElementById('nfc-card');
+      const glare = document.getElementById('nfc-glare');
+      if (!stage || !card || !glare) return;
+
+      function handleCardTilt(clientX, clientY) {
+        const rect = card.getBoundingClientRect();
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
+        const cx = rect.width / 2;
+        const cy = rect.height / 2;
+        const dx = (x - cx) / cx;
+        const dy = (y - cy) / cy;
+
+        const rotX = -dy * 16;
+        const rotY = dx * 18;
+
+        card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.04, 1.04, 1.04)`;
+        glare.style.background = `radial-gradient(circle 240px at ${x}px ${y}px, rgba(255, 255, 255, 0.22), transparent)`;
+      }
+
+      function resetCardTilt() {
+        card.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+      }
+
+      stage.addEventListener('mousemove', (e) => handleCardTilt(e.clientX, e.clientY));
+      stage.addEventListener('mouseleave', resetCardTilt);
+
+      stage.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches.length > 0) {
+          handleCardTilt(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+      stage.addEventListener('touchend', resetCardTilt);
+    })();
+
+    // -------------------------------------------------------------
+    // 5. LIVE AI AGENT CHAT PLAYGROUND SIMULATION (14 ADVANCED FAQ CATEGORIES)
+    // -------------------------------------------------------------
+    const knowledgeBase = {
+      hotel: "Our Hotel QR Suite allows guests in Room 101–305 to scan bedside acrylic cards, order In-Room Dining with custom dietary tags, view real-time cooking countdowns, and receive automated WhatsApp bills directly. The kitchen receives tickets on the live KDS display with audio chimes!",
+      nfc: "EliteTap NFC Cards are manufactured with NTAG215 microchips. When a customer taps their smartphone against the card, their native Google Maps review form launches in 1 second, increasing 5-star review collection by over 300%. Compatible with 100% of modern iPhones and Android devices with zero app downloads.",
+      whatsapp_bot: "Our Autonomous WhatsApp Agents operate 24/7 with under 180ms latency. They qualify high-ticket inquiries (BANT lead triage), answer complex business FAQs, send instant PDF brochures, schedule calendar appointments, and route VIP conversations directly to your phone. Never miss an after-hours lead again.",
+      timeline: "Standard deployments launch in just 3 to 7 business days! This includes full QR menu digitization, kitchen KDS setup, WhatsApp agent prompt engineering, and express door-to-door delivery of your customized EliteTap NFC hardware.",
+      branding: "Yes, 100% bespoke branding! We engrave your official brand logo, color palette, typography, and QR aesthetics directly onto your cards and bedside acrylic stands. Available in Matte Obsidian PVC, Brushed 24k Gold Stainless Steel, and Luxury Frost Acrylic.",
+      locations: "We operate globally with express hardware courier delivery across India and worldwide (USA, UAE, UK, Europe). Our cloud software and WhatsApp AI engines run securely on high-availability cloud servers accessible from anywhere on Earth.",
+      savings: "By automating room service ticket logging, front-desk repetitive FAQ answers, and review follow-ups, businesses save approximately 140–200 staff hours per month, equivalent to ₹50,000–₹1,20,000 in operational overhead. Every system is priced based on scale and ROI — we guarantee a positive return within the first 30 days.",
+      integration: "Our systems integrate seamlessly alongside your existing operations! We connect with popular hotel & restaurant POS systems, WhatsApp Business Cloud API, Google Business Profile, and CRMs like HubSpot and Zoho via webhook or standalone dashboard.",
+      security: "Enterprise-grade security is foundational to Elite AI. All customer interactions, WhatsApp messaging, and billing transactions are encrypted with 256-bit SSL. We never sell or share client data, ensuring full compliance and peace of mind for luxury hospitality brands.",
+      contact: "You can reach our executive team directly via WhatsApp or call at +91 9301814976, or email us at eliteai.agency.systems@gmail.com. Our lead architects respond within 2 hours.",
+      social: "Follow our official Instagram channels: @elite.ai_agency for real-world AI automation case studies and architecture previews, and @elitetap.cards for our smart contactless NFC cards!",
+      get_started: "Getting started is simple! Scroll down to our 'Book AI Audit' section on this page, or message us directly on WhatsApp at +91 9301814976 with your business name. We will conduct a 30-minute infrastructure audit and provide a tailored proposal.",
+      greetings: "Hello! Welcome to Elite AI. I am your autonomous agency concierge. Ask me anything about our Hotel QR Suite, Smart NFC Review Cards, 24/7 WhatsApp AI Agents, or how we can automate your operations.",
+      default: "Elite AI specializes in custom autonomous workflows, hotel QR ecosystems, smart NFC hardware, and 24/7 WhatsApp AI agents. Would you like to schedule an architecture audit or ask about our specific systems?"
+    };
+
+    function appendMessage(sender, text) {
+      const container = document.getElementById('chat-messages');
+      const msg = document.createElement('div');
+      msg.className = sender === 'user' ? 'user-msg' : 'bot-msg';
+      msg.textContent = text;
+      container.appendChild(msg);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function handleChatSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('chat-input');
+      const query = input.value.trim();
+      if (!query) return;
+
+      appendMessage('user', query);
+      input.value = '';
+
+      // Simulated realistic typing latency
+      setTimeout(() => {
+        const lower = query.toLowerCase();
+        let reply = knowledgeBase.default;
+
+        if (lower.includes('hotel') || lower.includes('qr') || lower.includes('dining') || lower.includes('room') || lower.includes('menu') || lower.includes('food') || lower.includes('kds') || lower.includes('restaurant') || lower.includes('waiter')) {
+          reply = knowledgeBase.hotel;
+        } else if (lower.includes('nfc') || lower.includes('review') || lower.includes('card') || lower.includes('google') || lower.includes('tap') || lower.includes('rating') || lower.includes('tripadvisor') || lower.includes('elitetap')) {
+          reply = knowledgeBase.nfc;
+        } else if (lower.includes('whatsapp') || lower.includes('bot') || lower.includes('agent') || lower.includes('voice') || lower.includes('chat') || lower.includes('auto reply') || lower.includes('support')) {
+          reply = knowledgeBase.whatsapp_bot;
+        } else if (lower.includes('timeline') || lower.includes('how long') || lower.includes('time') || lower.includes('turnaround') || lower.includes('delivery') || lower.includes('setup') || lower.includes('days') || lower.includes('deploy') || lower.includes('launch')) {
+          reply = knowledgeBase.timeline;
+        } else if (lower.includes('brand') || lower.includes('logo') || lower.includes('custom') || lower.includes('acrylic') || lower.includes('design') || lower.includes('metal') || lower.includes('material') || lower.includes('stand')) {
+          reply = knowledgeBase.branding;
+        } else if (lower.includes('location') || lower.includes('country') || lower.includes('india') || lower.includes('where') || lower.includes('global') || lower.includes('city') || lower.includes('ship') || lower.includes('serve')) {
+          reply = knowledgeBase.locations;
+        } else if (lower.includes('save') || lower.includes('cost') || lower.includes('money') || lower.includes('price') || lower.includes('roi') || lower.includes('fee') || lower.includes('quote') || lower.includes('how much') || lower.includes('charge') || lower.includes('rate') || lower.includes('package')) {
+          reply = knowledgeBase.savings;
+        } else if (lower.includes('integrate') || lower.includes('pos') || lower.includes('crm') || lower.includes('software') || lower.includes('connect') || lower.includes('petpooja') || lower.includes('zoho') || lower.includes('hubspot')) {
+          reply = knowledgeBase.integration;
+        } else if (lower.includes('security') || lower.includes('privacy') || lower.includes('safe') || lower.includes('data') || lower.includes('gdpr') || lower.includes('confidential')) {
+          reply = knowledgeBase.security;
+        } else if (lower.includes('instagram') || lower.includes('insta') || lower.includes('social') || lower.includes('handle') || lower.includes('follow') || lower.includes('page') || lower.includes('portfolio')) {
+          reply = knowledgeBase.social;
+        } else if (lower.includes('email') || lower.includes('mail') || lower.includes('gmail') || lower.includes('phone') || lower.includes('call') || lower.includes('number') || lower.includes('reach') || lower.includes('contact')) {
+          reply = knowledgeBase.contact;
+        } else if (lower.includes('start') || lower.includes('begin') || lower.includes('hire') || lower.includes('audit') || lower.includes('book') || lower.includes('demo') || lower.includes('order') || lower.includes('schedule')) {
+          reply = knowledgeBase.get_started;
+        } else if (lower === 'hi' || lower === 'hello' || lower === 'hey' || lower.includes('good morning') || lower.includes('good afternoon') || lower.includes('namaste')) {
+          reply = knowledgeBase.greetings;
+        }
+
+        appendMessage('bot', reply);
+      }, 450);
+    }
+
+    function sendQuickPrompt(text) {
+      document.getElementById('chat-input').value = text;
+      handleChatSubmit(new Event('submit'));
+    }
+
+    // -------------------------------------------------------------
+    // 6. DYNAMIC ROI CALCULATOR
+    // -------------------------------------------------------------
+    function calculateROI() {
+      const customers = parseInt(document.getElementById('customers-slider').value, 10);
+      const staff = parseInt(document.getElementById('staff-slider').value, 10);
+
+      document.getElementById('customers-val').textContent = customers.toLocaleString();
+      document.getElementById('staff-val').textContent = staff + (staff === 1 ? ' Member' : ' Members');
+
+      // Math: each customer inquiry automated saves ~3 minutes. Staff efficiency boost ~20%.
+      const hoursSaved = Math.round((customers * 0.05) + (staff * 15));
+      const rupeeSaved = Math.round(hoursSaved * 420); // avg cost value per hour
+
+      document.getElementById('hours-saved').textContent = hoursSaved + ' hrs';
+      document.getElementById('cost-saved').textContent = '₹' + rupeeSaved.toLocaleString();
+    }
+
+    // -------------------------------------------------------------
+    // 7. AUDIT SUBMISSION DISPATCHER (WHATSAPP + EMAIL/GMAIL)
+    // -------------------------------------------------------------
+    function dispatchAudit(channel) {
+      const name = document.getElementById('audit-name').value.trim();
+      const business = document.getElementById('audit-business').value.trim();
+      const phone = document.getElementById('audit-phone').value.trim();
+      const email = document.getElementById('audit-email').value.trim();
+      const industry = document.getElementById('audit-industry').value;
+      const goal = document.getElementById('audit-goal').value.trim() || 'Accelerate revenue, deploy smart NFC systems, and automate operations';
+
+      if (!name || !business || !phone) {
+        alert("⚠️ Please fill in your Name, Business Name, and Contact Number before submitting.");
+        return;
+      }
+
+      if (channel === 'whatsapp') {
+        const text = `*New AI Architecture Audit Request*%0A%0A👤 *Client Name:* ${encodeURIComponent(name)}%0A🏢 *Business / Brand:* ${encodeURIComponent(business)}%0A📱 *Contact:* ${encodeURIComponent(phone)}%0A✉️ *Email:* ${encodeURIComponent(email || 'Not provided')}%0A🏷️ *Industry:* ${encodeURIComponent(industry)}%0A🎯 *Goal / Bottleneck:* ${encodeURIComponent(goal)}`;
+        const whatsappUrl = `https://wa.me/919301814976?text=${text}`;
+        window.open(whatsappUrl, '_blank');
+      } else if (channel === 'email') {
+        const subject = encodeURIComponent(`Executive AI Architecture Audit Request: ${business} [${industry}]`);
+        const bodyText = 
+`Dear Elite AI Systems Advisory Team,
+
+I would like to formally request an executive 30-minute AI Architecture Audit for our company.
+
+EXECUTIVE BRIEF:
+-------------------------------------------------------
+• Client Name: ${name}
+• Business / Company: ${business}
+• Direct Phone / WhatsApp: ${phone}
+• Official Email: ${email || 'N/A'}
+• Primary Industry: ${industry}
+• Key Objective / Current Bottleneck: 
+  ${goal}
+-------------------------------------------------------
+
+Please review our operational profile and send over our custom architecture blueprint and consultation availability.
+
+Sincerely,
+${name}
+${business}`;
+
+        const body = encodeURIComponent(bodyText);
+        const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=eliteai.agency.systems@gmail.com&su=${subject}&body=${body}`;
+        const mailtoUrl = `mailto:eliteai.agency.systems@gmail.com?subject=${subject}&body=${body}`;
+
+        // Detect mobile vs desktop:
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        if (isMobile) {
+          window.location.href = mailtoUrl;
+        } else {
+          // Open Gmail Compose directly in new tab (synchronous, never blocked by popup blockers)
+          const newWindow = window.open(gmailWebUrl, '_blank');
+          if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+            window.location.href = mailtoUrl;
+          }
+        }
+      }
+    }
+
+    // -------------------------------------------------------------
+    // 8. THREE.JS REAL-TIME 3D CONVERGENCE ENGINE (CHROMATIC STAR + POINT CLOUD)
+    // -------------------------------------------------------------
+    function initConvergence3D() {
+      const section = document.getElementById('vision');
+      const canvas = document.getElementById('convergence-canvas');
+      if (!section || !canvas || typeof THREE === 'undefined') return;
+
+      let width = section.clientWidth || window.innerWidth;
+      let height = section.clientHeight || window.innerHeight;
+
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
+
+      const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+      camera.position.set(0, 0, 16);
+
+      const renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        antialias: true,
+        alpha: false,
+        powerPreference: "high-performance"
+      });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.35;
+
+      // Lighting: Dark ambient + 4 chromatic moving lights
+      const ambientLight = new THREE.AmbientLight(0x0a0a14, 1.2);
+      scene.add(ambientLight);
+
+      // Light 1: Vibrant Magenta
+      const lightMagenta = new THREE.PointLight(0xFF007A, 5.0, 35);
+      scene.add(lightMagenta);
+
+      // Light 2: Electric Cyan
+      const lightCyan = new THREE.PointLight(0x00F0FF, 4.5, 35);
+      scene.add(lightCyan);
+
+      // Light 3: Royal Violet / Lilac
+      const lightViolet = new THREE.PointLight(0x9D4EDD, 4.0, 30);
+      scene.add(lightViolet);
+
+      // Light 4: Liquid 24k Gold
+      const lightGold = new THREE.PointLight(0xE5B83B, 3.2, 25);
+      scene.add(lightGold);
+
+      // 3D Voxel Chromatic Star Group
+      const starGroup = new THREE.Group();
+      scene.add(starGroup);
+
+      // Stepped 8-bit Star Voxel Matrix (16x16)
+      const starMatrix = [
+        [0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0],
+        [0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0],
+        [0,0,0,1,0,0,1,1,1,1,0,0,1,0,0,0],
+        [0,0,1,1,1,0,0,1,1,0,0,1,1,1,0,0],
+        [0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0],
+        [0,1,1,0,0,1,1,1,1,1,1,0,0,1,1,0],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [0,1,1,0,0,1,1,1,1,1,1,0,0,1,1,0],
+        [0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0],
+        [0,0,1,1,1,0,0,1,1,0,0,1,1,1,0,0],
+        [0,0,0,1,0,0,1,1,1,1,0,0,1,0,0,0],
+        [0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0],
+        [0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0]
+      ];
+
+      const starMat = new THREE.MeshPhysicalMaterial({
+        color: 0x181022,
+        emissive: 0x12081d,
+        emissiveIntensity: 0.28,
+        metalness: 0.90,
+        roughness: 0.14,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.08,
+        reflectivity: 1.0
+      });
+
+      let voxelCount = 0;
+      for (let r = 0; r < 16; r++) {
+        for (let c = 0; c < 16; c++) {
+          if (starMatrix[r][c] === 1) voxelCount++;
+        }
+      }
+
+      const voxelSize = 0.36;
+      const voxelDepth = 0.95;
+      const boxGeo = new THREE.BoxGeometry(voxelSize * 0.96, voxelSize * 0.96, voxelDepth);
+      const instancedStar = new THREE.InstancedMesh(boxGeo, starMat, voxelCount);
+
+      const dummy = new THREE.Object3D();
+      let vIdx = 0;
+      for (let r = 0; r < 16; r++) {
+        for (let c = 0; c < 16; c++) {
+          if (starMatrix[r][c] === 1) {
+            const px = (c - 7.5) * voxelSize;
+            const py = (7.5 - r) * voxelSize;
+            dummy.position.set(px, py, 0);
+            dummy.updateMatrix();
+            instancedStar.setMatrixAt(vIdx++, dummy.matrix);
+          }
+        }
+      }
+      instancedStar.instanceMatrix.needsUpdate = true;
+      starGroup.add(instancedStar);
+
+      // Flanking Halftone Point-Cloud Convergence Hands
+      function makeParticleTexture() {
+        const pCanvas = document.createElement('canvas');
+        pCanvas.width = 32; pCanvas.height = 32;
+        const pCtx = pCanvas.getContext('2d');
+        const grad = pCtx.createRadialGradient(16, 16, 0, 16, 16, 16);
+        grad.addColorStop(0, 'rgba(255,255,255,1)');
+        grad.addColorStop(0.35, 'rgba(255,255,255,0.75)');
+        grad.addColorStop(1, 'rgba(255,255,255,0)');
+        pCtx.fillStyle = grad;
+        pCtx.fillRect(0, 0, 32, 32);
+        return new THREE.CanvasTexture(pCanvas);
+      }
+      const pTex = makeParticleTexture();
+
+      // Left: Robotic Android Point Matrix
+      const leftCount = 650;
+      const leftGeo = new THREE.BufferGeometry();
+      const leftPos = new Float32Array(leftCount * 3);
+      for (let i = 0; i < leftCount; i++) {
+        const t = Math.random();
+        const x = -10.5 + t * 7.2;
+        const curve = Math.sin(t * Math.PI) * 1.8 - 0.5;
+        const spread = (1.2 - t * 0.7);
+        const y = curve + (Math.random() - 0.5) * spread;
+        const z = (Math.random() - 0.5) * 2.2;
+        leftPos[i * 3] = x;
+        leftPos[i * 3 + 1] = y;
+        leftPos[i * 3 + 2] = z;
+      }
+      leftGeo.setAttribute('position', new THREE.BufferAttribute(leftPos, 3));
+      const leftMat = new THREE.PointsMaterial({
+        size: 0.26,
+        map: pTex,
+        transparent: true,
+        opacity: 0.8,
+        color: 0x88ccff,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+      const leftPoints = new THREE.Points(leftGeo, leftMat);
+      scene.add(leftPoints);
+
+      // Right: Human Hand Point Matrix
+      const rightCount = 650;
+      const rightGeo = new THREE.BufferGeometry();
+      const rightPos = new Float32Array(rightCount * 3);
+      for (let i = 0; i < rightCount; i++) {
+        const t = Math.random();
+        const x = 10.5 - t * 7.2;
+        const curve = Math.sin(t * Math.PI) * 1.6 - 0.4;
+        const spread = (1.1 - t * 0.65);
+        const y = curve + (Math.random() - 0.5) * spread;
+        const z = (Math.random() - 0.5) * 2.2;
+        rightPos[i * 3] = x;
+        rightPos[i * 3 + 1] = y;
+        rightPos[i * 3 + 2] = z;
+      }
+      rightGeo.setAttribute('position', new THREE.BufferAttribute(rightPos, 3));
+      const rightMat = new THREE.PointsMaterial({
+        size: 0.26,
+        map: pTex,
+        transparent: true,
+        opacity: 0.8,
+        color: 0xffd1a4,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+      const rightPoints = new THREE.Points(rightGeo, rightMat);
+      scene.add(rightPoints);
+
+      // Interactive Pointer Controls
+      let isDragging = false;
+      let prevMouseX = 0, prevMouseY = 0;
+      let targetRotX = 0, targetRotY = 0;
+      let curRotX = 0, curRotY = 0;
+      let spinSpeed = 1.0;
+
+      canvas.addEventListener('pointerdown', (e) => {
+        isDragging = true;
+        prevMouseX = e.clientX;
+        prevMouseY = e.clientY;
+      });
+
+      window.addEventListener('pointermove', (e) => {
+        if (isDragging) {
+          const deltaX = e.clientX - prevMouseX;
+          const deltaY = e.clientY - prevMouseY;
+          targetRotY += deltaX * 0.007;
+          targetRotX += deltaY * 0.007;
+          prevMouseX = e.clientX;
+          prevMouseY = e.clientY;
+        } else {
+          const rect = section.getBoundingClientRect();
+          if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
+            const normX = (e.clientX - rect.left) / rect.width - 0.5;
+            const normY = (e.clientY - rect.top) / rect.height - 0.5;
+            starGroup.position.x = normX * 1.4;
+            starGroup.position.y = -normY * 0.8;
+          }
+        }
+      });
+
+      window.addEventListener('pointerup', () => { isDragging = false; });
+
+      // Mobile Touch Drag Support for Central Spacer Zone
+      const dragZone = document.getElementById('webgl-drag-zone');
+      if (dragZone) {
+        dragZone.style.pointerEvents = 'auto';
+        dragZone.style.touchAction = 'none';
+
+        dragZone.addEventListener('touchstart', (e) => {
+          if (e.touches && e.touches.length > 0) {
+            isDragging = true;
+            prevMouseX = e.touches[0].clientX;
+            prevMouseY = e.touches[0].clientY;
+          }
+        }, { passive: true });
+
+        dragZone.addEventListener('touchmove', (e) => {
+          if (isDragging && e.touches && e.touches.length > 0) {
+            const deltaX = e.touches[0].clientX - prevMouseX;
+            const deltaY = e.touches[0].clientY - prevMouseY;
+            targetRotY += deltaX * 0.009;
+            targetRotX += deltaY * 0.009;
+            prevMouseX = e.touches[0].clientX;
+            prevMouseY = e.touches[0].clientY;
+          }
+        }, { passive: true });
+
+        dragZone.addEventListener('touchend', () => { isDragging = false; });
+      }
+
+      const speedBtn = document.getElementById('toggle-3d-speed');
+      if (speedBtn) {
+        speedBtn.addEventListener('click', () => {
+          spinSpeed = spinSpeed === 1.0 ? 2.8 : 1.0;
+          speedBtn.querySelector('span').textContent = spinSpeed > 1 ? 'Fast Orbit ✦' : 'Rotate 360° ↺';
+        });
+      }
+
+      const clock = new THREE.Clock();
+      const hudCoords = document.getElementById('hud-coords');
+
+      function animate() {
+        requestAnimationFrame(animate);
+        const t = clock.getElapsedTime();
+
+        // Orbit dynamic point lights
+        lightMagenta.position.set(Math.cos(t * 1.1) * 7, Math.sin(t * 1.3) * 4 + 2, Math.sin(t * 1.1) * 6);
+        lightCyan.position.set(Math.cos(-t * 0.9 + 2) * 7, Math.sin(t * 0.8) * 5, Math.sin(-t * 0.9 + 2) * 7);
+        lightViolet.position.set(Math.sin(t * 1.2) * 5, Math.cos(t * 1.4) * 6, Math.cos(t * 1.2) * 5);
+        lightGold.position.set(Math.cos(t * 0.7) * 5, -3, Math.sin(t * 0.7) * 5);
+
+        targetRotY += 0.008 * spinSpeed;
+        curRotX += (targetRotX - curRotX) * 0.08;
+        curRotY += (targetRotY - curRotY) * 0.08;
+
+        starGroup.rotation.y = curRotY;
+        starGroup.rotation.x = curRotX + Math.sin(t * 0.4) * 0.12;
+        starGroup.rotation.z = Math.cos(t * 0.3) * 0.08;
+
+        instancedStar.position.y = Math.sin(t * 1.8) * 0.22;
+
+        leftPoints.position.y = Math.sin(t * 1.2) * 0.15;
+        rightPoints.position.y = Math.sin(t * 1.2 + 1) * 0.15;
+
+        if (hudCoords && Math.floor(t * 10) % 5 === 0) {
+          const degY = Math.round(((curRotY * 180 / Math.PI) % 360 + 360) % 360);
+          const degX = Math.round(curRotX * 180 / Math.PI);
+          hudCoords.textContent = `ROT: ${degY}° // TILT: ${degX}°`;
+        }
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener('resize', () => {
+        if (!section) return;
+        width = section.clientWidth || window.innerWidth;
+        height = section.clientHeight || window.innerHeight;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      });
+    }
+
+    // Initial setup run
+    calculateROI();
+    initConvergence3D();
+  </script>
+</body>
+</html>
