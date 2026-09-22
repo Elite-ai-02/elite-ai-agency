@@ -671,12 +671,17 @@
       height: 100%;
       display: block;
       z-index: 1;
-      pointer-events: auto;
-      cursor: grab;
-      touch-action: none;
+      pointer-events: none;
+      touch-action: pan-y;
     }
-    .convergence-bg-canvas:active {
-      cursor: grabbing;
+    @media (min-width: 769px) {
+      .convergence-bg-canvas {
+        pointer-events: auto;
+        cursor: grab;
+      }
+      .convergence-bg-canvas:active {
+        cursor: grabbing;
+      }
     }
 
     .convergence-vignette {
@@ -834,7 +839,12 @@
       flex-direction: column;
       justify-content: flex-end;
       padding-bottom: 24px;
-      pointer-events: none;
+      pointer-events: auto;
+      touch-action: pan-y;
+      cursor: grab;
+    }
+    .convergence-3d-spacer:active {
+      cursor: grabbing;
     }
 
     .convergence-flank-labels {
@@ -1025,31 +1035,161 @@
     }
 
     .card-3d-stage {
-      perspective: 1200px;
+      perspective: 1400px;
       width: 100%;
-      height: 400px;
+      min-height: 380px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      position: relative;
+      touch-action: pan-y;
     }
 
-    .nfc-card-body {
+    .nfc-card-flipper, .nfc-card-body {
       width: 380px;
       height: 240px;
+      position: relative;
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.3, 1);
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .nfc-card-flipper:active, .nfc-card-body:active {
+      cursor: grabbing;
+    }
+
+    .nfc-card-face {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       border-radius: 20px;
       background: linear-gradient(135deg, #151922 0%, #0A0D14 100%);
       border: 2px solid var(--gold);
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px var(--gold-glow);
-      position: relative;
-      padding: 28px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transform-style: preserve-3d;
-      will-change: transform;
-      transition: transform 0.15s ease-out;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
       overflow: hidden;
-      cursor: grab;
+    }
+
+    .nfc-card-front {
+      transform: rotateY(0deg) translateZ(1px);
+    }
+
+    .nfc-card-back {
+      transform: rotateY(180deg) translateZ(1px);
+      background: linear-gradient(135deg, #0d1017 0%, #06080d 100%);
+      border: 2px solid rgba(229, 184, 59, 0.85);
+      padding: 0;
+    }
+
+    .card-mag-strip {
+      width: 100%;
+      height: 44px;
+      background: #020305;
+      margin-top: 24px;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .card-back-body {
+      padding: 16px 24px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+    }
+
+    .card-back-qr-zone {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .qr-mock-box {
+      width: 58px;
+      height: 58px;
+      background: #FFFFFF;
+      color: #04060A;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+      flex-shrink: 0;
+    }
+
+    .card-back-tag strong {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      color: #FFFFFF;
+      display: block;
+      letter-spacing: 0.05em;
+    }
+
+    .card-back-tag span {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
+
+    .card-back-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 10px;
+    }
+
+    .card-interaction-bar {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-flip-card {
+      background: rgba(229, 184, 59, 0.12);
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      padding: 8px 22px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.22s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    .btn-flip-card:hover, .btn-flip-card:active {
+      background: var(--gold);
+      color: #04060A;
+      box-shadow: 0 0 16px var(--gold-glow);
+      transform: translateY(-2px);
+    }
+
+    .card-drag-hint {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .nfc-card-glare {
@@ -1933,27 +2073,54 @@
         padding: 60px 0;
       }
       .card-3d-stage {
-        height: 240px;
+        min-height: 290px;
+        height: auto;
       }
-      .nfc-card-body {
-        width: min(310px, calc(100vw - 44px));
-        height: 185px;
+      .nfc-card-flipper, .nfc-card-body {
+        width: min(320px, calc(100vw - 44px));
+        height: 195px;
+      }
+      .nfc-card-face {
         padding: 16px;
         border-radius: 16px;
+      }
+      .card-mag-strip {
+        height: 32px;
+        margin-top: 14px;
+      }
+      .qr-mock-box {
+        width: 44px;
+        height: 44px;
+      }
+      .qr-mock-box svg {
+        width: 32px;
+        height: 32px;
+      }
+      .card-back-body {
+        padding: 10px 14px 12px;
+      }
+      .card-back-tag strong {
+        font-size: 0.85rem;
+      }
+      .card-back-tag span {
+        font-size: 0.7rem;
+      }
+      .card-back-meta {
+        font-size: 0.66rem;
       }
       .chip-gold {
         width: 38px;
         height: 26px;
       }
       .card-mid-logo img {
-        width: 36px;
-        height: 36px;
+        width: 34px;
+        height: 34px;
       }
       .card-mid-text strong {
         font-size: 1.15rem;
       }
       .card-bottom-row {
-        font-size: 0.76rem;
+        font-size: 0.74rem;
       }
       .hardware-info-panel h3 {
         font-size: clamp(1.4rem, 5.5vw, 1.9rem);
@@ -2472,26 +2639,61 @@
     <div class="container">
       <div class="hardware-grid">
         <div class="card-3d-stage" id="nfc-stage">
-          <div class="nfc-card-body" id="nfc-card">
-            <div class="nfc-card-glare" id="nfc-glare"></div>
+          <div class="nfc-card-flipper" id="nfc-card">
             
-            <div class="card-top-row">
-              <div class="chip-gold"></div>
-              <div class="nfc-wave-icon">)))</div>
-            </div>
+            <!-- FRONT FACE -->
+            <div class="nfc-card-face nfc-card-front">
+              <div class="nfc-card-glare" id="nfc-glare"></div>
+              
+              <div class="card-top-row">
+                <div class="chip-gold"></div>
+                <div class="nfc-wave-icon">)))</div>
+              </div>
 
-            <div class="card-mid-logo">
-              <img src="assets/logo.jpg" alt="Elite AI Emblem">
-              <div class="card-mid-text">
-                <strong>ELITE</strong>
-                <span>AI & SMART SYSTEMS</span>
+              <div class="card-mid-logo">
+                <img src="assets/logo.jpg" alt="Elite AI Emblem">
+                <div class="card-mid-text">
+                  <strong>ELITE</strong>
+                  <span>AI &amp; SMART SYSTEMS</span>
+                </div>
+              </div>
+
+              <div class="card-bottom-row">
+                <div>CONTACTLESS REPUTATION &amp; ACCESS</div>
+                <div style="color:var(--gold);">NFC + QR ENABLED</div>
               </div>
             </div>
 
-            <div class="card-bottom-row">
-              <div>CONTACTLESS REPUTATION & ACCESS</div>
-              <div style="color:var(--gold);">NFC + QR ENABLED</div>
+            <!-- BACK FACE (180deg) -->
+            <div class="nfc-card-face nfc-card-back">
+              <div class="card-mag-strip"></div>
+              <div class="card-back-body">
+                <div class="card-back-qr-zone">
+                  <div class="qr-mock-box">
+                    <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor">
+                      <path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v2h-3v-2zm-5 0h2v3h-2v-3zm2 3h3v2h-3v-2zm3 0h3v5h-2v-3h-1v-2zm-5 2h2v3h-2v-3zm2 2h3v1h-3v-1z"/>
+                    </svg>
+                  </div>
+                  <div class="card-back-tag">
+                    <strong>INSTANT 1-SEC TAP</strong>
+                    <span>GOOGLE 5-STAR REVIEW</span>
+                  </div>
+                </div>
+                <div class="card-back-meta">
+                  <span>NTAG215 CHIP // 504 BYTES</span>
+                  <span style="color:var(--gold);">100% SMART COMPLIANT</span>
+                </div>
+              </div>
             </div>
+
+          </div>
+
+          <!-- Card Controls & Interaction Indicator -->
+          <div class="card-interaction-bar">
+            <button type="button" class="btn-flip-card" id="btn-flip-card">
+              <span>⟲ Flip Card 180°</span>
+            </button>
+            <span class="card-drag-hint">✦ Drag horizontally to rotate 180° in 3D</span>
           </div>
         </div>
 
@@ -2992,51 +3194,171 @@
     })();
 
     // -------------------------------------------------------------
-    // 5. 3D GYROSCOPIC NFC CARD TILT (HARDWARE PHYSICS - TOUCH & MOUSE)
+    // 5. 3D GYROSCOPIC NFC CARD DUAL-FACE ROTATION ENGINE (180° FLIP & TILT)
     // -------------------------------------------------------------
     (function init3DCard() {
       const stage = document.getElementById('nfc-stage');
       const card = document.getElementById('nfc-card');
       const glare = document.getElementById('nfc-glare');
-      if (!stage || !card || !glare) return;
+      const flipBtn = document.getElementById('btn-flip-card');
+      if (!stage || !card) return;
 
-      let cachedCardRect = null;
-      function refreshCardRect() {
-        cachedCardRect = card.getBoundingClientRect();
+      let currentRotY = 0;
+      let currentRotX = 0;
+      let isFlipped = false;
+      let isDragging = false;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let lastClientX = 0;
+      let lastClientY = 0;
+
+      function updateCardTransform(rotX, rotY, isInstant = false) {
+        card.style.transition = isInstant ? 'none' : 'transform 0.28s cubic-bezier(0.2, 0.8, 0.3, 1)';
+        card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.03, 1.03, 1.03)`;
+        if (glare) {
+          const normAngle = ((rotY % 360) + 360) % 360;
+          const glareOpacity = (normAngle > 90 && normAngle < 270) ? 0 : 0.22;
+          glare.style.opacity = glareOpacity;
+        }
       }
 
-      function handleCardTilt(clientX, clientY) {
-        if (!cachedCardRect) refreshCardRect();
-        const x = clientX - cachedCardRect.left;
-        const y = clientY - cachedCardRect.top;
-        const cx = cachedCardRect.width / 2;
-        const cy = cachedCardRect.height / 2;
-        const dx = (x - cx) / cx;
-        const dy = (y - cy) / cy;
-
-        const rotX = -dy * 16;
-        const rotY = dx * 18;
-
-        card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.04, 1.04, 1.04)`;
-        glare.style.background = `radial-gradient(circle 240px at ${x}px ${y}px, rgba(255, 255, 255, 0.22), transparent)`;
+      // 1-Click 180° Flip Button
+      if (flipBtn) {
+        flipBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          isFlipped = !isFlipped;
+          currentRotY = isFlipped ? 180 : 0;
+          currentRotX = 0;
+          updateCardTransform(currentRotX, currentRotY);
+          flipBtn.querySelector('span').textContent = isFlipped ? '⟲ Flip To Front' : '⟲ Flip Card 180°';
+        });
       }
 
-      function resetCardTilt() {
-        card.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-      }
+      // DESKTOP: Mouse Tilt & Drag
+      let isMouseDown = false;
+      stage.addEventListener('mousedown', (e) => {
+        isMouseDown = true;
+        lastClientX = e.clientX;
+        lastClientY = e.clientY;
+      });
 
-      stage.addEventListener('mouseenter', refreshCardRect, { passive: true });
-      stage.addEventListener('touchstart', refreshCardRect, { passive: true });
-      stage.addEventListener('mousemove', (e) => handleCardTilt(e.clientX, e.clientY));
-      stage.addEventListener('mouseleave', resetCardTilt);
+      window.addEventListener('mousemove', (e) => {
+        if (isMouseDown) {
+          const deltaX = e.clientX - lastClientX;
+          const deltaY = e.clientY - lastClientY;
+          currentRotY += deltaX * 0.9;
+          currentRotX -= deltaY * 0.4;
+          currentRotX = Math.max(-35, Math.min(35, currentRotX));
+          updateCardTransform(currentRotX, currentRotY, true);
+          lastClientX = e.clientX;
+          lastClientY = e.clientY;
+        } else {
+          // Subtle desktop hover tilt when not dragging
+          const rect = card.getBoundingClientRect();
+          if (e.clientX >= rect.left - 40 && e.clientX <= rect.right + 40 &&
+              e.clientY >= rect.top - 40 && e.clientY <= rect.bottom + 40) {
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const dx = (e.clientX - cx) / (rect.width / 2);
+            const dy = (e.clientY - cy) / (rect.height / 2);
+            const baseRotY = isFlipped ? 180 : 0;
+            updateCardTransform(-dy * 18, baseRotY + dx * 22);
+          }
+        }
+      });
 
-      stage.addEventListener('touchmove', (e) => {
+      window.addEventListener('mouseup', () => {
+        if (isMouseDown) {
+          isMouseDown = false;
+          snapToNearestFace();
+        }
+      });
+
+      stage.addEventListener('mouseleave', () => {
+        if (!isMouseDown) {
+          const baseRotY = isFlipped ? 180 : 0;
+          updateCardTransform(0, baseRotY);
+        }
+      });
+
+      // MOBILE TOUCH: Smooth 180° Swipe & Drag with Vertical Page Scroll Safe Pass
+      let isHorizontalSwipe = false;
+
+      stage.addEventListener('touchstart', (e) => {
         if (e.touches && e.touches.length > 0) {
-          handleCardTilt(e.touches[0].clientX, e.touches[0].clientY);
+          isDragging = true;
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          lastClientX = touchStartX;
+          lastClientY = touchStartY;
+          isHorizontalSwipe = false;
         }
       }, { passive: true });
-      stage.addEventListener('touchend', resetCardTilt);
-      window.addEventListener('resize', refreshCardRect, { passive: true });
+
+      stage.addEventListener('touchmove', (e) => {
+        if (!isDragging || !e.touches || e.touches.length === 0) return;
+        const curX = e.touches[0].clientX;
+        const curY = e.touches[0].clientY;
+        const diffX = curX - touchStartX;
+        const diffY = curY - touchStartY;
+
+        // Detect horizontal swipe intention
+        if (!isHorizontalSwipe && Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 8) {
+          isHorizontalSwipe = true;
+        }
+
+        if (isHorizontalSwipe) {
+          if (e.cancelable) e.preventDefault();
+          const deltaX = curX - lastClientX;
+          const deltaY = curY - lastClientY;
+          // Highly responsive swipe: smoothly spins through 180°
+          currentRotY += deltaX * 1.1;
+          currentRotX -= deltaY * 0.3;
+          currentRotX = Math.max(-28, Math.min(28, currentRotX));
+          updateCardTransform(currentRotX, currentRotY, true);
+          lastClientX = curX;
+          lastClientY = curY;
+        }
+      }, { passive: false });
+
+      function snapToNearestFace() {
+        const normAngle = ((currentRotY % 360) + 360) % 360;
+        if (normAngle > 90 && normAngle < 270) {
+          isFlipped = true;
+          currentRotY = Math.round(currentRotY / 180) * 180;
+          if (currentRotY % 360 === 0) currentRotY += 180;
+        } else {
+          isFlipped = false;
+          currentRotY = Math.round(currentRotY / 360) * 360;
+        }
+        currentRotX = 0;
+        updateCardTransform(currentRotX, currentRotY);
+        if (flipBtn) {
+          flipBtn.querySelector('span').textContent = isFlipped ? '⟲ Flip To Front' : '⟲ Flip Card 180°';
+        }
+      }
+
+      stage.addEventListener('touchend', () => {
+        if (isDragging) {
+          isDragging = false;
+          if (isHorizontalSwipe) {
+            snapToNearestFace();
+          }
+        }
+      }, { passive: true });
+
+      // Tap on card directly flips it 180°
+      card.addEventListener('click', () => {
+        if (!isHorizontalSwipe && Math.abs(lastClientX - touchStartX) < 10) {
+          isFlipped = !isFlipped;
+          currentRotY = isFlipped ? 180 : 0;
+          currentRotX = 0;
+          updateCardTransform(currentRotX, currentRotY);
+          if (flipBtn) {
+            flipBtn.querySelector('span').textContent = isFlipped ? '⟲ Flip To Front' : '⟲ Flip Card 180°';
+          }
+        }
+      });
     })();
 
     // -------------------------------------------------------------
@@ -3432,28 +3754,47 @@ ${business}`;
       const dragZone = document.getElementById('webgl-drag-zone');
       if (dragZone) {
         dragZone.style.pointerEvents = 'auto';
-        dragZone.style.touchAction = 'none';
+        dragZone.style.touchAction = 'pan-y';
+
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let isIntentional3DDrag = false;
 
         dragZone.addEventListener('touchstart', (e) => {
           if (e.touches && e.touches.length > 0) {
-            isDragging = true;
-            prevMouseX = e.touches[0].clientX;
-            prevMouseY = e.touches[0].clientY;
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            prevMouseX = touchStartX;
+            prevMouseY = touchStartY;
+            isIntentional3DDrag = false;
           }
         }, { passive: true });
 
         dragZone.addEventListener('touchmove', (e) => {
-          if (isDragging && e.touches && e.touches.length > 0) {
-            const deltaX = e.touches[0].clientX - prevMouseX;
-            const deltaY = e.touches[0].clientY - prevMouseY;
-            targetRotY += deltaX * 0.009;
-            targetRotX += deltaY * 0.009;
-            prevMouseX = e.touches[0].clientX;
-            prevMouseY = e.touches[0].clientY;
+          if (!e.touches || e.touches.length === 0) return;
+          const curX = e.touches[0].clientX;
+          const curY = e.touches[0].clientY;
+          const diffX = curX - touchStartX;
+          const diffY = curY - touchStartY;
+
+          // Only rotate 3D when dragging horizontally across the star
+          if (!isIntentional3DDrag && Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 10) {
+            isIntentional3DDrag = true;
+          }
+
+          if (isIntentional3DDrag) {
+            const deltaX = curX - prevMouseX;
+            const deltaY = curY - prevMouseY;
+            targetRotY += deltaX * 0.012;
+            targetRotX += deltaY * 0.012;
+            prevMouseX = curX;
+            prevMouseY = curY;
           }
         }, { passive: true });
 
-        dragZone.addEventListener('touchend', () => { isDragging = false; });
+        dragZone.addEventListener('touchend', () => {
+          isIntentional3DDrag = false;
+        }, { passive: true });
       }
 
       const speedBtn = document.getElementById('toggle-3d-speed');
