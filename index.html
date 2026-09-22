@@ -11,7 +11,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link href="https://db.onlinewebfonts.com/c/d08bafd725a4cfc309efb5a88e0b63a5?family=basis33" rel="stylesheet">
+  <link rel="preconnect" href="https://db.onlinewebfonts.com" crossorigin>
+  <link href="https://db.onlinewebfonts.com/c/d08bafd725a4cfc309efb5a88e0b63a5?family=basis33" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://db.onlinewebfonts.com/c/d08bafd725a4cfc309efb5a88e0b63a5?family=basis33"></noscript>
 
   <style>
     /* basis33 Font Face Declaration */
@@ -1690,6 +1692,17 @@
       transform: translateY(-7px) rotate(-45deg);
     }
 
+    /* -------------------------------------------------------------
+       PERFORMANCE ENGINE: DEFERRED RENDERING FOR OFF-SCREEN CONTENT
+       ------------------------------------------------------------- */
+    .hardware-section,
+    .stack-section,
+    .lab-section,
+    .audit-section {
+      content-visibility: auto;
+      contain-intrinsic-size: auto none auto 800px;
+    }
+
     /* Tablet & Medium Screens */
     @media (max-width: 1080px) {
       .nav-links { display: none; }
@@ -1705,6 +1718,18 @@
     /* Standard Mobile & Small Tablets (<= 768px) */
     @media (max-width: 768px) {
       .container { padding: 0 16px; }
+
+      /* Mobile GPU Compositor Optimization: reduce multi-pass blur on mobile */
+      .master-nav,
+      .badge-pill,
+      .bento-card,
+      .stack-card,
+      .lab-card,
+      .comparison-card,
+      .audit-card {
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+      }
 
       /* Master Nav Bar */
       .master-nav {
@@ -2191,7 +2216,7 @@
 
   <!-- 1. HERO COMMAND CENTER (CONVERGING FIBRE-OPTIC ARTWORK) -->
   <header class="hero-section">
-    <video class="hero-art-video" autoplay muted loop playsinline preload="auto"
+    <video class="hero-art-video" autoplay muted loop playsinline preload="none"
       poster="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/130837c4-0244-4f37-9c61-8d801d93fd29.jpg"
       src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260912_104303_0c6d60b2-9353-408e-9449-585108a22fb5.mp4">
     </video>
@@ -2257,34 +2282,34 @@
     <div class="marquee-track-container">
       <!-- Row 1: Glides Right on Scroll -->
       <div class="marquee-row" id="marquee-row-1">
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif" alt="3D Space Voyage"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Spatial 3D Canvas</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif" alt="Prismatic 3D Core"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Prismatic 3D Core</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif" alt="CodeNest"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Autonomous Workflows</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-vex-ventures-preview-BczMFIiw.gif" alt="Vex Ventures"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Hospitality OS</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif" alt="Stellar AI"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Multi-Agent Core</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif" alt="ASME"><div class="marquee-tile-overlay"><span class="marquee-tile-label">KDS Architecture</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif" alt="Data Streams"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Real-time Sync</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif" alt="Vitara"><div class="marquee-tile-overlay"><span class="marquee-tile-label">In-Room Dining</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif" alt="Terra"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Smart Tap NFC</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif" alt="SkyElite"><div class="marquee-tile-overlay"><span class="marquee-tile-label">WhatsApp Engines</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif" alt="Aethera"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Quantum Dispatch</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif" alt="3D Space Voyage" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Spatial 3D Canvas</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif" alt="Prismatic 3D Core" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Prismatic 3D Core</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif" alt="CodeNest" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Autonomous Workflows</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-vex-ventures-preview-BczMFIiw.gif" alt="Vex Ventures" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Hospitality OS</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif" alt="Stellar AI" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Multi-Agent Core</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif" alt="ASME" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">KDS Architecture</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif" alt="Data Streams" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Real-time Sync</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif" alt="Vitara" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">In-Room Dining</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif" alt="Terra" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Smart Tap NFC</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif" alt="SkyElite" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">WhatsApp Engines</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif" alt="Aethera" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Quantum Dispatch</span></div></div>
         <!-- Duplicated for seamless length -->
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif" alt="3D Space Voyage"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Spatial 3D Canvas</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif" alt="CodeNest"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Autonomous Workflows</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif" alt="3D Space Voyage" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Spatial 3D Canvas</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif" alt="CodeNest" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Autonomous Workflows</span></div></div>
       </div>
 
       <!-- Row 2: Glides Left on Scroll -->
       <div class="marquee-row" id="marquee-row-2">
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-stellar-ai-preview-D3HL6bw1.gif" alt="Stellar AI"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Conversational AI</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-xportfolio-preview-D4A8maiC.gif" alt="Portfolio"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Luxury UI Grid</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif" alt="Orbit"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Contactless Folio</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-nexora-preview-cx5HmUgo.gif" alt="Nexora"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Staff KDS Terminal</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-evr-ventures-preview-DZxeVFEX.gif" alt="EVR"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Dynamic Billing</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-planet-orbit-preview-DWAP8Z1P.gif" alt="Planet Orbit"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Reputation Pulse</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-new-era-preview-CocuDUm9.gif" alt="New Era"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Autonomous Sales</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-wealth-preview-B70idl_u.gif" alt="Wealth"><div class="marquee-tile-overlay"><span class="marquee-tile-label">ROI Optimization</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-luminex-preview-CxOP7ce6.gif" alt="Luminex"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Omnichannel Care</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif" alt="Celestia"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Zero-Latency Bots</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-stellar-ai-preview-D3HL6bw1.gif" alt="Stellar AI" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Conversational AI</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-xportfolio-preview-D4A8maiC.gif" alt="Portfolio" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Luxury UI Grid</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif" alt="Orbit" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Contactless Folio</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-nexora-preview-cx5HmUgo.gif" alt="Nexora" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Staff KDS Terminal</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-evr-ventures-preview-DZxeVFEX.gif" alt="EVR" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Dynamic Billing</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-planet-orbit-preview-DWAP8Z1P.gif" alt="Planet Orbit" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Reputation Pulse</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-new-era-preview-CocuDUm9.gif" alt="New Era" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Autonomous Sales</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-wealth-preview-B70idl_u.gif" alt="Wealth" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">ROI Optimization</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-luminex-preview-CxOP7ce6.gif" alt="Luminex" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Omnichannel Care</span></div></div>
+        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif" alt="Celestia" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Zero-Latency Bots</span></div></div>
       </div>
     </div>
   </section>
@@ -2536,7 +2561,7 @@
             </div>
           </div>
           <div class="stack-card-preview">
-            <img src="https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif" alt="Hospitality Suite Preview">
+            <img src="https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif" alt="Hospitality Suite Preview" loading="lazy" decoding="async">
           </div>
         </article>
 
@@ -2555,7 +2580,7 @@
             </div>
           </div>
           <div class="stack-card-preview">
-            <img src="https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif" alt="NFC Reputation Engine">
+            <img src="https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif" alt="NFC Reputation Engine" loading="lazy" decoding="async">
           </div>
         </article>
 
@@ -2574,7 +2599,7 @@
             </div>
           </div>
           <div class="stack-card-preview">
-            <img src="https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif" alt="AI Agent Preview">
+            <img src="https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif" alt="AI Agent Preview" loading="lazy" decoding="async">
           </div>
         </article>
       </div>
@@ -2791,6 +2816,25 @@
        ============================================================= -->
   <script>
     // -------------------------------------------------------------
+    // HIGH-PERFORMANCE UNIFIED SCROLL ENGINE (rAF THROTTLED)
+    // -------------------------------------------------------------
+    let scrollTicking = false;
+    let updateCharRevealFn = null;
+    let updateMarqueeFn = null;
+
+    function onUnifiedScroll() {
+      if (!scrollTicking) {
+        requestAnimationFrame(() => {
+          if (updateCharRevealFn) updateCharRevealFn();
+          if (updateMarqueeFn) updateMarqueeFn();
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
+    }
+    window.addEventListener('scroll', onUnifiedScroll, { passive: true });
+
+    // -------------------------------------------------------------
     // 1. CHARACTER-BY-CHARACTER SCROLL REVEAL (PROMPT 3 ANATOMY)
     // -------------------------------------------------------------
     (function initCharReveal() {
@@ -2808,10 +2852,9 @@
         chars.push(span);
       }
 
-      function updateChars() {
+      updateCharRevealFn = function updateChars() {
         const rect = target.getBoundingClientRect();
         const winH = window.innerHeight;
-        // Progress between top at 80% of viewport and bottom at 20%
         const start = winH * 0.85;
         const end = winH * 0.2;
         const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
@@ -2827,10 +2870,8 @@
             c.classList.remove('lit', 'lit-gold');
           }
         });
-      }
-
-      window.addEventListener('scroll', updateChars, { passive: true });
-      updateChars();
+      };
+      updateCharRevealFn();
     })();
 
     // -------------------------------------------------------------
@@ -2842,15 +2883,17 @@
       const section = document.getElementById('marquee');
       if (!row1 || !row2 || !section) return;
 
-      function onScroll() {
-        const rect = section.getBoundingClientRect();
-        const offset = (window.scrollY - section.offsetTop + window.innerHeight) * 0.22;
+      let cachedOffsetTop = section.offsetTop;
+      window.addEventListener('resize', () => {
+        cachedOffsetTop = section.offsetTop;
+      }, { passive: true });
+
+      updateMarqueeFn = function onScroll() {
+        const offset = (window.scrollY - cachedOffsetTop + window.innerHeight) * 0.22;
         row1.style.transform = `translateX(${offset - 250}px)`;
         row2.style.transform = `translateX(${-(offset - 250)}px)`;
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
+      };
+      updateMarqueeFn();
     })();
 
     // -------------------------------------------------------------
@@ -2905,6 +2948,11 @@
       if (!box || !reveal) return;
 
       let radius = window.innerWidth < 640 ? 140 : 260;
+      let cachedBoxRect = null;
+
+      function refreshBoxRect() {
+        cachedBoxRect = box.getBoundingClientRect();
+      }
 
       function setMask(x, y) {
         const grad = `radial-gradient(circle ${radius}px at ${x}px ${y}px, #fff 0%, #fff 40%, rgba(255,255,255,0.7) 65%, transparent 100%)`;
@@ -2913,12 +2961,14 @@
       }
 
       function onMove(clientX, clientY) {
-        const rect = box.getBoundingClientRect();
-        const x = clientX - rect.left;
-        const y = clientY - rect.top;
+        if (!cachedBoxRect) refreshBoxRect();
+        const x = clientX - cachedBoxRect.left;
+        const y = clientY - cachedBoxRect.top;
         setMask(x, y);
       }
 
+      box.addEventListener('pointerenter', refreshBoxRect, { passive: true });
+      box.addEventListener('pointerdown', refreshBoxRect, { passive: true });
       box.addEventListener('pointermove', (e) => onMove(e.clientX, e.clientY));
       box.addEventListener('touchmove', (e) => {
         if (e.touches && e.touches.length > 0) {
@@ -2927,13 +2977,18 @@
       }, { passive: true });
 
       box.addEventListener('pointerleave', () => {
-        const rect = box.getBoundingClientRect();
-        setMask(rect.width * 0.5, rect.height * 0.4);
+        if (!cachedBoxRect) refreshBoxRect();
+        setMask(cachedBoxRect.width * 0.5, cachedBoxRect.height * 0.4);
       });
 
-      // Default spotlight placement for initial visual preview
-      const rect = box.getBoundingClientRect();
-      setMask(rect.width * 0.5, rect.height * 0.4);
+      window.addEventListener('resize', () => {
+        radius = window.innerWidth < 640 ? 140 : 260;
+        refreshBoxRect();
+        setMask(cachedBoxRect.width * 0.5, cachedBoxRect.height * 0.4);
+      }, { passive: true });
+
+      refreshBoxRect();
+      setMask(cachedBoxRect.width * 0.5, cachedBoxRect.height * 0.4);
     })();
 
     // -------------------------------------------------------------
@@ -2945,12 +3000,17 @@
       const glare = document.getElementById('nfc-glare');
       if (!stage || !card || !glare) return;
 
+      let cachedCardRect = null;
+      function refreshCardRect() {
+        cachedCardRect = card.getBoundingClientRect();
+      }
+
       function handleCardTilt(clientX, clientY) {
-        const rect = card.getBoundingClientRect();
-        const x = clientX - rect.left;
-        const y = clientY - rect.top;
-        const cx = rect.width / 2;
-        const cy = rect.height / 2;
+        if (!cachedCardRect) refreshCardRect();
+        const x = clientX - cachedCardRect.left;
+        const y = clientY - cachedCardRect.top;
+        const cx = cachedCardRect.width / 2;
+        const cy = cachedCardRect.height / 2;
         const dx = (x - cx) / cx;
         const dy = (y - cy) / cy;
 
@@ -2965,6 +3025,8 @@
         card.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
       }
 
+      stage.addEventListener('mouseenter', refreshCardRect, { passive: true });
+      stage.addEventListener('touchstart', refreshCardRect, { passive: true });
       stage.addEventListener('mousemove', (e) => handleCardTilt(e.clientX, e.clientY));
       stage.addEventListener('mouseleave', resetCardTilt);
 
@@ -2974,6 +3036,7 @@
         }
       }, { passive: true });
       stage.addEventListener('touchend', resetCardTilt);
+      window.addEventListener('resize', refreshCardRect, { passive: true });
     })();
 
     // -------------------------------------------------------------
@@ -3137,12 +3200,14 @@ ${business}`;
     }
 
     // -------------------------------------------------------------
-    // 8. THREE.JS REAL-TIME 3D CONVERGENCE ENGINE (CHROMATIC STAR + POINT CLOUD)
+    // 8. THREE.JS REAL-TIME 3D CONVERGENCE ENGINE (ADAPTIVE MOBILE + DESKTOP)
     // -------------------------------------------------------------
     function initConvergence3D() {
       const section = document.getElementById('vision');
       const canvas = document.getElementById('convergence-canvas');
       if (!section || !canvas || typeof THREE === 'undefined') return;
+
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth < 768;
 
       let width = section.clientWidth || window.innerWidth;
       let height = section.clientHeight || window.innerHeight;
@@ -3155,34 +3220,38 @@ ${business}`;
 
       const renderer = new THREE.WebGLRenderer({
         canvas: canvas,
-        antialias: true,
+        antialias: !isMobile,
         alpha: false,
-        powerPreference: "high-performance"
+        powerPreference: isMobile ? "default" : "high-performance"
       });
       renderer.setSize(width, height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.35;
+      renderer.setPixelRatio(isMobile ? Math.min(window.devicePixelRatio, 1.15) : Math.min(window.devicePixelRatio, 2));
 
-      // Lighting: Dark ambient + 4 chromatic moving lights
-      const ambientLight = new THREE.AmbientLight(0x0a0a14, 1.2);
+      if (!isMobile) {
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.35;
+      }
+
+      // Lighting: Dark ambient + dynamic point lights
+      const ambientLight = new THREE.AmbientLight(0x0a0a14, isMobile ? 1.6 : 1.2);
       scene.add(ambientLight);
 
       // Light 1: Vibrant Magenta
-      const lightMagenta = new THREE.PointLight(0xFF007A, 5.0, 35);
+      const lightMagenta = new THREE.PointLight(0xFF007A, isMobile ? 4.2 : 5.0, isMobile ? 24 : 35);
       scene.add(lightMagenta);
 
       // Light 2: Electric Cyan
-      const lightCyan = new THREE.PointLight(0x00F0FF, 4.5, 35);
+      const lightCyan = new THREE.PointLight(0x00F0FF, isMobile ? 3.8 : 4.5, isMobile ? 24 : 35);
       scene.add(lightCyan);
 
-      // Light 3: Royal Violet / Lilac
-      const lightViolet = new THREE.PointLight(0x9D4EDD, 4.0, 30);
-      scene.add(lightViolet);
-
-      // Light 4: Liquid 24k Gold
-      const lightGold = new THREE.PointLight(0xE5B83B, 3.2, 25);
-      scene.add(lightGold);
+      let lightViolet = null;
+      let lightGold = null;
+      if (!isMobile) {
+        lightViolet = new THREE.PointLight(0x9D4EDD, 4.0, 30);
+        scene.add(lightViolet);
+        lightGold = new THREE.PointLight(0xE5B83B, 3.2, 25);
+        scene.add(lightGold);
+      }
 
       // 3D Voxel Chromatic Star Group
       const starGroup = new THREE.Group();
@@ -3208,16 +3277,24 @@ ${business}`;
         [0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0]
       ];
 
-      const starMat = new THREE.MeshPhysicalMaterial({
-        color: 0x181022,
-        emissive: 0x12081d,
-        emissiveIntensity: 0.28,
-        metalness: 0.90,
-        roughness: 0.14,
-        clearcoat: 1.0,
-        clearcoatRoughness: 0.08,
-        reflectivity: 1.0
-      });
+      const starMat = isMobile
+        ? new THREE.MeshStandardMaterial({
+            color: 0x1d1326,
+            emissive: 0x14091e,
+            emissiveIntensity: 0.35,
+            metalness: 0.88,
+            roughness: 0.18
+          })
+        : new THREE.MeshPhysicalMaterial({
+            color: 0x181022,
+            emissive: 0x12081d,
+            emissiveIntensity: 0.28,
+            metalness: 0.90,
+            roughness: 0.14,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.08,
+            reflectivity: 1.0
+          });
 
       let voxelCount = 0;
       for (let r = 0; r < 16; r++) {
@@ -3247,23 +3324,23 @@ ${business}`;
       instancedStar.instanceMatrix.needsUpdate = true;
       starGroup.add(instancedStar);
 
-      // Flanking Halftone Point-Cloud Convergence Hands
+      // Flanking Halftone Point-Cloud Hands
       function makeParticleTexture() {
         const pCanvas = document.createElement('canvas');
-        pCanvas.width = 32; pCanvas.height = 32;
+        pCanvas.width = 16; pCanvas.height = 16;
         const pCtx = pCanvas.getContext('2d');
-        const grad = pCtx.createRadialGradient(16, 16, 0, 16, 16, 16);
+        const grad = pCtx.createRadialGradient(8, 8, 0, 8, 8, 8);
         grad.addColorStop(0, 'rgba(255,255,255,1)');
-        grad.addColorStop(0.35, 'rgba(255,255,255,0.75)');
+        grad.addColorStop(0.4, 'rgba(255,255,255,0.7)');
         grad.addColorStop(1, 'rgba(255,255,255,0)');
         pCtx.fillStyle = grad;
-        pCtx.fillRect(0, 0, 32, 32);
+        pCtx.fillRect(0, 0, 16, 16);
         return new THREE.CanvasTexture(pCanvas);
       }
       const pTex = makeParticleTexture();
 
       // Left: Robotic Android Point Matrix
-      const leftCount = 650;
+      const leftCount = isMobile ? 220 : 650;
       const leftGeo = new THREE.BufferGeometry();
       const leftPos = new Float32Array(leftCount * 3);
       for (let i = 0; i < leftCount; i++) {
@@ -3279,7 +3356,7 @@ ${business}`;
       }
       leftGeo.setAttribute('position', new THREE.BufferAttribute(leftPos, 3));
       const leftMat = new THREE.PointsMaterial({
-        size: 0.26,
+        size: isMobile ? 0.32 : 0.26,
         map: pTex,
         transparent: true,
         opacity: 0.8,
@@ -3291,7 +3368,7 @@ ${business}`;
       scene.add(leftPoints);
 
       // Right: Human Hand Point Matrix
-      const rightCount = 650;
+      const rightCount = isMobile ? 220 : 650;
       const rightGeo = new THREE.BufferGeometry();
       const rightPos = new Float32Array(rightCount * 3);
       for (let i = 0; i < rightCount; i++) {
@@ -3307,7 +3384,7 @@ ${business}`;
       }
       rightGeo.setAttribute('position', new THREE.BufferAttribute(rightPos, 3));
       const rightMat = new THREE.PointsMaterial({
-        size: 0.26,
+        size: isMobile ? 0.32 : 0.26,
         map: pTex,
         transparent: true,
         opacity: 0.8,
@@ -3318,7 +3395,7 @@ ${business}`;
       const rightPoints = new THREE.Points(rightGeo, rightMat);
       scene.add(rightPoints);
 
-      // Interactive Pointer Controls
+      // Pointer Drag Interaction
       let isDragging = false;
       let prevMouseX = 0, prevMouseY = 0;
       let targetRotX = 0, targetRotY = 0;
@@ -3339,7 +3416,7 @@ ${business}`;
           targetRotX += deltaY * 0.007;
           prevMouseX = e.clientX;
           prevMouseY = e.clientY;
-        } else {
+        } else if (!isMobile) {
           const rect = section.getBoundingClientRect();
           if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
             const normX = (e.clientX - rect.left) / rect.width - 0.5;
@@ -3352,7 +3429,6 @@ ${business}`;
 
       window.addEventListener('pointerup', () => { isDragging = false; });
 
-      // Mobile Touch Drag Support for Central Spacer Zone
       const dragZone = document.getElementById('webgl-drag-zone');
       if (dragZone) {
         dragZone.style.pointerEvents = 'auto';
@@ -3391,15 +3467,23 @@ ${business}`;
       const clock = new THREE.Clock();
       const hudCoords = document.getElementById('hud-coords');
 
-      function animate() {
-        requestAnimationFrame(animate);
+      // PERFORMANCE ENGINE: IntersectionObserver + Visibility pause
+      let isVisible = false;
+      let animFrameId = null;
+
+      function render() {
+        if (!isVisible) {
+          animFrameId = null;
+          return;
+        }
+        animFrameId = requestAnimationFrame(render);
         const t = clock.getElapsedTime();
 
-        // Orbit dynamic point lights
+        // Orbit dynamic lights
         lightMagenta.position.set(Math.cos(t * 1.1) * 7, Math.sin(t * 1.3) * 4 + 2, Math.sin(t * 1.1) * 6);
         lightCyan.position.set(Math.cos(-t * 0.9 + 2) * 7, Math.sin(t * 0.8) * 5, Math.sin(-t * 0.9 + 2) * 7);
-        lightViolet.position.set(Math.sin(t * 1.2) * 5, Math.cos(t * 1.4) * 6, Math.cos(t * 1.2) * 5);
-        lightGold.position.set(Math.cos(t * 0.7) * 5, -3, Math.sin(t * 0.7) * 5);
+        if (lightViolet) lightViolet.position.set(Math.sin(t * 1.2) * 5, Math.cos(t * 1.4) * 6, Math.cos(t * 1.2) * 5);
+        if (lightGold) lightGold.position.set(Math.cos(t * 0.7) * 5, -3, Math.sin(t * 0.7) * 5);
 
         targetRotY += 0.008 * spinSpeed;
         curRotX += (targetRotX - curRotX) * 0.08;
@@ -3422,7 +3506,45 @@ ${business}`;
 
         renderer.render(scene, camera);
       }
-      animate();
+
+      function startLoop() {
+        if (!animFrameId) {
+          clock.start();
+          animFrameId = requestAnimationFrame(render);
+        }
+      }
+
+      function stopLoop() {
+        if (animFrameId) {
+          cancelAnimationFrame(animFrameId);
+          animFrameId = null;
+        }
+      }
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            isVisible = entry.isIntersecting;
+            if (isVisible) {
+              startLoop();
+            } else {
+              stopLoop();
+            }
+          });
+        }, { rootMargin: '150px 0px 150px 0px' });
+        observer.observe(section);
+      } else {
+        isVisible = true;
+        startLoop();
+      }
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          stopLoop();
+        } else if (isVisible) {
+          startLoop();
+        }
+      });
 
       window.addEventListener('resize', () => {
         if (!section) return;
@@ -3434,9 +3556,13 @@ ${business}`;
       });
     }
 
-    // Initial setup run
+    // Initial setup run with deferred 3D startup
     calculateROI();
-    initConvergence3D();
+    if (window.requestIdleCallback) {
+      requestIdleCallback(() => initConvergence3D(), { timeout: 120 });
+    } else {
+      setTimeout(initConvergence3D, 50);
+    }
   </script>
 </body>
 </html>
