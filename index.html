@@ -2679,9 +2679,10 @@
 
   <!-- 1. HERO COMMAND CENTER (CONVERGING FIBRE-OPTIC ARTWORK) -->
   <header class="hero-section">
-    <video class="hero-art-video" autoplay muted loop playsinline preload="auto"
-      poster="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/130837c4-0244-4f37-9c61-8d801d93fd29.jpg"
-      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260912_104303_0c6d60b2-9353-408e-9449-585108a22fb5.mp4">
+    <video class="hero-art-video" autoplay muted loop playsinline preload="metadata"
+      poster="assets/hero_poster.webp" id="hero-bg-video">
+      <source media="(max-width: 768px)" src="assets/hero_bg_mobile.mp4" type="video/mp4">
+      <source src="assets/hero_bg_desktop.mp4" type="video/mp4">
     </video>
     <div class="hero-veil"></div>
 
@@ -2770,34 +2771,34 @@
 
       <!-- Row 1: Glides Right on Scroll -->
       <div class="marquee-row" id="marquee-row-1">
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif" alt="3D Space Voyage" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Spatial 3D Canvas</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif" alt="Prismatic 3D Core" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Prismatic 3D Core</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif" alt="CodeNest" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Autonomous Workflows</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-vex-ventures-preview-BczMFIiw.gif" alt="Vex Ventures" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Hospitality OS</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif" alt="Stellar AI" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Multi-Agent Core</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif" alt="ASME" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">KDS Architecture</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif" alt="Data Streams" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Real-time Sync</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif" alt="Vitara" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">In-Room Dining</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif" alt="Terra" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Smart Tap NFC</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif" alt="SkyElite" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">WhatsApp Engines</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif" alt="Aethera" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Quantum Dispatch</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="3D Space Voyage" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Spatial 3D Canvas</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="Prismatic 3D Core" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Prismatic 3D Core</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="CodeNest" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Autonomous Workflows</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-vex-ventures-preview-BczMFIiw.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="Vex Ventures" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Hospitality OS</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="Stellar AI" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Multi-Agent Core</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="ASME" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">KDS Architecture</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="Data Streams" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Real-time Sync</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="Vitara" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">In-Room Dining</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="Terra" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Smart Tap NFC</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="SkyElite" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">WhatsApp Engines</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="Aethera" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Quantum Dispatch</span></div></div>
         <!-- Duplicated for seamless length -->
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif" alt="3D Space Voyage" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Spatial 3D Canvas</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif" alt="CodeNest" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Autonomous Workflows</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="3D Space Voyage" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Spatial 3D Canvas</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="CodeNest" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Autonomous Workflows</span></div></div>
       </div>
 
       <!-- Row 2: Glides Left on Scroll -->
       <div class="marquee-row" id="marquee-row-2">
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-stellar-ai-preview-D3HL6bw1.gif" alt="Stellar AI" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Conversational AI</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-xportfolio-preview-D4A8maiC.gif" alt="Portfolio" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Luxury UI Grid</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif" alt="Orbit" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Contactless Folio</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-nexora-preview-cx5HmUgo.gif" alt="Nexora" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Staff KDS Terminal</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-evr-ventures-preview-DZxeVFEX.gif" alt="EVR" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Dynamic Billing</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-planet-orbit-preview-DWAP8Z1P.gif" alt="Planet Orbit" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Reputation Pulse</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-new-era-preview-CocuDUm9.gif" alt="New Era" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Autonomous Sales</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-wealth-preview-B70idl_u.gif" alt="Wealth" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">ROI Optimization</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-luminex-preview-CxOP7ce6.gif" alt="Luminex" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Omnichannel Care</span></div></div>
-        <div class="marquee-tile"><img src="https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif" alt="Celestia" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Zero-Latency Bots</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-stellar-ai-preview-D3HL6bw1.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="Stellar AI" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Conversational AI</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-xportfolio-preview-D4A8maiC.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="Portfolio" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Luxury UI Grid</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="Orbit" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Contactless Folio</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-nexora-preview-cx5HmUgo.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="Nexora" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Staff KDS Terminal</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-evr-ventures-preview-DZxeVFEX.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="EVR" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Dynamic Billing</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-planet-orbit-preview-DWAP8Z1P.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="Planet Orbit" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Reputation Pulse</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-new-era-preview-CocuDUm9.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="New Era" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Autonomous Sales</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-wealth-preview-B70idl_u.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="Wealth" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">ROI Optimization</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-luminex-preview-CxOP7ce6.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="Luminex" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Omnichannel Care</span></div></div>
+        <div class="marquee-tile"><img data-src="https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 240'%3E%3Crect width='380' height='240' fill='%230e131f'/%3E%3C/svg%3E" alt="Celestia" loading="lazy" decoding="async"><div class="marquee-tile-overlay"><span class="marquee-tile-label">Zero-Latency Bots</span></div></div>
       </div>
     </div>
   </section>
@@ -2976,7 +2977,7 @@
               </div>
 
               <div class="card-mid-logo">
-                <img src="assets/logo.jpg" alt="Elite AI Emblem">
+                <img src="assets/logo.webp" alt="Elite AI Emblem" width="60" height="60" loading="lazy">
                 <div class="card-mid-text">
                   <strong>ELITE</strong>
                   <span>AI &amp; SMART SYSTEMS</span>
@@ -3088,7 +3089,7 @@
             </div>
           </div>
           <div class="stack-card-preview">
-            <img src="https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif" alt="Hospitality Suite Preview" loading="lazy" decoding="async">
+            <img data-src="https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%230e131f'/%3E%3C/svg%3E" alt="Hospitality Suite Preview" loading="lazy" decoding="async">
           </div>
         </article>
 
@@ -3107,7 +3108,7 @@
             </div>
           </div>
           <div class="stack-card-preview">
-            <img src="https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif" alt="NFC Reputation Engine" loading="lazy" decoding="async">
+            <img data-src="https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%230e131f'/%3E%3C/svg%3E" alt="NFC Reputation Engine" loading="lazy" decoding="async">
           </div>
         </article>
 
@@ -3126,7 +3127,7 @@
             </div>
           </div>
           <div class="stack-card-preview">
-            <img src="https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif" alt="AI Agent Preview" loading="lazy" decoding="async">
+            <img data-src="https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%230e131f'/%3E%3C/svg%3E" alt="AI Agent Preview" loading="lazy" decoding="async">
           </div>
         </article>
       </div>
@@ -3292,7 +3293,7 @@
   <footer class="master-footer">
     <div class="container footer-grid">
       <div style="display:flex;align-items:center;gap:12px;">
-        <img src="assets/logo.jpg" alt="Elite AI Logo" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--gold);">
+        <img src="assets/logo_icon.webp" alt="Elite AI Logo" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--gold);">
         <div>
           <strong style="color:#FFF;letter-spacing:0.05em;display:block;">ELITE AI & SMART SYSTEMS</strong>
           <span style="font-size:0.75rem;color:var(--text-muted);">Autonomous Intelligence meets Contactless Hardware.</span>
@@ -3334,7 +3335,10 @@
   <script src="./assets/three.min.js"></script>
   <script>
     if (typeof THREE === 'undefined') {
-      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
+      const s = document.createElement('script');
+      s.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+      s.onload = () => { if (typeof initConvergence3D === 'function') initConvergence3D(); };
+      document.head.appendChild(s);
     }
   </script>
 
@@ -3342,6 +3346,56 @@
        CORE JAVASCRIPT LOGIC
        ============================================================= -->
   <script>
+    // -------------------------------------------------------------
+    // PROGRESSIVE HIGH-SPEED MEDIA ENGINE (MOBILE & DESKTOP ACCELERATOR)
+    // -------------------------------------------------------------
+    (function initFastMedia() {
+      // 1. Instant Video Autoplay Enforcer (Zero delay on mobile)
+      const heroVid = document.getElementById('hero-bg-video');
+      if (heroVid) {
+        heroVid.muted = true;
+        const playPromise = heroVid.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            // Autoplay blocked by device low-power mode, trigger on first interaction
+            const onFirstTouch = () => {
+              heroVid.play().catch(() => {});
+              window.removeEventListener('touchstart', onFirstTouch);
+              window.removeEventListener('scroll', onFirstTouch);
+            };
+            window.addEventListener('touchstart', onFirstTouch, { passive: true, once: true });
+            window.addEventListener('scroll', onFirstTouch, { passive: true, once: true });
+          });
+        }
+      }
+
+      // 2. High-Performance IntersectionObserver for Off-Screen Media (Zero Initial Network Choke)
+      if ('IntersectionObserver' in window) {
+        const imgObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              if (img.dataset.src) {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+              }
+              observer.unobserve(img);
+            }
+          });
+        }, {
+          rootMargin: '400px 0px 400px 0px'
+        });
+
+        document.querySelectorAll('img[data-src]').forEach(img => {
+          imgObserver.observe(img);
+        });
+      } else {
+        document.querySelectorAll('img[data-src]').forEach(img => {
+          img.src = img.dataset.src;
+        });
+      }
+    })();
+
     // -------------------------------------------------------------
     // HIGH-PERFORMANCE UNIFIED SCROLL ENGINE (rAF THROTTLED)
     // -------------------------------------------------------------
