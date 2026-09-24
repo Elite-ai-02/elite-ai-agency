@@ -1,0 +1,14 @@
+{
+  "name": "elite-ai-agency",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Elite AI & Smart Systems Autonomous Portal & Sentinel Engine",
+  "type": "module",
+  "scripts": {
+    "sentinel": "node scripts/health-check.mjs",
+    "test": "node scripts/health-check.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.47.0"
+  }
+}

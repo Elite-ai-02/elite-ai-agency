@@ -15,6 +15,17 @@
   <link href="https://db.onlinewebfonts.com/c/d08bafd725a4cfc309efb5a88e0b63a5?family=basis33" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://db.onlinewebfonts.com/c/d08bafd725a4cfc309efb5a88e0b63a5?family=basis33"></noscript>
 
+  <!-- Client-Side Runtime Error Sentinel -->
+  <script>
+    window.addEventListener('error', function(e) {
+      if (!e.filename || e.filename.includes('onlinewebfonts') || e.filename.includes('analytics')) return;
+      console.warn('[Elite AI Sentinel] Handled runtime error:', e.message, 'at', e.filename, ':', e.lineno);
+    });
+    window.addEventListener('unhandledrejection', function(e) {
+      console.warn('[Elite AI Sentinel] Handled promise rejection:', e.reason);
+    });
+  </script>
+
   <style>
     /* basis33 Font Face Declaration */
     @font-face {
