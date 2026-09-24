@@ -1959,6 +1959,7 @@
       background: rgba(4, 6, 10, 0.85);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
+      touch-action: none;
     }
     .mobile-drawer-sheet {
       position: absolute;
@@ -2585,10 +2586,13 @@
         min-height: 510px;
         height: 510px;
       }
+      .nfc-card-flipper, .nfc-card-body {
+        width: min(310px, calc(100vw - 36px));
+        height: 185px;
+      }
       .nfc-card-body {
-        width: calc(100vw - 36px);
-        height: 180px;
         padding: 14px;
+        margin: 0 auto;
       }
       .card-mid-text strong {
         font-size: 1.05rem;
