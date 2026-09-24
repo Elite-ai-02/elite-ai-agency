@@ -2679,10 +2679,11 @@
 
   <!-- 1. HERO COMMAND CENTER (CONVERGING FIBRE-OPTIC ARTWORK) -->
   <header class="hero-section">
-    <video class="hero-art-video" autoplay muted loop playsinline preload="metadata"
-      poster="assets/hero_poster.webp" id="hero-bg-video">
-      <source media="(max-width: 768px)" src="assets/hero_bg_mobile.mp4" type="video/mp4">
-      <source src="assets/hero_bg_desktop.mp4" type="video/mp4">
+    <video class="hero-art-video" id="hero-bg-video"
+      src="assets/hero_bg.mp4"
+      poster="assets/hero_poster.webp"
+      autoplay muted loop playsinline webkit-playsinline x5-playsinline
+      preload="auto">
     </video>
     <div class="hero-veil"></div>
 
@@ -3350,49 +3351,68 @@
     // PROGRESSIVE HIGH-SPEED MEDIA ENGINE (MOBILE & DESKTOP ACCELERATOR)
     // -------------------------------------------------------------
     (function initFastMedia() {
-      // 1. Instant Video Autoplay Enforcer (Zero delay on mobile)
+      // 1. Universal Video Autoplay Enforcer (iOS, Android & In-App WebViews)
       const heroVid = document.getElementById('hero-bg-video');
       if (heroVid) {
         heroVid.muted = true;
-        const playPromise = heroVid.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(() => {
-            // Autoplay blocked by device low-power mode, trigger on first interaction
-            const onFirstTouch = () => {
-              heroVid.play().catch(() => {});
-              window.removeEventListener('touchstart', onFirstTouch);
-              window.removeEventListener('scroll', onFirstTouch);
-            };
-            window.addEventListener('touchstart', onFirstTouch, { passive: true, once: true });
-            window.addEventListener('scroll', onFirstTouch, { passive: true, once: true });
-          });
-        }
+        heroVid.defaultMuted = true;
+        heroVid.setAttribute('muted', '');
+        heroVid.setAttribute('playsinline', '');
+        heroVid.setAttribute('webkit-playsinline', '');
+        heroVid.setAttribute('x5-playsinline', '');
+
+        const startVideo = () => {
+          const p = heroVid.play();
+          if (p && typeof p.then === 'function') {
+            p.catch(() => {});
+          }
+        };
+
+        // Attempt instant play
+        startVideo();
+
+        // Guaranteed unlock for strict iOS battery-saver / Low Power Mode
+        const userEvents = ['touchstart', 'touchend', 'scroll', 'click', 'pointerdown'];
+        const unlock = () => {
+          startVideo();
+          userEvents.forEach(ev => window.removeEventListener(ev, unlock));
+        };
+        userEvents.forEach(ev => window.addEventListener(ev, unlock, { passive: true, once: true }));
+
+        // Resume if browser was backgrounded/tab switched
+        document.addEventListener('visibilitychange', () => {
+          if (!document.hidden) startVideo();
+        });
       }
 
-      // 2. High-Performance IntersectionObserver for Off-Screen Media (Zero Initial Network Choke)
-      if ('IntersectionObserver' in window) {
-        const imgObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const img = entry.target;
-              if (img.dataset.src) {
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-              }
-              observer.unobserve(img);
-            }
-          });
-        }, {
-          rootMargin: '400px 0px 400px 0px'
+      // 2. Guaranteed Fast Image Hydration (Zero Initial Freeze + 100% Reliability)
+      function hydrateImages() {
+        const deferred = document.querySelectorAll('img[data-src]');
+        deferred.forEach(img => {
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+          }
         });
+      }
 
-        document.querySelectorAll('img[data-src]').forEach(img => {
-          imgObserver.observe(img);
-        });
+      // Pre-hydrate when user scrolls near marquee
+      const marqueeSection = document.getElementById('marquee');
+      if (marqueeSection && 'IntersectionObserver' in window) {
+        const obs = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) {
+            hydrateImages();
+            obs.disconnect();
+          }
+        }, { rootMargin: '800px 0px' });
+        obs.observe(marqueeSection);
+      }
+
+      // Absolute fallback: Ensure all images are 100% loaded after initial hero paint
+      if (document.readyState === 'complete') {
+        setTimeout(hydrateImages, 500);
       } else {
-        document.querySelectorAll('img[data-src]').forEach(img => {
-          img.src = img.dataset.src;
-        });
+        window.addEventListener('load', () => setTimeout(hydrateImages, 400), { once: true });
       }
     })();
 
