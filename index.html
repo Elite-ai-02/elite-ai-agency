@@ -4112,6 +4112,14 @@
         return;
       }
 
+      // Lead Persistence Safeguard: Store securely in local backup queue
+      try {
+        const leadData = { name, business, phone, email, industry, goal, channel, timestamp: new Date().toISOString() };
+        const existing = JSON.parse(localStorage.getItem('elite_ai_leads') || '[]');
+        existing.push(leadData);
+        localStorage.setItem('elite_ai_leads', JSON.stringify(existing));
+      } catch (err) {}
+
       if (channel === 'whatsapp') {
         const text = `*New AI Architecture Audit Request*%0A%0A👤 *Client Name:* ${encodeURIComponent(name)}%0A🏢 *Business / Brand:* ${encodeURIComponent(business)}%0A📱 *Contact:* ${encodeURIComponent(phone)}%0A✉️ *Email:* ${encodeURIComponent(email || 'Not provided')}%0A🏷️ *Industry:* ${encodeURIComponent(industry)}%0A🎯 *Goal / Bottleneck:* ${encodeURIComponent(goal)}`;
         const whatsappUrl = `https://wa.me/919301814976?text=${text}`;
