@@ -26,6 +26,15 @@ const ASSETS_TO_CHECK = [
   '/assets/three.min.js'
 ];
 
+// Multi-page structure (5 pages) — each must return HTTP 200 with real content
+const PAGES_TO_CHECK = [
+  '/',
+  '/nfc-cards.html',
+  '/ai-systems.html',
+  '/about.html',
+  '/contact.html'
+];
+
 const results = {
   timestamp: new Date().toISOString(),
   targetUrl: TARGET_URL,
@@ -68,8 +77,8 @@ async function probeHttp() {
     }
 
     const html = await res.text();
-    if (html.includes('Elite AI') && html.includes('audit-form')) {
-      recordCheck('HTML Body Verification', 'PASS', 'DOM payload contains core brand & form markers');
+    if (html.includes('Elite AI') && html.includes('path-chooser')) {
+      recordCheck('HTML Body Verification', 'PASS', 'DOM payload contains core brand & routing markers');
     } else {
       recordCheck('HTML Body Verification', 'FAIL', 'HTML response does not contain expected markers');
     }
@@ -92,6 +101,25 @@ async function probeHttp() {
     }
   } catch (err) {
     recordCheck('Apex Domain Connection', 'WARN', `Apex check warning: ${err.message}`, Date.now() - tApex);
+  }
+
+  // Probe every page in the multi-page structure
+  console.log('\n--- 1b. Probing All 5 Site Pages ---');
+  for (const pagePath of PAGES_TO_CHECK) {
+    const pageUrl = new URL(pagePath, TARGET_URL).toString();
+    const tPage = Date.now();
+    try {
+      const res = await fetch(pageUrl, { redirect: 'follow' });
+      const durPage = Date.now() - tPage;
+      const body = await res.text();
+      if (res.status === 200 && body.includes('Elite AI')) {
+        recordCheck(`Page: ${pagePath}`, 'PASS', `HTTP 200 with content (${durPage}ms)`, durPage);
+      } else {
+        recordCheck(`Page: ${pagePath}`, 'FAIL', `HTTP ${res.status} or missing expected content`, durPage);
+      }
+    } catch (err) {
+      recordCheck(`Page: ${pagePath}`, 'FAIL', `Fetch failed: ${err.message}`, Date.now() - tPage);
+    }
   }
 }
 
@@ -198,29 +226,58 @@ async function probeBrowserRuntime() {
       recordCheck('Network Requests', 'WARN', `${failedRequests.length} requests failed: ${failedRequests.slice(0, 3).join('; ')}`);
     }
 
-    // Inspect critical DOM elements
-    const criticalSelectors = [
-      { sel: '#hero-bg-video', label: 'Hero Video' },
-      { sel: '.master-nav', label: 'Master Glass Nav' },
-      { sel: '#marquee', label: 'Motion Marquee Track' },
-      { sel: '#convergence-canvas', label: 'Three.js 3D Canvas' },
-      { sel: '#spotlight', label: 'Spotlight X-Ray Curtain' },
-      { sel: '#hardware', label: 'Smart NFC Section' },
-      { sel: '#nfc-card', label: '3D NFC Flipper Card' },
-      { sel: '#playground', label: 'Live AI Chat Lab' },
-      { sel: '#calculator', label: 'ROI Calculator' },
-      { sel: '#audit-form', label: 'Consultation Form' },
-      { sel: '.floating-wa', label: 'Floating WhatsApp CTA' }
+    // Inspect critical DOM elements — page-aware for the 5-page structure
+    const PAGE_SELECTORS = [
+      { path: '/', label: 'Home', sels: [
+        { sel: '#hero-bg-video', label: 'Hero Video' },
+        { sel: '.master-nav', label: 'Master Glass Nav' },
+        { sel: '#marquee', label: 'Motion Marquee Track' },
+        { sel: '.path-chooser', label: 'Two-Path Chooser' },
+        { sel: '.floating-wa', label: 'Floating WhatsApp CTA' }
+      ] },
+      { path: '/nfc-cards.html', label: 'NFC Cards', sels: [
+        { sel: '#hardware', label: 'Smart NFC Section' },
+        { sel: '#nfc-card', label: '3D NFC Flipper Card' },
+        { sel: '#how-it-works', label: 'How It Works Steps' },
+        { sel: '.faq-item', label: 'Owner FAQ' }
+      ] },
+      { path: '/ai-systems.html', label: 'AI Systems', sels: [
+        { sel: '#systems', label: 'Ecosystem Stack' },
+        { sel: '#convergence-canvas', label: 'Three.js 3D Canvas' },
+        { sel: '#spotlight', label: 'Spotlight X-Ray Curtain' },
+        { sel: '#playground', label: 'Live AI Chat Lab' },
+        { sel: '#calculator', label: 'ROI Calculator' }
+      ] },
+      { path: '/about.html', label: 'About', sels: [
+        { sel: '.about-story', label: 'Founder Story' },
+        { sel: '.stat-strip', label: 'Credibility Numbers' }
+      ] },
+      { path: '/contact.html', label: 'Contact', sels: [
+        { sel: '#audit-form', label: 'Consultation Form' },
+        { sel: '.method-card', label: 'Contact Methods' }
+      ] }
     ];
 
-    for (const item of criticalSelectors) {
-      const exists = await page.$(item.sel);
-      if (exists) {
-        recordCheck(`DOM Component: ${item.label}`, 'PASS', `Selector "${item.sel}" verified present`);
-      } else {
-        recordCheck(`DOM Component: ${item.label}`, 'FAIL', `Selector "${item.sel}" missing from page`);
+    for (const pageDef of PAGE_SELECTORS) {
+      try {
+        await page.goto(new URL(pageDef.path, TARGET_URL).toString(), { waitUntil: 'domcontentloaded', timeout: 30000 });
+        await page.waitForTimeout(1200);
+        for (const item of pageDef.sels) {
+          const exists = await page.$(item.sel);
+          if (exists) {
+            recordCheck(`DOM [${pageDef.label}]: ${item.label}`, 'PASS', `Selector "${item.sel}" verified present`);
+          } else {
+            recordCheck(`DOM [${pageDef.label}]: ${item.label}`, 'FAIL', `Selector "${item.sel}" missing from page`);
+          }
+        }
+      } catch (err) {
+        recordCheck(`Page Load: ${pageDef.path}`, 'FAIL', `Navigation failed: ${err.message}`);
       }
     }
+
+    // Interactive tests below live on the AI Systems page
+    await page.goto(new URL('/ai-systems.html', TARGET_URL).toString(), { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await page.waitForTimeout(1500);
 
     // Interactive Test 1: Live AI Chat Lab
     try {

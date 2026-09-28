@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Autonomous AI Systems for Restaurants & Hotels | Elite AI & Smart Systems</title>
+  <meta name="description" content="24/7 WhatsApp agents, contactless ordering, live kitchen dispatch and ROI dashboards for restaurants, hotels and growing businesses. Book a free AI architecture audit.">
+  <meta name="theme-color" content="#06080F">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Autonomous AI Systems for Restaurants & Hotels | Elite AI & Smart Systems">
+  <meta property="og:description" content="24/7 WhatsApp agents, contactless ordering, live kitchen dispatch and ROI dashboards for restaurants, hotels and growing businesses. Book a free AI architecture audit.">
+  <meta property="og:url" content="https://www.eliteaiagency.in/">
+  <meta property="og:image" content="https://www.eliteaiagency.in/assets/logo.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Premium Typography: Inter (Google Fonts) + basis33 (OnlineWebFonts pixel font) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://db.onlinewebfonts.com" crossorigin>
+  <link href="https://db.onlinewebfonts.com/c/d08bafd725a4cfc309efb5a88e0b63a5?family=basis33" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://db.onlinewebfonts.com/c/d08bafd725a4cfc309efb5a88e0b63a5?family=basis33"></noscript>
+  <link rel="icon" href="assets/logo_icon.webp" type="image/webp">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles-pages.css">
+
+  <!-- Client-Side Runtime Error Sentinel -->
+  <script>
+    window.addEventListener('error', function(e) {
+      if (!e.filename || e.filename.includes('onlinewebfonts') || e.filename.includes('analytics')) return;
+      console.warn('[Elite AI Sentinel] Handled runtime error:', e.message, 'at', e.filename, ':', e.lineno);
+    });
+    window.addEventListener('unhandledrejection', function(e) {
+      console.warn('[Elite AI Sentinel] Handled promise rejection:', e.reason);
+    });
+  </script>
+</head>
+<body>
+
+  <!-- MASTER GLASS NAVIGATION -->
+  <nav class="master-nav">
+    <a href="index.html" class="nav-brand">
+      <img src="assets/logo.jpg" alt="Elite AI Logo" class="nav-brand-logo">
+      <div class="nav-brand-text">
+        <span class="nav-brand-title">ELITE AI</span>
+        <span class="nav-brand-sub">AUTONOMOUS SYSTEMS</span>
+      </div>
+    </a>
+
+    <div class="nav-links">
+      <a href="nfc-cards.html">NFC Cards</a>
+      <a href="ai-systems.html" style="color:var(--gold-light);">AI Systems</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="contact.html" class="btn-glow nav-cta-btn">
+        <span>Book AI Audit</span>
+      </a>
+      <button class="burger-btn" id="burger-btn" aria-label="Toggle Navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE SLIDE-OUT GLASS DRAWER -->
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <div class="mobile-drawer-backdrop" id="mobile-drawer-backdrop"></div>
+    <div class="mobile-drawer-sheet">
+      <div class="mobile-drawer-header">
+        <div class="nav-brand">
+          <img src="assets/logo.jpg" alt="Elite AI" class="nav-brand-logo">
+          <div class="nav-brand-text">
+            <span class="nav-brand-title">ELITE AI</span>
+            <span class="nav-brand-sub">AUTONOMOUS SYSTEMS</span>
+          </div>
+        </div>
+        <button class="mobile-close-btn" id="mobile-close-btn" aria-label="Close Navigation">✕</button>
+      </div>
+
+      <nav class="mobile-drawer-menu">
+        <a href="index.html" class="mobile-link"><span class="m-num">01</span><span>Home</span></a>
+        <a href="nfc-cards.html" class="mobile-link"><span class="m-num">02</span><span>EliteTap NFC Cards</span></a>
+        <a href="ai-systems.html" class="mobile-link"><span class="m-num">03</span><span>AI Systems</span></a>
+        <a href="about.html" class="mobile-link"><span class="m-num">04</span><span>About Us</span></a>
+        <a href="contact.html" class="mobile-link"><span class="m-num">05</span><span>Book an Audit</span></a>
+      </nav>
+
+      <div class="mobile-drawer-actions">
+        <a href="contact.html" class="btn-glow mobile-action-btn">
+          <span>Schedule Private Audit ➔</span>
+        </a>
+        <div class="mobile-quick-contacts">
+          <a href="https://wa.me/919301814976" target="_blank" rel="noopener noreferrer" class="mobile-contact-pill">
+            <span class="pill-dot" style="background:#25D366;box-shadow:0 0 8px #25D366;"></span> WhatsApp: +91 9301814976
+          </a>
+          <a href="https://instagram.com/elite.ai_agency" target="_blank" rel="noopener noreferrer" class="mobile-contact-pill">
+            <span class="pill-dot" style="background:#E1306C;box-shadow:0 0 8px #E1306C;"></span> Instagram: @elite.ai_agency
+          </a>
+          <a href="mailto:eliteai.agency.systems@gmail.com" class="mobile-contact-pill">
+            <span class="pill-dot" style="background:var(--gold);box-shadow:0 0 8px var(--gold);"></span> Email: eliteai.agency.systems@gmail.com
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="hero-section hero-compact">
+    <video class="hero-art-video" id="hero-bg-video"
+      src="assets/hero_bg.mp4"
+      poster="assets/hero_poster.webp"
+      autoplay muted loop playsinline webkit-playsinline x5-playsinline
+      preload="auto">
+    </video>
+    <div class="hero-veil"></div>
+
+    <div class="container hero-content">
+      <div class="badge-pill">
+        <span class="pill-dot"></span>
+        <span>Autonomous AI Systems</span>
+      </div>
+
+      <h1 class="hero-headline">
+        Automate The Work That Eats Your Day
+      </h1>
+
+      <p class="hero-subline">
+        WhatsApp agents that answer and book 24/7, contactless ordering with live kitchen dispatch, and dashboards that show you revenue as it happens — built for restaurants, hotels and growing businesses.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="contact.html" class="btn-glow">
+          <span>Book Free AI Audit ➔</span>
+        </a>
+        <a href="#playground" class="btn-ghost">
+          <span>▶ Test Live AI Bot</span>
+        </a>
+      </div>
+
+      <div class="hero-kpis">
+        <div class="kpi-item">
+          <div class="kpi-value"><180ms</div>
+          <div class="kpi-label">Agent Latency</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">24/7</div>
+          <div class="kpi-label">Lead Coverage</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">~150 hrs</div>
+          <div class="kpi-label">Staff Hours Saved / Mo</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">₹50,000+</div>
+          <div class="kpi-label">Monthly Overhead Saved</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="stack-section" id="systems">
+    <div class="container">
+      <div class="section-eyebrow">
+        <div class="badge-pill">
+          <span class="pill-dot"></span>
+          <span>Core Agency Systems</span>
+        </div>
+        <h2 class="section-title">Bespoke Enterprise Deployments</h2>
+        <p class="section-sub">Engineered to drive measurable revenue from day one.</p>
+      </div>
+
+      <div class="stack-cards-wrapper">
+        <!-- Card 1: Hotel & Hospitality OS -->
+        <article class="stack-card">
+          <div>
+            <div class="stack-card-num">01</div>
+            <h3 class="stack-card-title">Hotel & Restaurant QR Suite + KDS</h3>
+            <p class="stack-card-desc">
+              Transform guest dining and room service into a digital-first powerhouse. Live kitchen screens, automatic cooking timers, WhatsApp digital bills, and direct room folio charging.
+            </p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <span class="badge-pill">In-Room Dining</span>
+              <span class="badge-pill">Kitchen KDS</span>
+              <span class="badge-pill">WhatsApp Billing</span>
+            </div>
+          </div>
+          <div class="stack-card-preview">
+            <img data-src="assets/showcase/hero-vitara-preview-Cjz2QYyU.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%230e131f'/%3E%3C/svg%3E" alt="Hospitality Suite Preview" loading="lazy" decoding="async">
+          </div>
+        </article>
+
+        <!-- Card 2: Reputation & Review Growth -->
+        <article class="stack-card">
+          <div>
+            <div class="stack-card-num">02</div>
+            <h3 class="stack-card-title">EliteTap NFC Reputation Engines</h3>
+            <p class="stack-card-desc">
+              Rank #1 in Google Maps local search. Handcrafted contactless review cards and bedside acrylic stands that route customers straight to your Google review submission box in 1 second.
+            </p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <span class="badge-pill">NFC Review Cards</span>
+              <span class="badge-pill">Google Maps SEO</span>
+              <span class="badge-pill">Instant 5-Star Tap</span>
+            </div>
+          </div>
+          <div class="stack-card-preview">
+            <img data-src="assets/showcase/hero-terra-preview-BFjrCr7T.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%230e131f'/%3E%3C/svg%3E" alt="NFC Reputation Engine" loading="lazy" decoding="async">
+          </div>
+        </article>
+
+        <!-- Card 3: 24/7 AI WhatsApp Agents -->
+        <article class="stack-card">
+          <div>
+            <div class="stack-card-num">03</div>
+            <h3 class="stack-card-title">24/7 Autonomous WhatsApp & Voice Agents</h3>
+            <p class="stack-card-desc">
+              Never lose an after-hours lead again. Custom fine-tuned AI bots that answer complex inquiries, schedule appointments, send pricing quotes, and sync directly with your CRM.
+            </p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <span class="badge-pill">Omnichannel Bot</span>
+              <span class="badge-pill">BANT Lead Triage</span>
+              <span class="badge-pill">CRM Integration</span>
+            </div>
+          </div>
+          <div class="stack-card-preview">
+            <img data-src="assets/showcase/hero-stellar-ai-v2-preview-DjvxjG3C.gif" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%230e131f'/%3E%3C/svg%3E" alt="AI Agent Preview" loading="lazy" decoding="async">
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="convergence-section" id="vision">
+    <!-- Real-time Three.js Full-Bleed Background Canvas -->
+    <canvas id="convergence-canvas" class="convergence-bg-canvas"></canvas>
+
+    <!-- Seamless obsidian vignette overlay -->
+    <div class="convergence-vignette"></div>
+
+    <!-- HUD Overlay at Top of Background Interface -->
+    <div class="webgl-bg-hud">
+      <div class="webgl-hud-pill">
+        <span class="pulse-cyan"></span>
+        <span>REAL-TIME 3D // SPATIAL CONVERGENCE</span>
+      </div>
+      <div class="webgl-hud-coords" id="hud-coords">
+        ROT: 0° // TILT: 0°
+      </div>
+    </div>
+
+    <!-- Foreground Floating Content -->
+    <div class="convergence-container">
+      
+      <!-- Top Pill Header -->
+      <div class="convergence-eyebrow">
+        <div class="badge-pill">
+          <span class="pill-dot" style="background:var(--cyan);box-shadow:0 0 10px var(--cyan);"></span>
+          <span>Autonomous 3D Convergence</span>
+        </div>
+      </div>
+
+      <!-- Headline & Subtitle from Motion Interface Prompt -->
+      <h2 class="convergence-title">
+        Where Precision Finds Its Edge<br>
+        And Vision Rewrites What Comes Next
+      </h2>
+      <p class="convergence-sub">
+        a seamless bridge — where raw human ambition and machine clarity converge as one
+      </p>
+
+      <div class="convergence-actions">
+        <a href="#spotlight" class="btn-pill-action">
+          <span>Watch It Unfold ➔</span>
+        </a>
+        <button type="button" class="btn-pill-ghost" id="toggle-3d-speed">
+          <span>Rotate 360° ↺</span>
+        </button>
+      </div>
+
+      <!-- Open 3D Spatial Window where the chromatic star and convergence hands shine through -->
+      <div class="convergence-3d-spacer" id="webgl-drag-zone">
+        <div class="convergence-flank-labels">
+          <div class="hud-hand-label left">
+            <span class="pill-dot" style="background:#00F0FF;box-shadow:0 0 8px #00F0FF;display:inline-block;margin-right:6px;"></span> [SYNTHETIC AI INTELLIGENCE]
+          </div>
+          <div class="hud-hint">
+            <span>✦ DRAG OR HOVER TO NAVIGATE 3D SPACE</span>
+          </div>
+          <div class="hud-hand-label right">
+            [HUMAN AMBITION &amp; VISION] <span class="pill-dot" style="background:var(--gold);box-shadow:0 0 8px var(--gold);display:inline-block;margin-left:6px;"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Character-by-character illuminated thesis -->
+      <div class="about-inner" style="margin: 64px auto 0; max-width: 840px;">
+        <div class="badge-pill" style="margin-bottom: 8px;">
+          <span class="pill-dot"></span>
+          <span>The Autonomous Shift</span>
+        </div>
+        <p class="char-reveal-paragraph" id="char-target">
+          We engineer bespoke technological infrastructure where physical contactless hardware converges with autonomous intelligence. From luxury hotel in-room dining to 1-tap NFC reputation systems and 24/7 AI conversational agents, we replace obsolete manual friction with effortless mathematical precision. Welcome to Elite AI.
+        </p>
+
+        <a href="contact.html" class="btn-glow">
+          <span>Request Private Consultation ➔</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="spotlight-section" id="spotlight">
+    <div class="container">
+      <div class="section-eyebrow">
+        <div class="badge-pill">
+          <span class="pill-dot"></span>
+          <span>Interactive X-Ray Reveal</span>
+        </div>
+        <h2 class="section-title">Drag to Reveal The Transformation</h2>
+        <p class="section-sub">Hover or drag across the panel to unmask the shift from manual chaos to autonomous efficiency.</p>
+      </div>
+
+      <div class="spotlight-wrapper" id="spotlight-box">
+        <!-- BASE: Traditional Manual Business -->
+        <div class="spotlight-base">
+          <div>
+            <div class="spotlight-status legacy">[Status: Traditional Legacy Operations]</div>
+            <h3 class="spotlight-heading">Manual Friction & Lost Revenue</h3>
+          </div>
+
+          <div class="old-grid">
+            <div class="old-card">
+              <h4>⚠️ Paper Menus & Manual Entry</h4>
+              <p>Prone to kitchen miscommunication, printing reprint costs, and 25-minute wait times for diners.</p>
+            </div>
+            <div class="old-card">
+              <h4>⚠️ Lost Google Reviews</h4>
+              <p>Happy guests leave without writing reviews because the search-and-type process takes too long.</p>
+            </div>
+            <div class="old-card">
+              <h4>⚠️ Unanswered Night Enquiries</h4>
+              <p>Prospective high-ticket clients message on WhatsApp and Instagram after hours with zero response.</p>
+            </div>
+          </div>
+          <div class="spotlight-footer legacy">LEGACY BOTTLENECK: HIGH OVERHEAD, HUMAN ERROR</div>
+        </div>
+
+        <!-- REVEAL: Elite AI Automated System -->
+        <div class="spotlight-reveal" id="spotlight-reveal-layer">
+          <div>
+            <div class="spotlight-status auto">[Status: Elite AI Autonomous Transformation]</div>
+            <h3 class="spotlight-heading">Frictionless Growth on Autopilot</h3>
+          </div>
+
+          <div class="new-grid">
+            <div class="new-card">
+              <h4>⚡ Smart QR & Real-time KDS</h4>
+              <p>Guests scan, order, customize spice levels, and receive instant WhatsApp receipts with zero waiter lag.</p>
+            </div>
+            <div class="new-card">
+              <h4>🌟 1-Tap NFC Google Review Cards</h4>
+              <p>Customers tap their phone on your EliteTap card, directly opening your 5★ review page in 1 second.</p>
+            </div>
+            <div class="new-card">
+              <h4>🤖 24/7 Multi-Agent AI Dispatch</h4>
+              <p>Intelligent WhatsApp & Web agents qualify leads, answer FAQs, and book consultations while you sleep.</p>
+            </div>
+          </div>
+          <div class="spotlight-footer auto">TRANSFORMATION COMPLETE: ZERO ERROR, +40% TABLE TURNOVER</div>
+        </div>
+
+        <!-- Laser Divider Handle -->
+        <div class="spotlight-divider" id="spotlight-divider">
+          <div class="spotlight-handle"><span>◄ ►</span></div>
+        </div>
+      </div>
+
+      <!-- Quick 1-Tap Preset Pills -->
+      <div class="spotlight-pills-bar">
+        <button type="button" class="spotlight-preset-btn" id="btn-reveal-legacy">⚠️ Legacy Operations</button>
+        <button type="button" class="spotlight-preset-btn active" id="btn-reveal-split">⟷ 50/50 Comparison</button>
+        <button type="button" class="spotlight-preset-btn" id="btn-reveal-auto">⚡ Autonomous Future</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="lab-section" id="playground">
+    <div class="container">
+      <div class="section-eyebrow">
+        <div class="badge-pill">
+          <span class="pill-dot"></span>
+          <span>Proof of Competence</span>
+        </div>
+        <h2 class="section-title">Interactive AI Terminal & ROI Calculator</h2>
+        <p class="section-sub">Test drive our agent core live, then calculate your exact monthly cost reduction.</p>
+      </div>
+
+      <div class="lab-grid">
+        <!-- Live AI Chat Terminal -->
+        <div class="terminal-box">
+          <div class="terminal-bar">
+            <div class="terminal-dots">
+              <span class="dot-r"></span>
+              <span class="dot-y"></span>
+              <span class="dot-g"></span>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--cyan);">
+              ELITE_AI_KERNEL // V2.4 [ACTIVE]
+            </div>
+            <div style="font-size:0.75rem;color:var(--text-muted);">LATENCY: 142ms</div>
+          </div>
+
+          <div class="terminal-body" id="chat-messages">
+            <div class="bot-msg">
+              👋 Welcome to Elite AI. I am your autonomous agency concierge. How can I assist you today? You can test my hospitality ordering, review acceleration, or appointment booking capabilities below.
+            </div>
+          </div>
+
+          <div class="prompt-pills">
+            <button type="button" class="prompt-pill" onclick="sendQuickPrompt('How does the Hotel QR System work?')">🍽️ Hotel QR Suite</button>
+            <button type="button" class="prompt-pill" onclick="sendQuickPrompt('Tell me about the EliteTap NFC Review Cards')">🌟 NFC Review Cards</button>
+            <button type="button" class="prompt-pill" onclick="sendQuickPrompt('How do your 24/7 WhatsApp AI Agents work?')">🤖 WhatsApp AI Bots</button>
+            <button type="button" class="prompt-pill" onclick="sendQuickPrompt('How long does setup and delivery take?')">⏱️ Delivery Timeline</button>
+            <button type="button" class="prompt-pill" onclick="sendQuickPrompt('Can you put my custom hotel logo on the cards?')">🎨 Custom Branding</button>
+            <button type="button" class="prompt-pill" onclick="sendQuickPrompt('How much money can Elite AI save my business?')">💰 Calculate Savings</button>
+            <button type="button" class="prompt-pill" onclick="sendQuickPrompt('Do you serve businesses in India and globally?')">🌍 Locations Served</button>
+            <button type="button" class="prompt-pill" onclick="sendQuickPrompt('How can I contact your executive team?')">📞 Direct Contact</button>
+          </div>
+
+          <form class="terminal-input-bar" onsubmit="handleChatSubmit(event)">
+            <input type="text" id="chat-input" placeholder="Type a message to test our AI..." autocomplete="off">
+            <button type="submit" class="btn-glow" style="padding:8px 18px;font-size:0.85rem;">Send</button>
+          </form>
+        </div>
+
+        <!-- Dynamic ROI Calculator -->
+        <div class="roi-box" id="calculator">
+          <div>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+              <span style="font-size:1.4rem;">📊</span>
+              <h3 style="font-family:var(--font-display);font-size:1.6rem;color:#FFF;">Savings & ROI Simulator</h3>
+            </div>
+
+            <div class="roi-slider-group">
+              <div class="slider-header">
+                <span>Monthly Customers / Inquiries</span>
+                <span id="customers-val">2,500</span>
+              </div>
+              <input type="range" class="roi-slider" id="customers-slider" min="300" max="15000" step="100" value="2500" oninput="calculateROI()">
+            </div>
+
+            <div class="roi-slider-group">
+              <div class="slider-header">
+                <span>Front-Desk / Operations Staff</span>
+                <span id="staff-val">4 Members</span>
+              </div>
+              <input type="range" class="roi-slider" id="staff-slider" min="1" max="25" step="1" value="4" oninput="calculateROI()">
+            </div>
+          </div>
+
+          <div class="roi-results-card">
+            <div class="res-metric">
+              <strong id="hours-saved">160 hrs</strong>
+              <span>Hours Saved / Month</span>
+            </div>
+            <div class="res-metric">
+              <strong id="cost-saved" style="color:var(--gold-light);">₹72,000</strong>
+              <span>Est. Monthly Value Added</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container">
+      <div class="cta-band-inner">
+        <div class="badge-pill" style="margin:0 auto;">
+          <span class="pill-dot" style="background:var(--gold);box-shadow:0 0 10px var(--gold);"></span>
+          <span>WhatsApp</span>
+        </div>
+        <h2>See What Automation Is Worth To You</h2>
+        <p>We inspect your current bottlenecks and send back a blueprint showing exactly where automation and smart hardware will earn the most — free, in 30 minutes.</p>
+        <div class="cta-band-actions">
+          <a href="contact.html" class="btn-glow"><span>Book Free AI Audit ➔</span></a>
+          <a href="https://wa.me/919301814976" class="btn-ghost"><span>💬 Ask A Question</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="master-footer">
+    <div class="container footer-grid">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <img src="assets/logo_icon.webp" alt="Elite AI Logo" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--gold);">
+        <div>
+          <strong style="color:#FFF;letter-spacing:0.05em;display:block;">ELITE AI & SMART SYSTEMS</strong>
+          <span style="font-size:0.75rem;color:var(--text-muted);">Autonomous Intelligence meets Contactless Hardware.</span>
+        </div>
+      </div>
+
+      <!-- Official Instagram & Email Channels -->
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=eliteai.agency.systems@gmail.com" target="_blank" rel="noopener noreferrer" class="badge-pill" style="text-transform:none;padding:8px 16px;background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.2);transition:all 0.2s ease;">
+          <span style="font-size:0.9rem;">✉️</span>
+          <span style="color:#FFF;">Email: <b style="color:#FFF;">eliteai.agency.systems@gmail.com</b></span>
+        </a>
+        <a href="https://instagram.com/elite.ai_agency" target="_blank" rel="noopener noreferrer" class="badge-pill" style="text-transform:none;padding:8px 16px;background:rgba(255,255,255,0.06);border-color:rgba(212,175,55,0.3);transition:all 0.2s ease;">
+          <span style="font-size:0.9rem;">📸</span>
+          <span style="color:#FFF;">AI Agency: <b style="color:var(--gold-light);">@elite.ai_agency</b></span>
+        </a>
+        <a href="https://instagram.com/elitetap.cards" target="_blank" rel="noopener noreferrer" class="badge-pill" style="text-transform:none;padding:8px 16px;background:rgba(255,255,255,0.06);border-color:rgba(0,240,255,0.3);transition:all 0.2s ease;">
+          <span style="font-size:0.9rem;">💳</span>
+          <span style="color:#FFF;">Smart Cards: <b style="color:var(--cyan);">@elitetap.cards</b></span>
+        </a>
+      </div>
+
+      <div>
+        <span>Direct: <b>+91 9301814976</b> • © 2026 Elite AI Systems. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Quick Connect -->
+  <a href="https://wa.me/919301814976?text=Hello%20Elite%20AI,%20I%20would%20like%20to%20request%20an%20AI%20audit%20and%20smart%20hardware%20demo." target="_blank" rel="noopener noreferrer" class="floating-wa" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32">
+      <path d="M16 2a13.9 13.9 0 0 0-12 21l-1.9 6.9 7.1-1.9A13.9 13.9 0 1 0 16 2zm0 25.5a11.5 11.5 0 0 1-5.9-1.6l-.4-.2-4.4 1.2 1.2-4.3-.3-.5A11.6 11.6 0 1 1 16 27.5zm6.4-8.7c-.3-.2-2-.9-2.3-1s-.6-.2-.8.2-.9 1-1.1 1.3-.4.3-.7.1a9.2 9.2 0 0 1-2.7-1.7 10.2 10.2 0 0 1-1.9-2.4c-.2-.3 0-.5.2-.7s.3-.4.5-.6l.3-.5a1.8 1.8 0 0 0 .1-.8c0-.2-.8-2-1.1-2.7s-.6-.6-.8-.6h-.7a1.4 1.4 0 0 0-1 .5 4.3 4.3 0 0 0-1.3 3.2 7.5 7.5 0 0 0 1.6 4 17.2 17.2 0 0 0 6.6 5.8c.9.4 1.6.6 2.2.8a5.2 5.2 0 0 0 2.4.1 3.9 3.9 0 0 0 2.6-1.8 3.2 3.2 0 0 0 .2-1.8c-.1-.1-.4-.3-.7-.4z"/>
+    </svg>
+  </a>
+
+  <!-- =============================================================
+       THREE.JS 3D WEBGL LIBRARY (LOCAL WITH CDN FALLBACK)
+       ============================================================= -->
+
+  <!-- =============================================================
+       CORE JAVASCRIPT LOGIC (SHARED ACROSS ALL PAGES)
+       ============================================================= -->
+  <script src="./assets/three.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
