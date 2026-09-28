@@ -44,7 +44,7 @@
         });
       }
 
-      // 2. Guaranteed Fast Image Hydration (Zero Initial Freeze + 100% Reliability)
+      // 2. Guaranteed Fast Image + Video Hydration (Zero Initial Freeze + 100% Reliability)
       function hydrateImages() {
         const deferred = document.querySelectorAll('img[data-src]');
         deferred.forEach(img => {
@@ -53,6 +53,41 @@
             img.removeAttribute('data-src');
           }
         });
+
+        // Lightweight showcase MP4 loops (marquee tiles + stack previews).
+        // Poster frames show instantly, then the video plays once its source is set.
+        document.querySelectorAll('video[data-src]').forEach(video => {
+          if (!video.dataset.src) return;
+          video.src = video.dataset.src;
+          video.removeAttribute('data-src');
+          video.load();
+          const p = video.play();
+          if (p && typeof p.catch === 'function') p.catch(() => {});
+        });
+      }
+
+      // 2b. Play only on-screen showcase videos. Mobile browsers cap how many
+      // video decoders can run at once, so off-screen tiles are paused.
+      if ('IntersectionObserver' in window) {
+        const videoObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            const video = entry.target;
+            if (entry.isIntersecting) {
+              if (video.getAttribute('src')) {
+                const p = video.play();
+                if (p && typeof p.catch === 'function') p.catch(() => {});
+              }
+            } else if (!video.paused) {
+              video.pause();
+            }
+          });
+        }, { rootMargin: '250px 0px' });
+
+        const registerShowcaseVideos = () => {
+          document.querySelectorAll('.marquee-tile video, .stack-card-preview video').forEach(v => videoObserver.observe(v));
+        };
+        if (document.readyState === 'complete') registerShowcaseVideos();
+        else window.addEventListener('load', registerShowcaseVideos, { once: true });
       }
 
       // Pre-hydrate when user scrolls near marquee

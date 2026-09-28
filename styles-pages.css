@@ -7,6 +7,22 @@
    ============================================================ */
 
 /* ------------------------------------------------------------
+   0. SHOWCASE VIDEO TILES
+   The marquee and stack previews are now lightweight MP4 loops
+   (≈56x smaller than the original GIFs) instead of <img> tags.
+   These rules mirror the original img sizing exactly.
+   ------------------------------------------------------------ */
+.marquee-tile video,
+.stack-card-preview video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #0E131F;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------
    1. GENEROUS SECTION SPACING  (desktop breathes wider)
    ------------------------------------------------------------ */
 @media (min-width: 769px) {
