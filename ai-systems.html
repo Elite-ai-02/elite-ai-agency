@@ -109,12 +109,14 @@
   </div>
 
   <header class="hero-section hero-compact">
-    <video class="hero-art-video" id="hero-bg-video"
-      src="assets/hero_bg.mp4"
-      poster="assets/hero_poster.webp"
-      autoplay muted loop playsinline webkit-playsinline x5-playsinline
-      preload="auto">
-    </video>
+    <!-- Live Interactive Unicorn Studio Circuit ("Monolyth") -->
+    <div class="hero-unicorn-canvas"
+         data-us-project-src="./assets/unicorn-monolyth.json"
+         data-us-dpi="1.5"
+         data-us-scale="1"
+         data-us-fps="60"
+         data-us-lazyload="false">
+    </div>
     <div class="hero-veil"></div>
 
     <div class="container hero-content">
@@ -603,6 +605,7 @@
   <!-- =============================================================
        CORE JAVASCRIPT LOGIC (SHARED ACROSS ALL PAGES)
        ============================================================= -->
+  <script src="./assets/unicornStudio.umd.js" defer></script>
   <script src="./assets/three.min.js"></script>
   <script src="main.js"></script>
 </body>

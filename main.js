@@ -1,3 +1,33 @@
+    // -------------------------------------------------------------
+    // UNICORN STUDIO INTERACTIVE WEBGL LOADER (AUTO-HYDRATING)
+    // -------------------------------------------------------------
+    if (document.querySelector('[data-us-project], [data-us-project-src]')) {
+      const initUnicorn = () => {
+        if (window.UnicornStudio && typeof window.UnicornStudio.init === 'function') {
+          window.UnicornStudio.init().catch(err => {
+            console.warn('Unicorn Studio initialization deferred:', err);
+          });
+        }
+      };
+
+      if (typeof window.UnicornStudio === 'undefined') {
+        const script = document.createElement('script');
+        script.src = "./assets/unicornStudio.umd.js";
+        script.async = true;
+        script.onload = initUnicorn;
+        script.onerror = () => {
+          const cdn = document.createElement('script');
+          cdn.src = "https://cdn.unicorn.studio/v1.4.0/unicornStudio.umd.js";
+          cdn.async = true;
+          cdn.onload = initUnicorn;
+          document.head.appendChild(cdn);
+        };
+        document.head.appendChild(script);
+      } else {
+        initUnicorn();
+      }
+    }
+
     // Only pull the (large) Three.js library when this page actually has the 3D stage
     if (typeof THREE === 'undefined' && document.getElementById('convergence-canvas')) {
       const s = document.createElement('script');

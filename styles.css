@@ -12,6 +12,22 @@
       font-display: swap;
     }
 
+    /* Syne & Departure Mono (Self-hosted for Unicorn Studio WebGL) */
+    @font-face {
+      font-family: 'Syne';
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url('./assets/fonts/syne.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'Departure Mono';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('./assets/fonts/departure-mono.woff') format('woff');
+    }
+
     /* -------------------------------------------------------------
        0. SYSTEM RESET & CORE DESIGN VARIABLES
        ------------------------------------------------------------- */
@@ -378,6 +394,33 @@
       filter: brightness(1.24) contrast(1.1) saturate(1.3);
       pointer-events: none;
       background: #02060F;
+    }
+
+    /* Unicorn Studio Live Interactive WebGL Scene */
+    .hero-unicorn-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      background: #02060F url('assets/hero_poster.webp') center/cover no-repeat;
+    }
+
+    .hero-unicorn-canvas canvas {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      display: block;
+      pointer-events: none;
+    }
+
+    .hero-unicorn-canvas [data-us-text] {
+      pointer-events: none !important;
+      user-select: none !important;
     }
 
     .hero-veil {
