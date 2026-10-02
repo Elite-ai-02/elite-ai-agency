@@ -44,13 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Determine slug and source
   const pathParts = window.location.pathname.split('/r/');
   const urlParams = new URLSearchParams(window.location.search);
-  const slug = (pathParts[1] ? pathParts[1].replace(/\/$/, '') : (urlParams.get('client') || urlParams.get('slug') || '')).toLowerCase();
+  const rawSlug = pathParts[1] ? pathParts[1].replace(/\/$/, '') : (urlParams.get('client') || urlParams.get('slug') || '');
+  const slug = (rawSlug || 'oven-classic').toLowerCase();
   const source = urlParams.get('source') || 'nfc';
-
-  if (!slug) {
-    showError('Invalid review URL slug. Please check your link.');
-    return;
-  }
 
   // 🛡️ Security & Stability Helpers
   function copyTextSafely(text, btnTextEl, successLabel = 'Copied! ✓') {
