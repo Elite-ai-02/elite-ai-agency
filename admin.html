@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EliteTap Agency OS — Review Funnel & NFC Card Mission Control</title>
+  <meta name="description" content="Central agency administration portal for EliteTap NFC Cards, Review Funnels, and Reputation Interception." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/admin.css" />
+
+  <!-- Client-Side Runtime Error Sentinel (Crash Protection) -->
+  <script>
+    window.addEventListener('error', function(e) {
+      console.warn('[Elite AI Sentinel] Handled runtime error:', e.message);
+    });
+    window.addEventListener('unhandledrejection', function(e) {
+      console.warn('[Elite AI Sentinel] Handled promise rejection:', e.reason);
+    });
+  </script>
+</head>
+<body>
+  <!-- Ambient backdrop -->
+  <div class="ambient-glow glow-top"></div>
+  <div class="ambient-glow glow-bottom"></div>
+
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="agency-brand">
+          <div class="brand-mark">⚡</div>
+          <div>
+            <div class="brand-title">ELITE<span class="gold-text">TAP</span></div>
+            <div class="brand-sub">Review Funnel OS</div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-item active" data-tab="tab-overview">
+          <span class="icon">📊</span>
+          <span>Mission Control</span>
+        </button>
+        <button class="nav-item" data-tab="tab-clients">
+          <span class="icon">🏢</span>
+          <span>Client Businesses</span>
+          <span class="badge" id="clientCountBadge">4</span>
+        </button>
+        <button class="nav-item" data-tab="tab-qr-studio">
+          <span class="icon">🔲</span>
+          <span>QR & NFC Studio</span>
+        </button>
+        <button class="nav-item" data-tab="tab-feedback">
+          <span class="icon">🛡️</span>
+          <span>Intercepted Complaints</span>
+          <span class="badge badge-alert" id="unresolvedBadge">0</span>
+        </button>
+        <button class="nav-item" data-tab="tab-card-mockup">
+          <span class="icon">💳</span>
+          <span>Physical Card Mockup</span>
+        </button>
+        <button class="nav-item" data-tab="tab-roi-pitch">
+          <span class="icon">📈</span>
+          <span>Client ROI Pitcher</span>
+        </button>
+        <button class="nav-item" data-tab="tab-security">
+          <span class="icon">🛡️</span>
+          <span>Cyber Shield</span>
+          <span class="badge badge-emerald" id="shieldStatusBadge">Protected</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="agency-tag">
+          <div class="status-indicator">
+            <span class="pulse-dot"></span>
+            <span>Live Agency Engine</span>
+          </div>
+          <small>Elite AI Agency • Jabalpur</small>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-title-group">
+          <h1 id="pageTitle">Mission Control Overview</h1>
+          <p id="pageSubtitle">Real-time NFC tap telemetry, Google review redirects & reputation protection</p>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="security-status-badge">
+            <span class="pulse-dot"></span>
+            <span>Shield: 100% Secure</span>
+          </div>
+          <button id="quickAddClientBtn" class="btn btn-primary">
+            <span>+ Add New Business</span>
+          </button>
+          <a href="/r/oven-bake-jabalpur" target="_blank" class="btn btn-outline">
+            <span>Live Funnel Demo ↗</span>
+          </a>
+          <button id="adminLogoutBtn" class="btn btn-sm btn-outline" title="Lock Admin Session">
+            <span>🔒 Logout</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- TAB 1: OVERVIEW -->
+      <section id="tab-overview" class="tab-pane active">
+        <!-- KPI Metrics Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Total NFC Taps & Scans</span>
+              <span class="stat-icon">📲</span>
+            </div>
+            <div class="stat-value" id="kpiTotalTaps">1,296</div>
+            <div class="stat-trend positive">
+              <span>↑ 24% this week</span>
+              <span class="sub-text">(NFC: <b id="kpiNfcCount">782</b> • QR: <b id="kpiQrCount">514</b>)</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Google 5★ Reviews Delivered</span>
+              <span class="stat-icon">🌟</span>
+            </div>
+            <div class="stat-value text-emerald" id="kpiGoogleRedirects">1,130</div>
+            <div class="stat-trend positive">
+              <span>87.2% Funnel Conversion</span>
+            </div>
+          </div>
+
+          <div class="stat-card alert-card">
+            <div class="stat-header">
+              <span class="stat-label">Negative Reviews Blocked</span>
+              <span class="stat-icon">🛡️</span>
+            </div>
+            <div class="stat-value text-rose" id="kpiIntercepted">76</div>
+            <div class="stat-trend neutral">
+              <span>Kept off Google Maps!</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Protected Client Rating</span>
+              <span class="stat-icon">⭐</span>
+            </div>
+            <div class="stat-value text-gold" id="kpiAvgRating">4.82 / 5.0</div>
+            <div class="stat-trend positive">
+              <span>+0.9 vs un-gated average</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Funnel Flow Visualization -->
+        <div class="panel">
+          <div class="panel-header">
+            <h3>How The Smart Review Gatekeeper Works Live</h3>
+            <span class="badge badge-accent">Active Routing Engine</span>
+          </div>
+          <div class="funnel-infographic">
+            <div class="funnel-node">
+              <div class="node-icon">📱</div>
+              <h4>1. Customer Interaction</h4>
+              <p>Customer taps NFC card or scans QR acrylic stand at venue.</p>
+              <span class="node-tag">100% Traffic</span>
+            </div>
+
+            <div class="funnel-arrow">➔</div>
+
+            <div class="funnel-node node-decision">
+              <div class="node-icon">⚖️</div>
+              <h4>2. Star Rating Gate</h4>
+              <p>System checks rating against client's minimum threshold (4★).</p>
+              <span class="node-tag">Smart Routing</span>
+            </div>
+
+            <div class="funnel-arrow">➔</div>
+
+            <div class="funnel-split-branches">
+              <div class="branch branch-positive">
+                <div class="branch-pill">⭐ 4 or 5 Stars (87%)</div>
+                <strong>Positive Path</strong>
+                <p>AI Review generator assists text, redirects directly to Google Maps review dialog!</p>
+              </div>
+              <div class="branch branch-negative">
+                <div class="branch-pill alert">🚫 1, 2, or 3 Stars (13%)</div>
+                <strong>Negative Interceptor</strong>
+                <p>Blocks Google Maps! Captures complaint, alerts owner & offers apology voucher.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Client Summary Table -->
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Client Businesses Performance</h3>
+            <button class="btn btn-sm btn-outline" id="viewAllClientsBtn">View All Clients →</button>
+          </div>
+          <div class="table-container">
+            <table class="data-table" id="overviewClientsTable">
+              <thead>
+                <tr>
+                  <th>Business</th>
+                  <th>Category & Location</th>
+                  <th>Total Taps</th>
+                  <th>To Google (4-5★)</th>
+                  <th>Intercepted (1-3★)</th>
+                  <th>Gate Threshold</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="overviewClientsTbody">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: CLIENT BUSINESSES -->
+      <section id="tab-clients" class="tab-pane">
+        <div class="section-actions-bar">
+          <div class="search-box">
+            <input type="text" id="clientSearchInput" placeholder="Search by name, category, or slug..." />
+          </div>
+          <button class="btn btn-primary" id="openAddClientModalBtn">
+            <span>+ Onboard New Business</span>
+          </button>
+        </div>
+
+        <div class="clients-cards-grid" id="clientsGrid">
+          <!-- Injected via JS -->
+        </div>
+      </section>
+
+      <!-- TAB 3: QR & NFC STUDIO -->
+      <section id="tab-qr-studio" class="tab-pane">
+        <div class="studio-layout">
+          <!-- Left: Configuration Controls -->
+          <div class="panel studio-controls">
+            <div class="panel-header">
+              <h3>🔲 QR Code & NFC Target Link Studio</h3>
+            </div>
+
+            <div class="control-group">
+              <label for="qrClientSelector">Select a Client Business:</label>
+              <select id="qrClientSelector" class="form-select">
+                <!-- Injected via JS -->
+              </select>
+              <small class="help-text">Automatically populates the business's dynamic funnel link below.</small>
+            </div>
+
+            <div class="control-group highlight-box">
+              <label for="qrTargetLinkInput">
+                <strong>Target Link to Encode in QR & NFC Card:</strong>
+              </label>
+              <div class="input-with-button">
+                <input type="url" id="qrTargetLinkInput" placeholder="https://yourdomain.com/r/client-slug" />
+                <button type="button" id="copyQrLinkBtn" class="btn btn-sm btn-secondary">Copy Link</button>
+              </div>
+              <small class="help-text text-amber">
+                💡 <strong>You can paste ANY link here!</strong> Whether it's the dynamic review funnel, a custom Google link, or any URL, the QR code and NFC link update instantly.
+              </small>
+            </div>
+
+            <div class="control-group">
+              <label>Traffic Attribution Tag:</label>
+              <div class="source-toggle">
+                <label><input type="radio" name="sourceTag" value="qr" checked /> <code>?source=qr</code> (For Stands & Acrylics)</label>
+                <label><input type="radio" name="sourceTag" value="nfc" /> <code>?source=nfc</code> (For NFC Cards)</label>
+              </div>
+            </div>
+
+            <div class="control-row">
+              <div class="control-group">
+                <label for="qrColorDark">QR Color:</label>
+                <input type="color" id="qrColorDark" value="#000000" />
+              </div>
+              <div class="control-group">
+                <label for="qrColorLight">Background:</label>
+                <input type="color" id="qrColorLight" value="#ffffff" />
+              </div>
+              <div class="control-group">
+                <label for="qrSizeSelect">Resolution:</label>
+                <select id="qrSizeSelect" class="form-select">
+                  <option value="400">400px (Screen Preview)</option>
+                  <option value="800">800px (Table Tent Print)</option>
+                  <option value="1200" selected>1200px (High-Res 4x4 Stand)</option>
+                  <option value="2000">2000px (Ultra-Res PVC Card)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="nfc-instructions-box">
+              <h4>📲 How to Program the Physical NFC Card:</h4>
+              <ol>
+                <li>Install <strong>NFC Tools</strong> app (Free on Android & iOS).</li>
+                <li>Tap <strong>Write</strong> ➔ <strong>Add a record</strong> ➔ <strong>URL / URI</strong>.</li>
+                <li>Paste the Target Link copied from above.</li>
+                <li>Tap <strong>Write / 28 Bytes</strong> and touch the phone to the EliteTap NFC card. <em>Done in 3 seconds!</em></li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Right: Live QR Preview & Print Downloads -->
+          <div class="panel studio-preview">
+            <div class="panel-header">
+              <h3>Live Scannable QR Code</h3>
+              <span class="badge badge-emerald">Ready to Scan</span>
+            </div>
+
+            <div class="qr-canvas-wrapper" id="qrCanvasWrapper">
+              <div id="qrCodeContainer" style="display:flex; justify-content:center; align-items:center;"></div>
+              <img id="qrPreviewImg" src="" alt="Dynamic QR Code" style="display:none;" />
+              <div class="scan-hint">📷 Test scan with your smartphone camera right now!</div>
+            </div>
+
+            <div class="qr-actions-row">
+              <button id="downloadPngBtn" class="btn btn-primary">
+                <span>⬇ Download Print PNG</span>
+              </button>
+              <button id="downloadSvgBtn" class="btn btn-outline">
+                <span>⬇ Download Vector SVG</span>
+              </button>
+              <button id="openEncodedUrlBtn" class="btn btn-secondary">
+                <span>Test Link in Browser ↗</span>
+              </button>
+            </div>
+
+            <div class="print-specs-card">
+              <div class="spec-item">
+                <span class="spec-label">Print Size:</span>
+                <span class="spec-val">Recommended 4" x 4" Acrylic Table Stand or 85.6mm x 54mm PVC Card</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Error Correction:</span>
+                <span class="spec-val">Level H (High 30% redundancy)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: INTERCEPTED COMPLAINTS VAULT -->
+      <section id="tab-feedback" class="tab-pane">
+        <div class="section-actions-bar">
+          <div class="filter-group">
+            <select id="feedbackFilterClient" class="form-select">
+              <option value="">All Businesses</option>
+            </select>
+            <select id="feedbackFilterStatus" class="form-select">
+              <option value="">All Statuses</option>
+              <option value="new">New (Needs Action)</option>
+              <option value="contacted">Contacted</option>
+              <option value="resolved">Resolved</option>
+            </select>
+          </div>
+          <div class="rescue-metric">
+            🛡️ <span id="rescueMetricText">76 Negative reviews intercepted and saved from Google</span>
+          </div>
+        </div>
+
+        <div class="feedback-list" id="feedbackListContainer">
+          <!-- Injected via JS -->
+        </div>
+      </section>
+
+      <!-- TAB 5: PHYSICAL CARD & STAND MOCKUP -->
+      <section id="tab-card-mockup" class="tab-pane">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>EliteTap Physical Hardware Visualizer</h3>
+            <p>Select a client to preview their custom branded NFC Card & Acrylic Stand</p>
+          </div>
+
+          <div class="mockup-controls">
+            <label>Preview Business:</label>
+            <select id="mockupClientSelector" class="form-select">
+              <!-- Injected via JS -->
+            </select>
+          </div>
+
+          <div class="mockup-showcase">
+            <!-- 3D Matte Black NFC Card Front -->
+            <div class="hardware-card nfc-card-mockup">
+              <div class="card-chip-symbol">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2">
+                  <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+                  <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+                </svg>
+                <span>TAP HERE WITH PHONE</span>
+              </div>
+              <div class="card-body-content">
+                <img id="mockupCardLogo" src="" alt="Client Logo" class="card-mock-logo" />
+                <h3 id="mockupCardName">The Oven Bake</h3>
+                <p id="mockupCardCategory">Tap to Review on Google</p>
+              </div>
+              <div class="card-footer-branding">
+                <span>POWERED BY ELITETAP NFC</span>
+                <div class="wifi-tap-icon">📡</div>
+              </div>
+            </div>
+
+            <!-- Acrylic Stand Mockup -->
+            <div class="hardware-card stand-mockup">
+              <div class="stand-header">
+                <div class="google-badge-pill">
+                  <svg width="18" height="18" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                  </svg>
+                  <span>Review us on Google</span>
+                </div>
+                <h3 id="mockupStandName">The Oven Bake</h3>
+                <p>Tap Phone or Scan QR Code</p>
+              </div>
+
+              <div class="stand-qr-box">
+                <img id="mockupStandQr" src="" alt="Stand QR" />
+              </div>
+
+              <div class="stand-footer">
+                <div class="stars-gold">★★★★★</div>
+                <small>Takes only 10 seconds!</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 6: CLIENT ROI PITCH CALCULATOR -->
+      <section id="tab-roi-pitch" class="tab-pane">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>📈 Agency Client Pitch & Reputation ROI Calculator</h3>
+            <p>Use this live interactive simulator when pitching new businesses in Jabalpur & nationwide</p>
+          </div>
+
+          <div class="roi-calculator-grid">
+            <div class="roi-inputs">
+              <div class="control-group">
+                <label for="roiCustomersInput">Estimated Monthly In-Store Customers:</label>
+                <input type="range" id="roiCustomersInput" min="200" max="10000" step="100" value="2500" />
+                <div class="slider-val"><span id="roiCustomersVal">2,500</span> customers / month</div>
+              </div>
+
+              <div class="control-group">
+                <label for="roiCurrentRatingInput">Current Google Rating:</label>
+                <input type="range" id="roiCurrentRatingInput" min="3.0" max="4.9" step="0.1" value="3.9" />
+                <div class="slider-val"><span id="roiRatingVal">3.9</span> ★</div>
+              </div>
+
+              <div class="control-group">
+                <label for="roiTapRateInput">Customer Tap/Scan Conversion Rate:</label>
+                <input type="range" id="roiTapRateInput" min="5" max="30" step="1" value="12" />
+                <div class="slider-val"><span id="roiTapVal">12%</span> tap the card / stand</div>
+              </div>
+            </div>
+
+            <div class="roi-results-card">
+              <h4>Projected 90-Day Impact with EliteTap</h4>
+              
+              <div class="roi-metric-row">
+                <div class="roi-metric">
+                  <span class="roi-number text-emerald" id="resPositiveReviews">+315</span>
+                  <span class="roi-label">New 5-Star Google Reviews</span>
+                </div>
+                <div class="roi-metric">
+                  <span class="roi-number text-rose" id="resBlockedNegative">45</span>
+                  <span class="roi-label">1-to-3★ Reviews Blocked & Rescued</span>
+                </div>
+              </div>
+
+              <div class="rating-jump-box">
+                <div class="jump-item">
+                  <span>Current:</span>
+                  <strong id="resBeforeRating">3.9 ★</strong>
+                </div>
+                <div class="jump-arrow">➔</div>
+                <div class="jump-item highlight">
+                  <span>New Rating:</span>
+                  <strong id="resAfterRating">4.72 ★</strong>
+                </div>
+              </div>
+
+              <p class="roi-pitch-text">
+                "Without EliteTap, ~45 dissatisfied customers would have posted 1-star reviews on Google Maps, permanently sinking your rating. With our Smart Review Funnel, 100% of those complaints are caught privately, and your rating climbs to 4.7+ ★!"
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 7: CYBER SHIELD & SECURITY MONITOR -->
+      <section id="tab-security" class="tab-pane">
+        <!-- Shield Health Banner -->
+        <div class="shield-health-banner">
+          <div class="shield-score-circle">
+            <div class="score-number">100%</div>
+            <div class="score-grade">GRADE A+</div>
+          </div>
+          <div class="shield-summary-info">
+            <div class="shield-status-pill">
+              <span class="pulse-dot"></span>
+              <strong>DEFENSE PROTOCOLS: ACTIVE & HARDENED</strong>
+            </div>
+            <h2>Enterprise Cyber Shield & Anti-Intrusion Suite</h2>
+            <p>
+              Your agency's review funnel infrastructure is shielded with zero-trust input validation, rate limiting, anti-XSS entity escaping, payload armor, and AI prompt injection guards. No virus or malicious code can penetrate the server.
+            </p>
+          </div>
+        </div>
+
+        <!-- 6 Security Layer Modules Grid -->
+        <div class="security-modules-grid">
+          <div class="sec-module-card">
+            <div class="sec-module-header">
+              <span class="sec-icon">🛡️</span>
+              <span class="badge badge-emerald">ACTIVE</span>
+            </div>
+            <h4>Anti-XSS & Script Neutralizer</h4>
+            <p>All client feedback, names, and parameters undergo rigorous HTML entity sanitization. Dangerous <code>&lt;script&gt;</code> and binary payloads are stripped before storage.</p>
+          </div>
+
+          <div class="sec-module-card">
+            <div class="sec-module-header">
+              <span class="sec-icon">⚡</span>
+              <span class="badge badge-emerald">ACTIVE</span>
+            </div>
+            <h4>Anti-DDoS & IP Rate Limiting</h4>
+            <p>Sliding-window IP throttler stops spam bots from bombing feedback, tap beacons, or brute-forcing admin passwords. Bad actors are throttled with HTTP 429.</p>
+          </div>
+
+          <div class="sec-module-card">
+            <div class="sec-module-header">
+              <span class="sec-icon">📦</span>
+              <span class="badge badge-emerald">ACTIVE</span>
+            </div>
+            <h4>Payload Armor (50KB Strict Cap)</h4>
+            <p>Enforces a hard 50KB JSON request limit. Rejects oversized virus blobs, trojans, and buffer overflow attacks with HTTP 413 Payload Too Large.</p>
+          </div>
+
+          <div class="sec-module-card">
+            <div class="sec-module-header">
+              <span class="sec-icon">🔑</span>
+              <span class="badge badge-emerald">ACTIVE</span>
+            </div>
+            <h4>256-Bit Encrypted Session Vault</h4>
+            <p>Agency management APIs are locked behind cryptographically random session tokens with timing-attack safe PIN verification. Unauthorized access is blocked with HTTP 401.</p>
+          </div>
+
+          <div class="sec-module-card">
+            <div class="sec-module-header">
+              <span class="sec-icon">🌐</span>
+              <span class="badge badge-emerald">ACTIVE</span>
+            </div>
+            <h4>HTTP Security Cloak & CSP</h4>
+            <p>Removes <code>X-Powered-By</code> server identity. Enforces <code>Content-Security-Policy</code>, <code>X-Frame-Options: SAMEORIGIN</code>, and <code>X-Content-Type-Options: nosniff</code>.</p>
+          </div>
+
+          <div class="sec-module-card">
+            <div class="sec-module-header">
+              <span class="sec-icon">🤖</span>
+              <span class="badge badge-emerald">ACTIVE</span>
+            </div>
+            <h4>AI Prompt Injection Defense</h4>
+            <p>Customer feedback is filtered against prompt hijacking, system role overrides, and jailbreak vectors before being processed by AI review drafting assistants.</p>
+          </div>
+        </div>
+
+        <!-- Master PIN Management Panel -->
+        <div class="panel" style="margin-bottom: 24px;">
+          <div class="panel-header">
+            <div>
+              <h3>🔑 Agency Master Security Passkey Management</h3>
+              <p style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">
+                Change your secret admin PIN to keep your portal strictly confidential
+              </p>
+            </div>
+          </div>
+          <form id="changePinForm" style="display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end;">
+            <div class="form-group" style="margin-bottom: 0; min-width: 180px;">
+              <label for="currentPinInput" style="font-size: 12px; margin-bottom: 4px; display: block;">Current PIN:</label>
+              <input type="password" id="currentPinInput" required placeholder="Current PIN" style="padding: 9px 12px;" />
+            </div>
+            <div class="form-group" style="margin-bottom: 0; min-width: 180px;">
+              <label for="newPinInput" style="font-size: 12px; margin-bottom: 4px; display: block;">New Secret PIN:</label>
+              <input type="password" id="newPinInput" required placeholder="New Secret PIN" style="padding: 9px 12px;" />
+            </div>
+            <div class="form-group" style="margin-bottom: 0; min-width: 180px;">
+              <label for="confirmPinInput" style="font-size: 12px; margin-bottom: 4px; display: block;">Confirm New PIN:</label>
+              <input type="password" id="confirmPinInput" required placeholder="Repeat New PIN" style="padding: 9px 12px;" />
+            </div>
+            <button type="submit" id="updatePinBtn" class="btn btn-primary" style="height: 38px;">
+              <span>Update PIN 🔒</span>
+            </button>
+          </form>
+          <div id="changePinFeedback" class="hidden" style="margin-top: 10px; font-size: 12px; font-weight: 600;"></div>
+        </div>
+
+        <!-- Live Security Telemetry & Event Audit Log -->
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>Live Security Audit Telemetry</h3>
+              <p style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">
+                Real-time firewall logs tracking sanitized inputs, rate limits, and authentication events
+              </p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-sm btn-outline" id="simulateSecTestBtn">Run Security Penetration Test 🛡️</button>
+              <button class="btn btn-sm btn-secondary" id="clearSecLogsBtn">Clear Logs</button>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table" id="securityLogsTable">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Event Type</th>
+                  <th>IP Address</th>
+                  <th>Severity</th>
+                  <th>Security Action Taken</th>
+                </tr>
+              </thead>
+              <tbody id="securityLogsTbody">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Admin Auth Gatekeeper Screen Overlay -->
+  <div class="auth-gate-overlay" id="adminAuthOverlay">
+    <div class="auth-gate-card">
+      <div class="auth-lock-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+      <h2>Agency OS Security Gate</h2>
+      <p>Enter your Master Agency Passkey / PIN to access Mission Control, QR Studio, and client records.</p>
+      
+      <form id="adminLoginForm" class="auth-form">
+        <div class="form-group">
+          <input type="password" id="adminPinInput" placeholder="Enter Security PIN..." required autofocus />
+          <div class="pin-hint">🔒 Restricted Access • Authorized Personnel Only</div>
+        </div>
+        <div id="loginErrorMsg" class="auth-error-msg hidden">Invalid security key. Access denied.</div>
+        <button type="submit" id="submitLoginBtn" class="btn btn-primary btn-block">
+          <span>Unlock Agency Mission Control</span>
+          <span>🔓</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add / Edit Client Business -->
+  <div class="modal-overlay hidden" id="clientModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modalTitle">Onboard New Business</h3>
+        <button type="button" class="btn-close" id="closeModalBtn">&times;</button>
+      </div>
+
+      <form id="clientForm" class="modal-form">
+        <input type="hidden" id="clientIdInput" />
+
+        <div class="form-row">
+          <div class="form-group flex-2">
+            <label for="clientNameInput">Business Name *</label>
+            <input type="text" id="clientNameInput" required placeholder="e.g. The Grand Italian Cafe" />
+          </div>
+          <div class="form-group flex-1">
+            <label for="clientSlugInput">URL Slug *</label>
+            <input type="text" id="clientSlugInput" required placeholder="e.g. grand-cafe" />
+            <small>Review link: <code>/r/[slug]</code></small>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="clientCategoryInput">Industry Category</label>
+            <input type="text" id="clientCategoryInput" placeholder="e.g. Cafe & Bistro" />
+          </div>
+          <div class="form-group flex-1">
+            <label for="clientLocationInput">City / Location</label>
+            <input type="text" id="clientLocationInput" placeholder="e.g. Civic Centre, Jabalpur" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="clientTaglineInput">Tagline / Subheading</label>
+          <input type="text" id="clientTaglineInput" placeholder="e.g. Woodfired Pizzas & Specialty Coffee" />
+        </div>
+
+        <div class="form-group">
+          <label for="clientGoogleUrlInput">Google Maps Review Direct Dialog Link *</label>
+          <input type="url" id="clientGoogleUrlInput" required placeholder="https://search.google.com/local/writereview?placeid=..." />
+          <small>Where 4 & 5 star happy customers will be redirected to leave public reviews.</small>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="clientThresholdInput">Google Redirect Threshold</label>
+            <select id="clientThresholdInput" class="form-select">
+              <option value="4" selected>4+ Stars (4 & 5 go to Google, 1-3 blocked)</option>
+              <option value="5">5 Stars ONLY (Only 5★ goes to Google, 1-4 blocked)</option>
+            </select>
+          </div>
+          <div class="form-group flex-1">
+            <label for="clientWhatsAppInput">Owner WhatsApp for Alerts</label>
+            <input type="tel" id="clientWhatsAppInput" placeholder="+919826012345" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="clientVoucherInput">Apology Voucher Code</label>
+            <input type="text" id="clientVoucherInput" placeholder="e.g. SORRY15" />
+          </div>
+          <div class="form-group flex-1">
+            <label for="clientDiscountInput">Apology Offer Description</label>
+            <input type="text" id="clientDiscountInput" placeholder="e.g. 15% OFF your next visit" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="clientLogoInput">Logo Image URL</label>
+            <input type="url" id="clientLogoInput" placeholder="https://..." />
+          </div>
+          <div class="form-group flex-1">
+            <label for="clientCoverInput">Cover Banner Image URL</label>
+            <input type="url" id="clientCoverInput" placeholder="https://..." />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="clientAiTagsInput">AI Review Assist Keyword Tags (Comma separated)</label>
+          <input type="text" id="clientAiTagsInput" placeholder="Delicious Food 🍕, Fast Service ⚡, Courteous Staff 🌟, Great Ambience ☕" />
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancelModalBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="saveClientBtn">Save Business Profile</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: AI Apology Resolution Assistant -->
+  <div class="modal-overlay hidden" id="aiApologyModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>🤖 AI Customer Recovery & Apology Assistant</h3>
+        <button type="button" class="btn-close" id="closeAiModalBtn">&times;</button>
+      </div>
+
+      <div class="ai-modal-body">
+        <div class="complaint-summary-box">
+          <strong id="aiCustomerName">Customer Name</strong>
+          <span class="rating-badge alert" id="aiCustomerRating">2 ★</span>
+          <p id="aiCustomerComment">Comment text...</p>
+        </div>
+
+        <div class="form-group">
+          <label for="aiGeneratedApologyText">
+            Generated Empathetic Apology (Ready for WhatsApp / SMS):
+          </label>
+          <textarea id="aiGeneratedApologyText" rows="9" class="mono-text"></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="copyAiTextBtn">Copy Text</button>
+          <a id="aiSendWhatsAppBtn" href="#" target="_blank" class="btn btn-whatsapp">
+            <span>Send to Customer via WhatsApp ↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/assets/qrcode.min.js"></script>
+  <script src="/admin.js"></script>
+</body>
+</html>

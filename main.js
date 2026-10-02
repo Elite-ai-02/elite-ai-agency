@@ -1229,3 +1229,31 @@ ${business}`;
     } else {
       setTimeout(initConvergence3D, 50);
     }
+
+    // =============================================================
+    // 🤫 CLOAKED AGENCY ADMIN TRIGGERS (ZERO PUBLIC VISIBILITY)
+    // =============================================================
+    (function initSecretAdminTriggers() {
+      // 1. Keyboard Shortcut: Ctrl + Shift + A (or Cmd + Shift + A)
+      window.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+          e.preventDefault();
+          window.location.href = '/admin.html';
+        }
+      });
+
+      // 2. Secret Easter Egg: Triple-click copyright in footer
+      let copyrightClicks = 0;
+      let clickTimer = null;
+      document.addEventListener('click', (e) => {
+        const text = e.target?.innerText || '';
+        if (text.includes('Elite AI Systems') || text.includes('9301814976')) {
+          copyrightClicks++;
+          clearTimeout(clickTimer);
+          if (copyrightClicks >= 3) {
+            window.location.href = '/admin.html';
+          }
+          clickTimer = setTimeout(() => { copyrightClicks = 0; }, 800);
+        }
+      });
+    })();
