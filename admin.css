@@ -620,32 +620,198 @@ body {
   flex-grow: 1;
 }
 
-.client-logo-avatar {
-  width: 52px;
-  height: 52px;
+.client-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px 14px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.client-logo-box {
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
   border-radius: 12px;
+  overflow: hidden;
+  background: #141824;
+  border: 2px solid rgba(229, 169, 60, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.client-logo-box img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border: 2px solid #ffffff;
-  position: absolute;
-  top: -26px;
-  left: 20px;
-  background: #111;
+  display: block;
 }
 
-.client-header-title {
-  margin-top: 30px;
-  margin-bottom: 4px;
+.client-logo-box .badge-initials {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 18px;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--gold), #fb923c);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-.client-header-title h4 {
+.client-card-title {
+  flex-grow: 1;
+}
+
+.client-card-title h3 {
   font-family: var(--font-display);
   font-size: 17px;
   color: #ffffff;
+  margin-bottom: 4px;
 }
 
-.client-category-tag {
-  font-size: 12px;
+.client-card-tagline {
+  font-size: 12.5px;
+  color: var(--gold);
+  padding: 10px 20px 0 20px;
+  font-style: italic;
+  line-height: 1.4;
+  opacity: 0.95;
+}
+
+.client-card-stats {
+  display: flex;
+  gap: 12px;
+  margin: 12px 20px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.stat-mini {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-mini .num {
+  display: block;
+  font-weight: 700;
+  font-size: 15px;
+  color: #ffffff;
+}
+
+.stat-mini .lbl {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.client-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 20px 14px 20px;
+}
+
+.tag-chip {
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.05);
   color: var(--text-muted);
+  border-radius: 4px;
+  padding: 3px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.client-card-footer {
+  margin-top: auto;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 12px 20px;
+  background: rgba(0, 0, 0, 0.25);
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* Modal Logo Uploader & Preview */
+.logo-input-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.upload-file-btn {
+  white-space: nowrap;
+  cursor: pointer;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.upload-file-btn:hover {
+  background: rgba(229, 169, 60, 0.2);
+  border-color: var(--gold);
+}
+
+.logo-preview-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.logo-preview-box {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #141824;
+  border: 1.5px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.logo-preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.logo-preview-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--gold), #fb923c);
+}
+
+.logo-hint {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.3;
 }
 
 .client-stats-row {

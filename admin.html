@@ -264,9 +264,14 @@
           <div class="search-box">
             <input type="text" id="clientSearchInput" placeholder="Search by name, category, or slug..." />
           </div>
-          <button class="btn btn-primary" id="openAddClientModalBtn">
-            <span>+ Onboard New Business</span>
-          </button>
+          <div style="display:flex; gap:10px;">
+            <button class="btn btn-outline" id="exportClientsJsonBtn" title="Download updated data/clients.json for server/git sync">
+              <span>💾 Export clients.json</span>
+            </button>
+            <button class="btn btn-primary" id="openAddClientModalBtn">
+              <span>+ Onboard New Business</span>
+            </button>
+          </div>
         </div>
 
         <div class="clients-cards-grid" id="clientsGrid">
@@ -711,7 +716,7 @@
         <button type="button" class="btn-close" id="closeModalBtn">&times;</button>
       </div>
 
-      <form id="clientForm" class="modal-form">
+      <form id="clientForm" class="modal-form" novalidate>
         <input type="hidden" id="clientIdInput" />
 
         <div class="form-row">
@@ -775,12 +780,25 @@
 
         <div class="form-row">
           <div class="form-group flex-1">
-            <label for="clientLogoInput">Logo Image URL</label>
-            <input type="url" id="clientLogoInput" placeholder="https://..." />
+            <label for="clientLogoInput">Business Logo</label>
+            <div class="logo-input-group">
+              <input type="text" id="clientLogoInput" placeholder="Paste image URL (Drive, Imgur, direct link)" />
+              <label for="clientLogoFileInput" class="btn btn-secondary btn-sm upload-file-btn" title="Upload image file from device">
+                📁 Upload
+              </label>
+              <input type="file" id="clientLogoFileInput" accept="image/*" style="display:none;" />
+            </div>
+            <div class="logo-preview-row">
+              <div class="logo-preview-box">
+                <img id="clientLogoPreview" alt="Logo Preview" referrerpolicy="no-referrer" style="display:none;" />
+                <div id="modalLogoFallback" class="logo-preview-fallback">OC</div>
+              </div>
+              <small class="logo-hint">Upload JPG/PNG or paste Google Drive/Imgur links.</small>
+            </div>
           </div>
           <div class="form-group flex-1">
             <label for="clientCoverInput">Cover Banner Image URL</label>
-            <input type="url" id="clientCoverInput" placeholder="https://..." />
+            <input type="text" id="clientCoverInput" placeholder="https://..." />
           </div>
           <div class="form-group" style="max-width: 140px;">
             <label for="clientColorInput">Brand Color</label>

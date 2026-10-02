@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   const cardHero = document.getElementById('cardHero');
   const bizLogo = document.getElementById('bizLogo');
+  const bizLogoFallback = document.getElementById('bizLogoFallback');
   const bizName = document.getElementById('bizName');
   const bizTagline = document.getElementById('bizTagline');
   const bizLocationText = document.getElementById('bizLocationText');
@@ -187,6 +188,44 @@ document.addEventListener('DOMContentLoaded', () => {
     errorState.classList.remove('hidden');
   }
 
+  function cleanImageUrl(url) {
+    if (!url || typeof url !== 'string') return '';
+    url = url.trim();
+    if (url.startsWith('data:image/')) return url;
+
+    // Google Drive share link converter
+    const gdMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    if (gdMatch && (url.includes('drive.google.com') || url.includes('docs.google.com'))) {
+      return `https://lh3.googleusercontent.com/d/${gdMatch[1]}`;
+    }
+
+    // Dropbox converter
+    if (url.includes('dropbox.com')) {
+      return url.replace(/[?&]dl=0/, '').replace(/\?/, '?raw=1') + (url.includes('?') ? '&raw=1' : '?raw=1');
+    }
+
+    // Imgur direct image converter
+    if (url.includes('imgur.com') && !url.includes('i.imgur.com') && !url.match(/\.(png|jpg|jpeg|webp|gif)$/i)) {
+      const parts = url.split('/');
+      const id = parts[parts.length - 1];
+      if (id) return `https://i.imgur.com/${id}.png`;
+    }
+
+    // Missing protocol fix
+    if (url.startsWith('www.') || (!url.startsWith('http://') && !url.startsWith('https://') && !url.startsWith('/') && !url.startsWith('data:'))) {
+      return 'https://' + url;
+    }
+
+    return url;
+  }
+
+  function getInitials(name) {
+    if (!name) return 'OC';
+    const parts = name.trim().split(/\s+/);
+    if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+    return name.substring(0, 2).toUpperCase();
+  }
+
   function renderBusinessProfile(data) {
     loadingState.classList.add('hidden');
     mainCard.classList.remove('hidden');
@@ -196,15 +235,27 @@ document.addEventListener('DOMContentLoaded', () => {
     bizTagline.textContent = data.tagline || data.category || 'Specialty Bakery & Cafe';
     bizLocationText.textContent = data.location || 'Local Business';
 
-    const defaultLogo = 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=160&auto=format&fit=crop&q=80';
-    bizLogo.onerror = () => {
-      bizLogo.onerror = null;
-      bizLogo.src = defaultLogo;
-    };
-    bizLogo.src = data.logo || defaultLogo;
+    const initials = getInitials(data.name || 'Oven Classic');
+    if (bizLogoFallback) bizLogoFallback.textContent = initials;
+
+    const cleanedLogo = cleanImageUrl(data.logo);
+    if (cleanedLogo) {
+      bizLogo.onload = () => {
+        bizLogo.style.display = 'block';
+        if (bizLogoFallback) bizLogoFallback.style.display = 'none';
+      };
+      bizLogo.onerror = () => {
+        bizLogo.style.display = 'none';
+        if (bizLogoFallback) bizLogoFallback.style.display = 'flex';
+      };
+      bizLogo.src = cleanedLogo;
+    } else {
+      bizLogo.style.display = 'none';
+      if (bizLogoFallback) bizLogoFallback.style.display = 'flex';
+    }
 
     if (data.coverImage) {
-      cardHero.style.backgroundImage = `url('${data.coverImage}')`;
+      cardHero.style.backgroundImage = `url('${cleanImageUrl(data.coverImage)}')`;
     }
 
     if (data.brandColor) {

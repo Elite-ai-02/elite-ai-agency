@@ -41,9 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const clientForm = document.getElementById('clientForm');
   const modalTitle = document.getElementById('modalTitle');
   const openAddClientModalBtn = document.getElementById('openAddClientModalBtn');
-  const quickAddClientBtn = document.getElementById('quickAddClientBtn');
   const closeModalBtn = document.getElementById('closeModalBtn');
   const cancelModalBtn = document.getElementById('cancelModalBtn');
+  const clientLogoInput = document.getElementById('clientLogoInput');
+  const clientLogoFileInput = document.getElementById('clientLogoFileInput');
+  const clientLogoPreview = document.getElementById('clientLogoPreview');
+  const modalLogoFallback = document.getElementById('modalLogoFallback');
+  const exportClientsJsonBtn = document.getElementById('exportClientsJsonBtn');
 
   // QR Studio
   const qrClientSelector = document.getElementById('qrClientSelector');
@@ -110,6 +114,44 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#39;');
+  }
+
+  function cleanImageUrl(url) {
+    if (!url || typeof url !== 'string') return '';
+    url = url.trim();
+    if (url.startsWith('data:image/')) return url;
+
+    // Google Drive share link converter
+    const gdMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    if (gdMatch && (url.includes('drive.google.com') || url.includes('docs.google.com'))) {
+      return `https://lh3.googleusercontent.com/d/${gdMatch[1]}`;
+    }
+
+    // Dropbox converter
+    if (url.includes('dropbox.com')) {
+      return url.replace(/[?&]dl=0/, '').replace(/\?/, '?raw=1') + (url.includes('?') ? '&raw=1' : '?raw=1');
+    }
+
+    // Imgur direct image converter
+    if (url.includes('imgur.com') && !url.includes('i.imgur.com') && !url.match(/\.(png|jpg|jpeg|webp|gif)$/i)) {
+      const parts = url.split('/');
+      const id = parts[parts.length - 1];
+      if (id) return `https://i.imgur.com/${id}.png`;
+    }
+
+    // Missing protocol fix
+    if (url.startsWith('www.') || (!url.startsWith('http://') && !url.startsWith('https://') && !url.startsWith('/') && !url.startsWith('data:'))) {
+      return 'https://' + url;
+    }
+
+    return url;
+  }
+
+  function getInitials(name) {
+    if (!name) return 'OC';
+    const parts = name.trim().split(/\s+/);
+    if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+    return name.substring(0, 2).toUpperCase();
   }
 
   function copyTextSafely(text, btn, successLabel = 'Copied! ✓') {
@@ -501,19 +543,29 @@ document.addEventListener('DOMContentLoaded', () => {
     clients.forEach(c => {
       const a = c.analytics || { totalTaps: 0, googleRedirects: 0, interceptedNegative: 0 };
       const row = document.createElement('tr');
+      const cleanLogo = cleanImageUrl(c.logo) || 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=160&auto=format&fit=crop&q=80';
+      const initials = getInitials(c.name);
+
       row.innerHTML = `
         <td>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <img src="${escapeHTML(c.logo || 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=60')}" style="width:32px; height:32px; border-radius:6px; object-fit:cover;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:36px; height:36px; min-width:36px; border-radius:8px; overflow:hidden; background:#141824; border:1px solid rgba(229,169,60,0.4); display:flex; align-items:center; justify-content:center;">
+              <img src="${escapeHTML(cleanLogo)}" 
+                   style="width:100%; height:100%; object-fit:cover;" 
+                   referrerpolicy="no-referrer"
+                   onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+              <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; font-weight:700; font-size:13px; color:#fff; background:linear-gradient(135deg, var(--gold), #fb923c);">${escapeHTML(initials)}</div>
+            </div>
             <div>
               <strong>${escapeHTML(c.name)}</strong>
               <div style="font-size:11px; color:var(--text-dim);">${escapeHTML(c.category)}</div>
+              ${c.tagline ? `<div style="font-size:10.5px; color:var(--gold); font-style:italic;">“${escapeHTML(c.tagline)}”</div>` : ''}
             </div>
           </div>
         </td>
         <td>
           <div>${escapeHTML(c.category)}</div>
-          <small style="color:var(--text-dim);">${escapeHTML(c.location || 'Civil Lines, Jabalpur')}</small>
+          <small style="color:var(--text-dim);">${escapeHTML(c.location || 'Jabalpur, MP')}</small>
         </td>
         <td><strong>${a.totalTaps || 0}</strong></td>
         <td><span class="badge badge-emerald">⭐ ${a.googleRedirects || 0}</span></td>
@@ -546,6 +598,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const filtered = clients.filter(c => {
       return c.name.toLowerCase().includes(query) ||
              c.category.toLowerCase().includes(query) ||
+             (c.tagline && c.tagline.toLowerCase().includes(query)) ||
              c.slug.toLowerCase().includes(query);
     });
 
@@ -558,16 +611,23 @@ document.addEventListener('DOMContentLoaded', () => {
       const a = c.analytics || { totalTaps: 0, googleRedirects: 0, interceptedNegative: 0 };
       const card = document.createElement('div');
       card.className = 'client-card';
+      const cleanLogo = cleanImageUrl(c.logo) || 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=160&auto=format&fit=crop&q=80';
+      const initials = getInitials(c.name);
+
       card.innerHTML = `
         <div class="client-card-header">
           <div class="client-logo-box">
-            <img src="${escapeHTML(c.logo || 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=80')}" alt="${escapeHTML(c.name)}">
+            <img src="${escapeHTML(cleanLogo)}" alt="${escapeHTML(c.name)}" referrerpolicy="no-referrer"
+                 onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+            <div class="badge-initials" style="display:none;">${escapeHTML(initials)}</div>
           </div>
           <div class="client-card-title">
             <h3>${escapeHTML(c.name)}</h3>
             <span class="badge badge-accent">${escapeHTML(c.category)}</span>
           </div>
         </div>
+
+        ${c.tagline ? `<div class="client-card-tagline">“${escapeHTML(c.tagline)}”</div>` : ''}
 
         <div class="client-card-stats">
           <div class="stat-mini">
@@ -586,6 +646,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         <div class="client-card-tags">
           ${(c.aiReviewKeywords || []).slice(0, 4).map(k => `<span class="tag-chip">${escapeHTML(k)}</span>`).join('')}
+          ${c.phone ? `<span class="tag-chip" style="color:var(--gold); border-color:rgba(229,169,60,0.3);">📞 Alert: ${escapeHTML(c.phone)}</span>` : ''}
         </div>
 
         <div class="client-card-footer" style="display: flex; gap: 8px; flex-wrap: wrap;">
@@ -614,6 +675,97 @@ document.addEventListener('DOMContentLoaded', () => {
 
   clientSearchInput.addEventListener('input', renderClientsGrid);
 
+  // Logo Preview & Uploader logic
+  function updateLogoPreview(url, name) {
+    if (!clientLogoPreview || !modalLogoFallback) return;
+    const initials = getInitials(name || getVal('clientNameInput') || 'Oven Classic');
+    modalLogoFallback.textContent = initials;
+    const cleanUrl = cleanImageUrl(url);
+
+    if (cleanUrl) {
+      clientLogoPreview.onload = () => {
+        clientLogoPreview.style.display = 'block';
+        modalLogoFallback.style.display = 'none';
+      };
+      clientLogoPreview.onerror = () => {
+        clientLogoPreview.style.display = 'none';
+        modalLogoFallback.style.display = 'flex';
+      };
+      clientLogoPreview.src = cleanUrl;
+    } else {
+      clientLogoPreview.style.display = 'none';
+      modalLogoFallback.style.display = 'flex';
+    }
+  }
+
+  if (clientLogoInput) {
+    clientLogoInput.addEventListener('input', () => {
+      updateLogoPreview(clientLogoInput.value, getVal('clientNameInput'));
+    });
+    clientLogoInput.addEventListener('blur', () => {
+      const cleaned = cleanImageUrl(clientLogoInput.value);
+      if (cleaned && cleaned !== clientLogoInput.value) {
+        clientLogoInput.value = cleaned;
+      }
+      updateLogoPreview(clientLogoInput.value, getVal('clientNameInput'));
+    });
+  }
+
+  if (clientLogoFileInput) {
+    clientLogoFileInput.addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          const maxDim = 256;
+          if (width > height) {
+            if (width > maxDim) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            }
+          } else {
+            if (height > maxDim) {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
+          }
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          const compressedDataUrl = canvas.toDataURL('image/webp', 0.88);
+          clientLogoInput.value = compressedDataUrl;
+          updateLogoPreview(compressedDataUrl, getVal('clientNameInput'));
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  if (exportClientsJsonBtn) {
+    exportClientsJsonBtn.addEventListener('click', () => {
+      const jsonStr = JSON.stringify(clients, null, 2);
+      copyTextSafely(jsonStr, exportClientsJsonBtn, 'Copied JSON! ✓');
+
+      const blob = new Blob([jsonStr], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'clients.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
+    });
+  }
+
   // Client Modal handlers
   function openEditModal(c) {
     currentEditingClientId = c.id || c.slug;
@@ -633,6 +785,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setVal('clientCoverInput', c.coverImage || '');
     setVal('clientAiTagsInput', (c.aiReviewKeywords || []).join(', '));
     setVal('clientColorInput', c.brandColor || '#E5A93C');
+    updateLogoPreview(c.logo, c.name);
     clientModal.classList.remove('hidden');
   }
 
@@ -647,11 +800,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setVal('clientAiTagsInput', 'Delicious Food 🍕, Fast Service ⚡, Courteous Staff 🌟, Great Ambience ☕');
     setVal('clientVoucherInput', 'RESCUE15');
     setVal('clientDiscountInput', '15% OFF your next order');
+    updateLogoPreview('', '');
     clientModal.classList.remove('hidden');
-  });
-
-  quickAddClientBtn?.addEventListener('click', () => {
-    openAddClientModalBtn.click();
   });
 
   closeModalBtn.addEventListener('click', () => clientModal.classList.add('hidden'));
@@ -665,13 +815,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const tagline = getVal('clientTaglineInput');
     const googleReviewUrl = getVal('clientGoogleUrlInput');
     const starThreshold = parseInt(getVal('clientThresholdInput', '4'), 10) || 4;
-    const phone = getVal('clientWhatsAppInput');
+    let rawPhone = getVal('clientWhatsAppInput').replace(/[^0-9+]/g, '');
+    if (rawPhone.length === 10) rawPhone = '+91' + rawPhone;
+    const phone = rawPhone;
     const alertWhatsApp = phone;
     const location = getVal('clientLocationInput');
     const recoveryVoucher = getVal('clientVoucherInput');
     const recoveryDiscount = getVal('clientDiscountInput');
-    const logo = getVal('clientLogoInput');
-    const coverImage = getVal('clientCoverInput');
+    const logo = cleanImageUrl(getVal('clientLogoInput'));
+    const coverImage = cleanImageUrl(getVal('clientCoverInput'));
     const brandColor = getVal('clientColorInput', '#E5A93C');
     const keywordsRaw = getVal('clientAiTagsInput');
 
@@ -690,8 +842,8 @@ document.addEventListener('DOMContentLoaded', () => {
       alertWhatsApp,
       recoveryVoucher,
       recoveryDiscount,
-      logo: logo || 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=80',
-      coverImage: coverImage || 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200',
+      logo: logo || 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=160&auto=format&fit=crop&q=80',
+      coverImage: coverImage || 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&auto=format&fit=crop&q=80',
       brandColor,
       aiReviewKeywords: keywords,
       analytics: { totalTaps: 0, googleRedirects: 0, interceptedNegative: 0 }
@@ -723,6 +875,12 @@ document.addEventListener('DOMContentLoaded', () => {
     renderClientsGrid();
     renderOverview();
     populateDropdowns();
+
+    const saveBtn = document.getElementById('saveClientBtn');
+    if (saveBtn) {
+      saveBtn.textContent = 'Saved! ✓';
+      setTimeout(() => { saveBtn.textContent = 'Save Business Profile'; }, 2000);
+    }
   });
 
   // Auto-slugify
@@ -1014,8 +1172,13 @@ document.addEventListener('DOMContentLoaded', () => {
     mockupCardCategory.textContent = client.category;
     mockupStandName.textContent = client.name;
 
-    if (client.logo) {
-      mockupCardLogo.src = client.logo;
+    const cleanLogo = cleanImageUrl(client.logo) || 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=160&auto=format&fit=crop&q=80';
+    if (mockupCardLogo) {
+      mockupCardLogo.referrerPolicy = 'no-referrer';
+      mockupCardLogo.onerror = () => {
+        mockupCardLogo.src = 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=160&auto=format&fit=crop&q=80';
+      };
+      mockupCardLogo.src = cleanLogo;
     }
 
     // Render mockup QR
