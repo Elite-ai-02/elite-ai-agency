@@ -70,9 +70,11 @@
   from = "/admin"
   to = "/admin.html"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/r/*"
   to = "/funnel.html"
   status = 200
+  force = true
 
