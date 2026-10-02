@@ -86,15 +86,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const DEFAULT_FALLBACK_CLIENTS = {
-    'oven-bake-jabalpur': {
-      name: 'Oven Bake Jabalpur',
-      category: 'Premium Bakery & Cafe',
-      tagline: 'Freshly Baked Goodness & Artisan Coffee',
-      location: 'Civil Lines, Jabalpur',
+    'oven-classic': {
+      name: 'Oven Classic',
+      category: 'Bakery, Cafe & Confectionery',
+      tagline: 'Freshly Baked Goodness, Artisan Cakes & Delicious Coffee',
+      location: 'Jabalpur, MP',
       googleReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJ-3YyH8_reTkR0Kj8Uo5n6rI',
       phone: '919301814976',
       brandColor: '#E5A93C',
-      aiReviewKeywords: ['Fresh Pastries', 'Ambience', 'Cold Coffee', 'Courteous Staff', 'Custom Cakes']
+      aiReviewKeywords: ['Delicious Fresh Cakes 🎂', 'Artisan Pastries & Bakery 🥐', 'Cozy & Aesthetic Ambience ✨', 'Courteous & Polite Staff 💖', 'Top-Notch Hygiene & Quality 🧼']
+    },
+    'oven-bake-jabalpur': {
+      name: 'Oven Classic',
+      category: 'Bakery, Cafe & Confectionery',
+      tagline: 'Freshly Baked Goodness, Artisan Cakes & Delicious Coffee',
+      location: 'Jabalpur, MP',
+      googleReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJ-3YyH8_reTkR0Kj8Uo5n6rI',
+      phone: '919301814976',
+      brandColor: '#E5A93C',
+      aiReviewKeywords: ['Delicious Fresh Cakes 🎂', 'Artisan Pastries & Bakery 🥐', 'Cozy & Aesthetic Ambience ✨', 'Courteous & Polite Staff 💖', 'Top-Notch Hygiene & Quality 🧼']
     }
   };
 

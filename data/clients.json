@@ -1,126 +1,33 @@
 [
   {
-    "id": "client_oven_bake",
-    "name": "The Oven Bake Cafe & Bistro",
-    "slug": "oven-bake-jabalpur",
-    "category": "Cafe & Bistro",
-    "tagline": "Artisanal Breads, Woodfired Pizzas & Specialty Coffee",
-    "location": "Napier Town, Jabalpur, MP",
+    "id": "client_oven_classic",
+    "name": "Oven Classic",
+    "slug": "oven-classic",
+    "category": "Bakery, Cafe & Confectionery",
+    "tagline": "Freshly Baked Goodness, Artisan Cakes & Delicious Coffee",
+    "location": "Jabalpur, MP",
     "logo": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=160&auto=format&fit=crop&q=80",
-    "coverImage": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&auto=format&fit=crop&q=80",
-    "brandColor": "#E65100",
-    "googleReviewUrl": "https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4",
+    "coverImage": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&auto=format&fit=crop&q=80",
+    "brandColor": "#E5A93C",
+    "googleReviewUrl": "https://search.google.com/local/writereview?placeid=ChIJ-3YyH8_reTkR0Kj8Uo5n6rI",
     "starThreshold": 4,
-    "alertWhatsApp": "+919826112233",
-    "alertEmail": "manager@theovenbake.in",
-    "recoveryVoucher": "OVEN15VIP",
-    "recoveryDiscount": "15% OFF your next visit + free dessert",
+    "phone": "+919301814976",
+    "alertWhatsApp": "+919301814976",
+    "alertEmail": "manager@ovenclassic.in",
+    "recoveryVoucher": "OVENCLASSIC15",
+    "recoveryDiscount": "15% OFF your next order",
     "aiReviewKeywords": [
-      "Delicious Woodfired Pizza 🍕",
-      "Cozy Aesthetic Ambience ☕",
-      "Fast & Friendly Service ⚡",
-      "Rich Artisan Coffee ☕",
-      "Great Value for Money 💰"
+      "Delicious Fresh Cakes 🎂",
+      "Artisan Pastries & Bakery 🥐",
+      "Cozy & Aesthetic Ambience ✨",
+      "Courteous & Polite Staff 💖",
+      "Top-Notch Hygiene & Quality 🧼"
     ],
-    "stats": {
-      "taps": 358,
-      "googleRedirects": 301,
-      "intercepted": 31,
-      "avgRating": 4.7
+    "analytics": {
+      "totalTaps": 0,
+      "googleRedirects": 0,
+      "interceptedNegative": 0
     },
-    "createdAt": "2026-09-15T10:00:00.000Z"
-  },
-  {
-    "id": "client_chai_sutta_bar",
-    "name": "Chai Sutta Bar - Civic Centre",
-    "slug": "csb-civic-centre",
-    "category": "Youth Lounge & Cafe",
-    "tagline": "Kulhad Chai, Quick Bites & Great Memories",
-    "location": "Civic Centre, Jabalpur, MP",
-    "logo": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=160&auto=format&fit=crop&q=80",
-    "coverImage": "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&auto=format&fit=crop&q=80",
-    "brandColor": "#D97706",
-    "googleReviewUrl": "https://search.google.com/local/writereview?placeid=ChIJrTLr-GyuEmsRBfy61i59si0",
-    "starThreshold": 4,
-    "alertWhatsApp": "+919425001122",
-    "alertEmail": "csb.civiccentre@gmail.com",
-    "recoveryVoucher": "CHAIKULHAD",
-    "recoveryDiscount": "Complimentary Kulhad Chai on next visit",
-    "aiReviewKeywords": [
-      "Authentic Kulhad Chai ☕",
-      "Crispy Peri Peri Fries 🍟",
-      "Lively Youth Vibe 🎶",
-      "Pocket Friendly 💰",
-      "Super Quick Service ⚡"
-    ],
-    "stats": {
-      "taps": 512,
-      "googleRedirects": 448,
-      "intercepted": 31,
-      "avgRating": 4.8
-    },
-    "createdAt": "2026-09-18T12:00:00.000Z"
-  },
-  {
-    "id": "client_agarwal_dental",
-    "name": "Dr. Agarwal Dental Care Clinic",
-    "slug": "dr-agarwal-dental",
-    "category": "Healthcare & Dental Clinic",
-    "tagline": "Painless Laser Dentistry, Implants & Smile Designing",
-    "location": "Wright Town, Jabalpur, MP",
-    "logo": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=160&auto=format&fit=crop&q=80",
-    "coverImage": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&auto=format&fit=crop&q=80",
-    "brandColor": "#0284C7",
-    "googleReviewUrl": "https://search.google.com/local/writereview?placeid=ChIJd8BlQ2muEmsR2Z8r4H7H9H0",
-    "starThreshold": 4,
-    "alertWhatsApp": "+919893123456",
-    "alertEmail": "care@dragarwaldental.com",
-    "recoveryVoucher": "DENTALCARE",
-    "recoveryDiscount": "Free Dental Checkup & Polishing Consultation",
-    "aiReviewKeywords": [
-      "100% Painless Treatment 🦷",
-      "Extremely Clean & Sanitized 🧼",
-      "Doctor Explains Very Patiently 🩺",
-      "Modern Laser Equipment 🔬",
-      "Gentle & Caring Staff 💖"
-    ],
-    "stats": {
-      "taps": 196,
-      "googleRedirects": 178,
-      "intercepted": 9,
-      "avgRating": 4.9
-    },
-    "createdAt": "2026-09-20T14:30:00.000Z"
-  },
-  {
-    "id": "client_luxe_spa",
-    "name": "Luxe Glow Salon & Ayurvedic Spa",
-    "slug": "luxe-glow-salon",
-    "category": "Salon, Hair & Spa",
-    "tagline": "Premium Hair Styling, Bridal Makeover & Organic Facials",
-    "location": "South Civil Lines, Jabalpur, MP",
-    "logo": "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=160&auto=format&fit=crop&q=80",
-    "coverImage": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&auto=format&fit=crop&q=80",
-    "brandColor": "#BE185D",
-    "googleReviewUrl": "https://search.google.com/local/writereview?placeid=ChIJ8_2eZ3OuEmsRXe7M_1-4oT4",
-    "starThreshold": 4,
-    "alertWhatsApp": "+919752003344",
-    "alertEmail": "bookings@luxeglowjabalpur.in",
-    "recoveryVoucher": "LUXEGIFT20",
-    "recoveryDiscount": "20% OFF on any Hair Spa or Facial service",
-    "aiReviewKeywords": [
-      "Exceptional Hair Transformation 💇‍♀️",
-      "Relaxing Ambience & Aromatherapy 🌸",
-      "Very Professional Stylists ⭐",
-      "Premium International Products 🧴",
-      "Value for Money Packages 💆‍♀️"
-    ],
-    "stats": {
-      "taps": 240,
-      "googleRedirects": 210,
-      "intercepted": 14,
-      "avgRating": 4.7
-    },
-    "createdAt": "2026-09-22T16:00:00.000Z"
+    "createdAt": "2026-10-02T10:00:00.000Z"
   }
 ]
