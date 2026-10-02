@@ -144,6 +144,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function setVal(id, val) {
+    const el = document.getElementById(id);
+    if (el) el.value = val ?? '';
+  }
+
+  function getVal(id, fallback = '') {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : fallback;
+  }
+
   // ==========================================
   // 🔐 SHA-256 CRYPTO HELPER
   // ==========================================
@@ -364,9 +374,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (e) {}
       }
 
-      // Clean legacy demo clients from localStorage (only keep real clients)
+      // Clean legacy demo mock cafes from localStorage (while preserving real onboarded clients)
+      const legacyDemoSlugs = ['chhavish-cafe', 'the-rooftop-brew', 'spice-symphony', 'pizza-express', 'urban-turban', 'the-coffee-bean'];
       let customClients = JSON.parse(localStorage.getItem('elitetap_custom_clients') || '[]');
-      customClients = customClients.filter(c => c.slug === 'oven-classic');
+      customClients = customClients.filter(c => !legacyDemoSlugs.includes(c.slug));
       localStorage.setItem('elitetap_custom_clients', JSON.stringify(customClients));
 
       if (customClients.length) {
@@ -509,10 +520,19 @@ document.addEventListener('DOMContentLoaded', () => {
         <td><span class="badge badge-alert">🛡️ ${a.interceptedNegative || 0}</span></td>
         <td><span class="badge badge-accent">4.0 ★ Threshold</span></td>
         <td>
-          <a href="/r/${escapeHTML(c.slug)}" target="_blank" class="btn btn-sm btn-secondary">Open Funnel ↗</a>
+          <div style="display:flex; gap:6px;">
+            <a href="/r/${escapeHTML(c.slug)}" target="_blank" class="btn btn-sm btn-secondary" title="Test Public Funnel">Open ↗</a>
+            <button type="button" class="btn btn-sm btn-outline copy-client-nfc-btn" data-url="${window.location.origin}/r/${escapeHTML(c.slug)}" title="Copy Customer NFC Link">📋 NFC</button>
+          </div>
         </td>
       `;
       overviewClientsTbody.appendChild(row);
+    });
+
+    overviewClientsTbody.querySelectorAll('.copy-client-nfc-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        copyTextSafely(b.dataset.url, b, 'Copied! ✓');
+      });
     });
   }
 
@@ -568,12 +588,19 @@ document.addEventListener('DOMContentLoaded', () => {
           ${(c.aiReviewKeywords || []).slice(0, 4).map(k => `<span class="tag-chip">${escapeHTML(k)}</span>`).join('')}
         </div>
 
-        <div class="client-card-footer">
+        <div class="client-card-footer" style="display: flex; gap: 8px; flex-wrap: wrap;">
           <a href="/r/${escapeHTML(c.slug)}" target="_blank" class="btn btn-sm btn-secondary">Test Funnel ↗</a>
-          <button class="btn btn-sm btn-primary edit-client-btn" data-slug="${escapeHTML(c.slug)}">Edit Setup</button>
+          <button type="button" class="btn btn-sm btn-outline copy-client-nfc-btn" data-url="${window.location.origin}/r/${escapeHTML(c.slug)}">📋 Copy NFC Link</button>
+          <button type="button" class="btn btn-sm btn-primary edit-client-btn" data-slug="${escapeHTML(c.slug)}">Edit Setup</button>
         </div>
       `;
       clientsGrid.appendChild(card);
+    });
+
+    document.querySelectorAll('#clientsGrid .copy-client-nfc-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        copyTextSafely(b.dataset.url, b, 'Copied! ✓');
+      });
     });
 
     document.querySelectorAll('.edit-client-btn').forEach(b => {
@@ -591,18 +618,21 @@ document.addEventListener('DOMContentLoaded', () => {
   function openEditModal(c) {
     currentEditingClientId = c.id || c.slug;
     modalTitle.textContent = `Edit Client: ${c.name}`;
-    document.getElementById('clientIdInput').value = c.id || c.slug;
-    document.getElementById('clientNameInput').value = c.name;
-    document.getElementById('clientSlugInput').value = c.slug;
-    document.getElementById('clientCategoryInput').value = c.category;
-    document.getElementById('clientTaglineInput').value = c.tagline || '';
-    document.getElementById('clientGoogleReviewUrlInput').value = c.googleReviewUrl;
-    document.getElementById('clientPhoneInput').value = c.phone || '';
-    document.getElementById('clientLocationInput').value = c.location || '';
-    document.getElementById('clientKeywordsInput').value = (c.aiReviewKeywords || []).join(', ');
-    document.getElementById('clientLogoInput').value = c.logo || '';
-    document.getElementById('clientCoverInput').value = c.coverImage || '';
-    document.getElementById('clientColorInput').value = c.brandColor || '#E5A93C';
+    setVal('clientIdInput', c.id || c.slug);
+    setVal('clientNameInput', c.name);
+    setVal('clientSlugInput', c.slug);
+    setVal('clientCategoryInput', c.category || '');
+    setVal('clientLocationInput', c.location || '');
+    setVal('clientTaglineInput', c.tagline || '');
+    setVal('clientGoogleUrlInput', c.googleReviewUrl || '');
+    setVal('clientThresholdInput', c.starThreshold || 4);
+    setVal('clientWhatsAppInput', c.alertWhatsApp || c.phone || '');
+    setVal('clientVoucherInput', c.recoveryVoucher || '');
+    setVal('clientDiscountInput', c.recoveryDiscount || '');
+    setVal('clientLogoInput', c.logo || '');
+    setVal('clientCoverInput', c.coverImage || '');
+    setVal('clientAiTagsInput', (c.aiReviewKeywords || []).join(', '));
+    setVal('clientColorInput', c.brandColor || '#E5A93C');
     clientModal.classList.remove('hidden');
   }
 
@@ -610,8 +640,13 @@ document.addEventListener('DOMContentLoaded', () => {
     currentEditingClientId = null;
     modalTitle.textContent = 'Add New Business Client';
     clientForm.reset();
-    document.getElementById('clientSlugInput').value = '';
-    document.getElementById('clientColorInput').value = '#00F0FF';
+    setVal('clientIdInput', '');
+    setVal('clientSlugInput', '');
+    setVal('clientThresholdInput', '4');
+    setVal('clientColorInput', '#E5A93C');
+    setVal('clientAiTagsInput', 'Delicious Food 🍕, Fast Service ⚡, Courteous Staff 🌟, Great Ambience ☕');
+    setVal('clientVoucherInput', 'RESCUE15');
+    setVal('clientDiscountInput', '15% OFF your next order');
     clientModal.classList.remove('hidden');
   });
 
@@ -624,17 +659,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   clientForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const slug = document.getElementById('clientSlugInput').value.trim().toLowerCase().replace(/[^a-z0-9-]/g, '-');
-    const name = document.getElementById('clientNameInput').value.trim();
-    const category = document.getElementById('clientCategoryInput').value.trim();
-    const tagline = document.getElementById('clientTaglineInput').value.trim();
-    const googleReviewUrl = document.getElementById('clientGoogleReviewUrlInput').value.trim();
-    const phone = document.getElementById('clientPhoneInput').value.trim();
-    const location = document.getElementById('clientLocationInput').value.trim();
-    const keywordsRaw = document.getElementById('clientKeywordsInput').value.trim();
-    const logo = document.getElementById('clientLogoInput').value.trim();
-    const coverImage = document.getElementById('clientCoverInput').value.trim();
-    const brandColor = document.getElementById('clientColorInput').value;
+    const slug = getVal('clientSlugInput').toLowerCase().replace(/[^a-z0-9-]/g, '-');
+    const name = getVal('clientNameInput');
+    const category = getVal('clientCategoryInput');
+    const tagline = getVal('clientTaglineInput');
+    const googleReviewUrl = getVal('clientGoogleUrlInput');
+    const starThreshold = parseInt(getVal('clientThresholdInput', '4'), 10) || 4;
+    const phone = getVal('clientWhatsAppInput');
+    const alertWhatsApp = phone;
+    const location = getVal('clientLocationInput');
+    const recoveryVoucher = getVal('clientVoucherInput');
+    const recoveryDiscount = getVal('clientDiscountInput');
+    const logo = getVal('clientLogoInput');
+    const coverImage = getVal('clientCoverInput');
+    const brandColor = getVal('clientColorInput', '#E5A93C');
+    const keywordsRaw = getVal('clientAiTagsInput');
 
     const keywords = keywordsRaw ? keywordsRaw.split(',').map(k => k.trim()).filter(Boolean) : [];
 
@@ -646,7 +685,11 @@ document.addEventListener('DOMContentLoaded', () => {
       tagline,
       location,
       googleReviewUrl,
+      starThreshold,
       phone,
+      alertWhatsApp,
+      recoveryVoucher,
+      recoveryDiscount,
       logo: logo || 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=80',
       coverImage: coverImage || 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200',
       brandColor,
@@ -656,7 +699,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const existingIdx = clients.findIndex(x => x.slug === slug || x.id === currentEditingClientId);
     if (existingIdx >= 0) {
-      newClient.analytics = clients[existingIdx].analytics;
+      newClient.analytics = clients[existingIdx].analytics || { totalTaps: 0, googleRedirects: 0, interceptedNegative: 0 };
       clients[existingIdx] = newClient;
     } else {
       clients.push(newClient);
@@ -731,7 +774,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const src = getSelectedSourceTag();
       qrTargetLinkInput.value = `${window.location.origin}/r/${currentSlug}?source=${src}`;
     } else if (!qrTargetLinkInput.value) {
-      qrTargetLinkInput.value = `${window.location.origin}/r/oven-bake-jabalpur?source=qr`;
+      const defaultSlug = clients[0]?.slug || 'oven-classic';
+      qrTargetLinkInput.value = `${window.location.origin}/r/${defaultSlug}?source=qr`;
     }
     renderLiveQr();
   }
@@ -774,6 +818,19 @@ document.addEventListener('DOMContentLoaded', () => {
               link.href = canvas.toDataURL('image/png');
               link.click();
             };
+
+            if (downloadSvgBtn) {
+              downloadSvgBtn.onclick = () => {
+                const dataUrl = canvas.toDataURL('image/png');
+                const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><rect width="100%" height="100%" fill="${light}"/><image href="${dataUrl}" width="${size}" height="${size}"/></svg>`;
+                const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+                const link = document.createElement('a');
+                link.download = `elitetap-qr-${Date.now()}.svg`;
+                link.href = URL.createObjectURL(blob);
+                link.click();
+                setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+              };
+            }
           } else if (img && img.src) {
             downloadPngBtn.onclick = () => {
               const link = document.createElement('a');
@@ -781,6 +838,18 @@ document.addEventListener('DOMContentLoaded', () => {
               link.href = img.src;
               link.click();
             };
+
+            if (downloadSvgBtn) {
+              downloadSvgBtn.onclick = () => {
+                const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><rect width="100%" height="100%" fill="${light}"/><image href="${img.src}" width="${size}" height="${size}"/></svg>`;
+                const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+                const link = document.createElement('a');
+                link.download = `elitetap-qr-${Date.now()}.svg`;
+                link.href = URL.createObjectURL(blob);
+                link.click();
+                setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+              };
+            }
           }
         }, 150);
       } catch (err) {
@@ -1028,4 +1097,66 @@ document.addEventListener('DOMContentLoaded', () => {
   simulateSecTestBtn?.addEventListener('click', () => {
     alert('🛡️ Security Shield Test Complete:\n- Anti-XSS Sanitizer: 100% BLOCKED\n- Rate Limiting Armor: 100% ARMED\n- Timing Attack Defense: SAFE\n- AI Prompt Injection: FILTERED');
   });
+
+  // Top Banner: 1-Click Copy Public Customer NFC Link
+  const copyDirectNfcBtn = document.getElementById('copyDirectNfcBtn');
+  if (copyDirectNfcBtn) {
+    copyDirectNfcBtn.addEventListener('click', () => {
+      const targetSlug = clients[0]?.slug || 'oven-classic';
+      const fullUrl = `${window.location.origin}/r/${targetSlug}`;
+      copyTextSafely(fullUrl, copyDirectNfcBtn, 'Copied! ✓');
+    });
+  }
+
+  // Master PIN Management Form
+  const changePinForm = document.getElementById('changePinForm');
+  const changePinFeedback = document.getElementById('changePinFeedback');
+  if (changePinForm) {
+    changePinForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const currentPin = document.getElementById('currentPinInput').value.trim();
+      const newPin = document.getElementById('newPinInput').value.trim();
+      const confirmPin = document.getElementById('confirmPinInput').value.trim();
+
+      if (newPin !== confirmPin) {
+        if (changePinFeedback) {
+          changePinFeedback.textContent = '❌ New PIN and confirmation PIN do not match.';
+          changePinFeedback.style.color = '#EF4444';
+          changePinFeedback.classList.remove('hidden');
+        }
+        return;
+      }
+
+      if (newPin.length < 4) {
+        if (changePinFeedback) {
+          changePinFeedback.textContent = '❌ New PIN must be at least 4 characters long.';
+          changePinFeedback.style.color = '#EF4444';
+          changePinFeedback.classList.remove('hidden');
+        }
+        return;
+      }
+
+      const currentHash = await sha256(currentPin);
+      const activeHash = localStorage.getItem('elitetap_custom_pin_hash') || DEFAULT_PIN_HASH;
+
+      if (currentHash !== activeHash) {
+        if (changePinFeedback) {
+          changePinFeedback.textContent = '❌ Current PIN is incorrect.';
+          changePinFeedback.style.color = '#EF4444';
+          changePinFeedback.classList.remove('hidden');
+        }
+        return;
+      }
+
+      const newHash = await sha256(newPin);
+      localStorage.setItem('elitetap_custom_pin_hash', newHash);
+      if (changePinFeedback) {
+        changePinFeedback.textContent = '✅ Master PIN successfully updated! Use your new passkey to log in.';
+        changePinFeedback.style.color = '#10B981';
+        changePinFeedback.classList.remove('hidden');
+        setTimeout(() => { changePinFeedback.classList.add('hidden'); }, 5000);
+      }
+      changePinForm.reset();
+    });
+  }
 });

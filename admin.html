@@ -114,6 +114,35 @@
 
       <!-- TAB 1: OVERVIEW -->
       <section id="tab-overview" class="tab-pane active">
+        <!-- Direct Customer NFC Card Programming Banner -->
+        <div class="nfc-hardware-banner" style="background: linear-gradient(135deg, rgba(0, 240, 255, 0.08), rgba(16, 185, 129, 0.08)); border: 1px solid rgba(0, 240, 255, 0.25); border-radius: 14px; padding: 18px 22px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+          <div style="display: flex; align-items: center; gap: 14px; flex: 1; min-width: 280px;">
+            <div style="font-size: 30px; background: rgba(0, 240, 255, 0.1); border-radius: 10px; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(0, 240, 255, 0.2);">📱💳</div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span style="font-size: 13px; font-weight: 800; color: #00F0FF; letter-spacing: 0.05em; text-transform: uppercase;">Direct Customer NFC Card Link</span>
+                <span class="badge badge-emerald" style="font-size: 11px;">100% PUBLIC • ZERO PASSWORD NEEDED</span>
+              </div>
+              <p style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">
+                Flash this exact URL into physical NFC cards/tags via <strong>NFC Tools</strong> app (Do <em>not</em> write admin.html to customer cards):
+              </p>
+              <div style="display: flex; align-items: center; gap: 8px; margin-top: 6px;">
+                <code id="topNfcUrlDisplay" style="padding: 5px 12px; background: rgba(0,0,0,0.6); border: 1px solid rgba(0,240,255,0.3); border-radius: 6px; color: #10B981; font-size: 13px; font-weight: 600; font-family: monospace;">
+                  https://www.eliteaiagency.in/r/oven-classic
+                </code>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <button type="button" class="btn btn-primary" id="copyDirectNfcBtn" style="padding: 9px 18px; font-size: 13px;">
+              <span>📋 Copy Customer NFC Link</span>
+            </button>
+            <a href="/r/oven-classic" target="_blank" class="btn btn-secondary" style="padding: 9px 16px; font-size: 13px;">
+              <span>Test Public Funnel ↗</span>
+            </a>
+          </div>
+        </div>
+
         <!-- KPI Metrics Grid -->
         <div class="stats-grid">
           <div class="stat-card">
@@ -752,6 +781,10 @@
           <div class="form-group flex-1">
             <label for="clientCoverInput">Cover Banner Image URL</label>
             <input type="url" id="clientCoverInput" placeholder="https://..." />
+          </div>
+          <div class="form-group" style="max-width: 140px;">
+            <label for="clientColorInput">Brand Color</label>
+            <input type="color" id="clientColorInput" value="#E5A93C" style="height: 42px; padding: 4px; cursor: pointer; width: 100%; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.3);" />
           </div>
         </div>
 
