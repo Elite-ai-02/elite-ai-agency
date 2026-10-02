@@ -123,17 +123,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   sendTelemetryBeacon('/api/funnel/tap', { slug, source });
 
-  // Load Client Data (Backend API -> /data/clients.json -> localStorage fallback)
+  // Load Client Data (localStorage FIRST -> static clients.json -> API -> Fallback)
   async function loadClient() {
     let client = null;
 
-    // 1. Try local server API
+    // 1. Try custom clients in localStorage FIRST (Respect edits made on admin dashboard)
     try {
-      const res = await fetch(`/api/funnel/${slug}`);
-      if (res.ok) client = await res.json();
+      const custom = JSON.parse(localStorage.getItem('elitetap_custom_clients') || '[]');
+      const foundCustom = custom.find(c => c.slug === slug);
+      if (foundCustom) {
+        client = foundCustom;
+      }
     } catch (e) {}
 
-    // 2. Try static clients.json
+    // 2. Try static clients.json if not in localStorage
     if (!client) {
       try {
         const res = await fetch('/data/clients.json');
@@ -144,10 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (e) {}
     }
 
-    // 3. Try custom clients in localStorage
+    // 3. Try local server API
     if (!client) {
-      const custom = JSON.parse(localStorage.getItem('elitetap_custom_clients') || '[]');
-      client = custom.find(c => c.slug === slug);
+      try {
+        const res = await fetch(`/api/funnel/${slug}`);
+        if (res.ok) client = await res.json();
+      } catch (e) {}
     }
 
     // 4. Try hardcoded default fallback
@@ -155,7 +160,18 @@ document.addEventListener('DOMContentLoaded', () => {
       client = { ...DEFAULT_FALLBACK_CLIENTS[slug], slug };
     }
 
+    // 5. Query Parameter Overrides (for testing or NFC tags: ?tagline=...&logo=...&phone=...)
     if (client) {
+      const pTagline = urlParams.get('tagline');
+      const pLogo = urlParams.get('logo');
+      const pPhone = urlParams.get('phone') || urlParams.get('wa');
+      if (pTagline) client.tagline = pTagline;
+      if (pLogo) client.logo = pLogo;
+      if (pPhone) {
+        client.phone = pPhone;
+        client.alertWhatsApp = pPhone;
+      }
+
       clientData = client;
       renderBusinessProfile(client);
     } else {
@@ -177,9 +193,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.title = `${data.name} — Review & Feedback`;
     bizName.textContent = data.name;
-    bizTagline.textContent = data.tagline || data.category;
+    bizTagline.textContent = data.tagline || data.category || 'Specialty Bakery & Cafe';
     bizLocationText.textContent = data.location || 'Local Business';
-    bizLogo.src = data.logo || 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=160';
+
+    const defaultLogo = 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=160&auto=format&fit=crop&q=80';
+    bizLogo.onerror = () => {
+      bizLogo.onerror = null;
+      bizLogo.src = defaultLogo;
+    };
+    bizLogo.src = data.logo || defaultLogo;
 
     if (data.coverImage) {
       cardHero.style.backgroundImage = `url('${data.coverImage}')`;
@@ -200,9 +222,21 @@ document.addEventListener('DOMContentLoaded', () => {
     5: { text: '🤩 Outstanding! Loved it! (5/5)', color: '#00F0FF' }
   };
 
+  function getRatingVal(el) {
+    if (!el) return 0;
+    return parseInt(
+      el.dataset.star || 
+      el.dataset.val || 
+      el.getAttribute('data-star') || 
+      el.getAttribute('data-val') || 
+      '0', 
+      10
+    );
+  }
+
   starButtons.forEach(btn => {
     btn.addEventListener('mouseenter', () => {
-      const val = parseInt(btn.dataset.val, 10);
+      const val = getRatingVal(btn);
       highlightStars(val);
       if (sentiments[val]) {
         sentimentText.textContent = sentiments[val].text;
@@ -222,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     btn.addEventListener('click', () => {
-      selectedRating = parseInt(btn.dataset.val, 10);
+      selectedRating = getRatingVal(btn);
       highlightStars(selectedRating);
       proceedToNextStep(selectedRating);
     });
@@ -230,7 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function highlightStars(val) {
     starButtons.forEach(b => {
-      const bVal = parseInt(b.dataset.val, 10);
+      const bVal = getRatingVal(b);
       if (bVal <= val) {
         b.classList.add('active');
       } else {
@@ -242,11 +276,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function proceedToNextStep(rating) {
     ratingStep.classList.add('hidden');
 
-    if (rating >= 4) {
+    const threshold = (clientData && clientData.starThreshold) ? parseInt(clientData.starThreshold, 10) : 4;
+    if (rating >= threshold) {
       positiveStep.classList.remove('hidden');
+      negativeStep.classList.add('hidden');
       setupPositiveFlow();
     } else {
       negativeStep.classList.remove('hidden');
+      positiveStep.classList.add('hidden');
       setupNegativeFlow();
     }
   }
@@ -255,14 +292,23 @@ document.addEventListener('DOMContentLoaded', () => {
   function setupPositiveFlow() {
     generateReviewDraft();
 
-    if (clientData.googleReviewUrl) {
-      googleReviewBtn.href = clientData.googleReviewUrl;
-      directGoogleLink.href = clientData.googleReviewUrl;
+    const gUrl = clientData.googleReviewUrl || 'https://search.google.com/local/writereview?placeid=ChIJ-3YyH8_reTkR0Kj8Uo5n6rI';
+    if (googleReviewBtn) {
+      googleReviewBtn.href = gUrl;
+      googleReviewBtn.onclick = (e) => {
+        sendTelemetryBeacon('/api/funnel/public-click', { slug, rating: selectedRating });
+        if (reviewDraftInput && reviewDraftInput.value) {
+          copyTextSafely(reviewDraftInput.value, copyBtnText, 'Copied! ✓');
+        }
+      };
     }
 
-    googleReviewBtn.addEventListener('click', () => {
-      sendTelemetryBeacon('/api/funnel/public-click', { slug, rating: selectedRating });
-    });
+    if (directGoogleLink) {
+      directGoogleLink.href = gUrl;
+      directGoogleLink.onclick = (e) => {
+        sendTelemetryBeacon('/api/funnel/public-click', { slug, rating: selectedRating });
+      };
+    }
   }
 
   function renderAITags(tags) {
@@ -355,10 +401,18 @@ document.addEventListener('DOMContentLoaded', () => {
       voucherDiscountText.textContent = '20% OFF';
       voucherCodeText.textContent = 'RESCUE20';
 
-      const ownerPhone = (clientData.phone || '919301814976').replace(/[^0-9]/g, '');
+      const rawPhone = (clientData.alertWhatsApp || clientData.phone || '').trim();
+      let cleanPhone = rawPhone.replace(/[^0-9]/g, '');
+      if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
+
       const waText = encodeURIComponent(`Hello ${clientData.name} Management,\n\nI just submitted private feedback regarding my visit.\nRating: ${selectedRating}/5 stars\nIssue: ${selectedIssue}\nNote: "${comment}"\nName: ${customerName}\nPhone: ${customerPhone}`);
 
-      ownerWhatsAppBtn.href = `https://wa.me/${ownerPhone}?text=${waText}`;
+      if (cleanPhone) {
+        ownerWhatsAppBtn.href = `https://wa.me/${cleanPhone}?text=${waText}`;
+        ownerWhatsAppBtn.style.display = 'inline-flex';
+      } else {
+        ownerWhatsAppBtn.style.display = 'none';
+      }
     });
   }
 });
