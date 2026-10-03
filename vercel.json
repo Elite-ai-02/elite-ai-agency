@@ -1,7 +1,6 @@
 {
   "version": 2,
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://elitetap-review-funnel.onrender.com/api/:path*" },
     { "source": "/admin", "destination": "/admin.html" },
     { "source": "/r/:path*", "destination": "/funnel.html" }
   ],
