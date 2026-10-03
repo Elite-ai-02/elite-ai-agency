@@ -98,7 +98,7 @@
         <div class="topbar-actions">
           <div class="security-status-badge">
             <span class="pulse-dot"></span>
-            <span>Shield: 100% Secure</span>
+            <span>Shield: Active</span>
           </div>
           <button id="quickAddClientBtn" class="btn btn-primary">
             <span>+ Add New Business</span>
@@ -170,7 +170,7 @@
 
           <div class="stat-card alert-card">
             <div class="stat-header">
-              <span class="stat-label">Negative Reviews Blocked</span>
+              <span class="stat-label">Unhappy Customers Rescued</span>
               <span class="stat-icon">🛡️</span>
             </div>
             <div class="stat-value text-rose" id="kpiIntercepted">0</div>
@@ -225,7 +225,7 @@
               <div class="branch branch-negative">
                 <div class="branch-pill alert">🚫 1, 2, or 3 Stars (13%)</div>
                 <strong>Negative Interceptor</strong>
-                <p>Blocks Google Maps! Captures complaint, alerts owner & offers apology voucher.</p>
+                <p>Captures complaint, alerts owner & offers apology voucher before they leave.</p>
               </div>
             </div>
           </div>
@@ -515,7 +515,7 @@
                 </div>
                 <div class="roi-metric">
                   <span class="roi-number text-rose" id="resBlockedNegative">45</span>
-                  <span class="roi-label">1-to-3★ Reviews Blocked & Rescued</span>
+                  <span class="roi-label">1-to-3★ Feedback Intercepted</span>
                 </div>
               </div>
 
@@ -545,7 +545,7 @@
         <div class="shield-health-banner">
           <div class="shield-score-circle">
             <div class="score-number">100%</div>
-            <div class="score-grade">GRADE A+</div>
+            <div class="score-grade">Protected</div>
           </div>
           <div class="shield-summary-info">
             <div class="shield-status-pill">
@@ -554,7 +554,7 @@
             </div>
             <h2>Enterprise Cyber Shield & Anti-Intrusion Suite</h2>
             <p>
-              Your agency's review funnel infrastructure is shielded with zero-trust input validation, rate limiting, anti-XSS entity escaping, payload armor, and AI prompt injection guards. No virus or malicious code can penetrate the server.
+              Your agency's review funnel infrastructure is shielded with input validation, rate limiting, and anti-XSS entity escaping.
             </p>
           </div>
         </div>
@@ -656,7 +656,7 @@
               </p>
             </div>
             <div style="display: flex; gap: 8px;">
-              <button class="btn btn-sm btn-outline" id="simulateSecTestBtn">Run Security Penetration Test 🛡️</button>
+              <button class="btn btn-sm btn-outline" id="simulateSecTestBtn">Check Security Status 🛡️</button>
               <button class="btn btn-sm btn-secondary" id="clearSecLogsBtn">Clear Logs</button>
             </div>
           </div>
@@ -757,8 +757,8 @@
           <div class="form-group flex-1">
             <label for="clientThresholdInput">Google Redirect Threshold</label>
             <select id="clientThresholdInput" class="form-select">
-              <option value="4" selected>4+ Stars (4 & 5 go to Google, 1-3 blocked)</option>
-              <option value="5">5 Stars ONLY (Only 5★ goes to Google, 1-4 blocked)</option>
+              <option value="4" selected>4+ Stars Prompted for Google (1-3 offered private resolution)</option>
+              <option value="5">5 Stars ONLY (Only 5★ prompted for Google)</option>
             </select>
           </div>
           <div class="form-group flex-1">

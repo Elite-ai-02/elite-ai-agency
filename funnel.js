@@ -35,6 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const voucherDiscountText = document.getElementById('voucherDiscountText');
   const voucherCodeText = document.getElementById('voucherCodeText');
   const ownerWhatsAppBtn = document.getElementById('ownerWhatsAppBtn');
+  const negativeGoogleLink = document.getElementById('negativeGoogleLink');
+  const thankYouText = document.getElementById('thankYouText');
+  const voucherCard = document.querySelector('.voucher-card');
 
   // State
   let clientData = null;
@@ -339,26 +342,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // POSITIVE FLOW (4-5 Stars -> Google Maps)
+  // Each client's own Google review link. Never fall back to another business's link.
+  function getGoogleUrl() {
+    const url = (clientData && clientData.googleReviewUrl || '').trim();
+    return /^https:\/\//i.test(url) ? url : '';
+  }
+
+  function wireGoogleLink(el, gUrl) {
+    if (!el) return;
+    if (!gUrl) { el.style.display = 'none'; return; }
+    el.href = gUrl;
+    el.addEventListener('click', () => {
+      sendTelemetryBeacon('/api/funnel/public-click', { slug, rating: selectedRating });
+    });
+  }
+
+  // POSITIVE FLOW (at/above threshold -> Google review)
   function setupPositiveFlow() {
     generateReviewDraft();
 
-    const gUrl = clientData.googleReviewUrl || 'https://search.google.com/local/writereview?placeid=ChIJ-3YyH8_reTkR0Kj8Uo5n6rI';
-    if (googleReviewBtn) {
-      googleReviewBtn.href = gUrl;
-      googleReviewBtn.onclick = (e) => {
-        sendTelemetryBeacon('/api/funnel/public-click', { slug, rating: selectedRating });
-        if (reviewDraftInput && reviewDraftInput.value) {
+    const gUrl = getGoogleUrl();
+    wireGoogleLink(googleReviewBtn, gUrl);
+    wireGoogleLink(directGoogleLink, gUrl);
+    if (googleReviewBtn && gUrl) {
+      googleReviewBtn.addEventListener('click', () => {
+        if (reviewDraftInput && reviewDraftInput.value.trim()) {
           copyTextSafely(reviewDraftInput.value, copyBtnText, 'Copied! ✓');
         }
-      };
-    }
-
-    if (directGoogleLink) {
-      directGoogleLink.href = gUrl;
-      directGoogleLink.onclick = (e) => {
-        sendTelemetryBeacon('/api/funnel/public-click', { slug, rating: selectedRating });
-      };
+      });
     }
   }
 
@@ -383,15 +394,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Starter text built ONLY from highlights the customer picked. The customer writes the rest.
+  // Never invents claims, and never overwrites text the customer has typed themselves.
+  let lastAutoText = '';
   function generateReviewDraft() {
-    const biz = clientData.name;
+    const current = reviewDraftInput.value;
+    if (current.trim() && current !== lastAutoText) return; // customer has written their own text
     const tagArray = Array.from(selectedTags);
-    let draft = `Had a truly wonderful experience at ${biz}! `;
-    if (tagArray.length > 0) {
-      draft += `Particularly impressed by the ${tagArray.join(', ')}. `;
-    }
-    draft += `The staff was courteous, everything was top-notch, and the quality exceeded expectations. Highly recommend visiting! ⭐⭐⭐⭐⭐`;
-    reviewDraftInput.value = draft;
+    lastAutoText = tagArray.length > 0 ? `Loved the ${tagArray.join(', ')}. ` : '';
+    reviewDraftInput.value = lastAutoText;
   }
 
   copyDraftBtn.addEventListener('click', () => {
@@ -407,13 +418,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2500);
   });
 
-  // NEGATIVE FLOW (1-3 Stars -> Private Interception)
+  // BELOW-THRESHOLD FLOW: offer private resolution via WhatsApp. Google review stays available (no gating).
+  let negativeFlowReady = false;
   function setupNegativeFlow() {
+    wireGoogleLink(negativeGoogleLink, getGoogleUrl());
+    if (negativeFlowReady) return; // avoid attaching duplicate listeners
+    negativeFlowReady = true;
+
     issueChips.forEach(chip => {
       chip.addEventListener('click', () => {
         issueChips.forEach(c => c.classList.remove('selected'));
         chip.classList.add('selected');
-        selectedIssue = chip.dataset.category || chip.textContent;
+        selectedIssue = chip.dataset.issue || chip.textContent.trim();
       });
     });
 
@@ -437,32 +453,34 @@ document.addEventListener('DOMContentLoaded', () => {
         status: 'new'
       };
 
-      // 1. Send beacon to backend if running
+      // Beacon for when a backend exists (Phase 2). On the current static site this is not stored.
       sendTelemetryBeacon('/api/funnel/feedback', payload);
 
-      // 2. Save in localStorage for 24/7 static Netlify operation
-      const customFeedback = JSON.parse(localStorage.getItem('elitetap_custom_feedback') || '[]');
-      customFeedback.unshift(payload);
-      localStorage.setItem('elitetap_custom_feedback', JSON.stringify(customFeedback));
-
-      // Show Thank You step
       negativeStep.classList.add('hidden');
       thankYouNegativeStep.classList.remove('hidden');
 
-      voucherDiscountText.textContent = '20% OFF';
-      voucherCodeText.textContent = 'RESCUE20';
+      // This client's own apology offer (hide the card if none is configured)
+      const voucherCode = (clientData.recoveryVoucher || '').trim();
+      if (voucherCode) {
+        voucherDiscountText.textContent = clientData.recoveryDiscount || 'A special offer on your next visit';
+        voucherCodeText.textContent = voucherCode;
+        if (voucherCard) voucherCard.style.display = '';
+      } else if (voucherCard) {
+        voucherCard.style.display = 'none';
+      }
 
       const rawPhone = (clientData.alertWhatsApp || clientData.phone || '').trim();
       let cleanPhone = rawPhone.replace(/[^0-9]/g, '');
       if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
 
-      const waText = encodeURIComponent(`Hello ${clientData.name} Management,\n\nI just submitted private feedback regarding my visit.\nRating: ${selectedRating}/5 stars\nIssue: ${selectedIssue}\nNote: "${comment}"\nName: ${customerName}\nPhone: ${customerPhone}`);
+      const waText = encodeURIComponent(`Hello ${clientData.name} Management,\n\nFeedback about my visit:\nRating: ${selectedRating}/5 stars\nIssue: ${selectedIssue}\nNote: "${comment}"\nName: ${customerName}\nPhone: ${customerPhone}`);
 
       if (cleanPhone) {
         ownerWhatsAppBtn.href = `https://wa.me/${cleanPhone}?text=${waText}`;
         ownerWhatsAppBtn.style.display = 'inline-flex';
       } else {
         ownerWhatsAppBtn.style.display = 'none';
+        if (thankYouText) thankYouText.textContent = 'Please let a staff member know. The manager would like to make it right.';
       }
     });
   }

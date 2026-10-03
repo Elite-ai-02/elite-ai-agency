@@ -275,29 +275,14 @@ document.addEventListener('DOMContentLoaded', () => {
           const data = await res.json();
           adminToken = data.token;
           isBackendAuthenticated = true;
+        } else {
+          const data = await res.json();
+          throw new Error(data.error || 'Access Denied: Invalid Master Passkey.');
         }
       } catch (backendErr) {
-        // Backend not available (static Netlify mode), proceed to WebCrypto hash
-      }
-
-      if (!isBackendAuthenticated) {
-        // 2. Client-side cryptographic hash verification
-        const enteredHash = await sha256(pin);
-        const activeMasterHash = localStorage.getItem('elitetap_custom_pin_hash') || DEFAULT_PIN_HASH;
-
-        if (enteredHash !== activeMasterHash) {
-          failedLoginAttempts++;
-          sessionStorage.setItem('failed_logins', failedLoginAttempts);
-          if (failedLoginAttempts >= 5) {
-            lockoutUntil = Date.now() + 15 * 60 * 1000;
-            sessionStorage.setItem('lockout_until', lockoutUntil);
-            throw new Error('Access Denied: 5 failed attempts. System locked for 15 minutes.');
-          }
-          throw new Error('Access Denied: Invalid Master Passkey.');
+        if (!isBackendAuthenticated) {
+           throw backendErr;
         }
-
-        // Generate cryptographic session token
-        adminToken = 'token_' + Array.from(crypto.getRandomValues(new Uint8Array(24))).map(b => b.toString(16).padStart(2, '0')).join('');
       }
 
       // Success
@@ -346,7 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     'tab-feedback': {
       title: 'Intercepted Complaints & Customer Rescue',
-      subtitle: 'Review negative feedback blocked from Google Maps and resolve complaints privately'
+      subtitle: 'Review negative feedback intercepted and resolve complaints privately'
     },
     'tab-card-mockup': {
       title: 'EliteTap Physical Hardware Visualizer',
@@ -1258,7 +1243,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   simulateSecTestBtn?.addEventListener('click', () => {
-    alert('🛡️ Security Shield Test Complete:\n- Anti-XSS Sanitizer: 100% BLOCKED\n- Rate Limiting Armor: 100% ARMED\n- Timing Attack Defense: SAFE\n- AI Prompt Injection: FILTERED');
+    alert('🛡️ Security Status:\n- Anti-XSS Sanitizer: ACTIVE\n- Rate Limiting: ACTIVE');
   });
 
   // Top Banner: 1-Click Copy Public Customer NFC Link
